@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:20:38 by etien             #+#    #+#             */
-/*   Updated: 2024/08/10 15:58:36 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/10 18:04:55 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 // 	1) (error[0] * 2) > dx
 // 	2) (error[0] * 2) < -dy
 // Based on the different decision parameters, either x/y/both
-// (which is the reason for two if conditions, rather than else if)
+// (increment for both x and y is why two if conditions are necessary,
+// rather than using a simple else if statement)
 // will be incremented and the error term will be adjusted accordingly.
 // error[0] is the error term and error[1] is (error[0] * 2) used
 // in the decision parameter.

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/10 16:46:30 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/10 19:12:36 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,39 @@
 # include "../libft/libft/libft.h"
 
 // Width and height macros
-# define WIN_WIDTH 1000
-# define WIN_HEIGHT 1000
-# define IMG_WIDTH 800
+# define WIN_WIDTH 1400
+# define WIN_HEIGHT 800
+# define IMG_WIDTH 1000
 # define IMG_HEIGHT 800
+# define PANEL_WIDTH 400
+# define PANEL_HEIGHT 800
+
+#define PANEL_TEXT 0x8F00FF
 
 // Error message macros
-# define ARG_ERR "Usage: './fdf file.fdf'"
-# define FILENAME_ERR "Error: File should end with '.fdf' extension"
+# define ARG_ERR "Usage: './fdf file.fdf'."
+# define FILENAME_ERR "Error: File should end with '.fdf' extension."
 # define FDF_INIT_ERR "Error: An error occurred while initialising \
-	the fdf struct"
+	the fdf struct."
+# define VIEW_INIT_ERR "Error: An error occurred while initialising \
+	the view struct."
+
+// Map parsing functions
+bool	check_file_extension(const char *filename);
+
+// Structs initialisation functions
+t_view	*view_init();
+t_fdf	*fdf_init(t_map *map, t_view *view);
 
 // Bresenham line drawing algorithm functions
 void	draw_line(t_point a, t_point b, t_fdf *fdf);
 int		ft_abs(int nbr);
 void	determine_step(t_point *sign, t_point a, t_point b);
 
-// Util functions
+// Error handling functions
 void	err_and_exit(char *err_msg);
-bool	check_file_extension(const char *filename);
+void	cleanup_and_exit(t_fdf *fdf, char *err_msg);
+
+int key_press(int key, t_fdf *fdf)
 
 #endif
