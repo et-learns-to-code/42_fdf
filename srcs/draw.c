@@ -6,8 +6,13 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:00:00 by etien             #+#    #+#             */
-/*   Updated: 2024/08/10 16:03:42 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/10 16:30:11 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
+void	put_pixel(t_fdf *fdf, int x, int y, int color)
+{
+
+}

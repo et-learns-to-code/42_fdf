@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/10 16:03:19 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/10 16:46:30 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 // Error message macros
 # define ARG_ERR "Usage: './fdf file.fdf'"
 # define FILENAME_ERR "Error: File should end with '.fdf' extension"
+# define FDF_INIT_ERR "Error: An error occurred while initialising \
+	the fdf struct"
 
 // Bresenham line drawing algorithm functions
 void	draw_line(t_point a, t_point b, t_fdf *fdf);

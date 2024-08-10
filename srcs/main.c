@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:26:44 by etien             #+#    #+#             */
-/*   Updated: 2024/08/10 15:38:44 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/10 16:34:26 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ int	handle_key(int keycode, t_fdf *fdf)
 
 int	main(int ac, char **av)
 {
-	t_fdf	fdf;
-	t_point	a;
-	t_point	b;
+	t_fdf	*fdf;
 
 	if (ac == 2)
 	{
@@ -38,13 +36,8 @@ int	main(int ac, char **av)
 			ft_printf("good file name\n");
 		else
 			err_and_exit(FILENAME_ERR);
-		fdf.mlx = mlx_init();
-		fdf.win = mlx_new_window(fdf.mlx, WIN_WIDTH, WIN_HEIGHT, "Fil de Fer");
-		fdf.img = mlx_new_image(fdf.mlx, IMG_WIDTH, IMG_HEIGHT);
-		a.x = 0;
-		a.y = 0;
-		b.x = 300;
-		b.y = 300;
+		fdf = init_fdf();
+
 		draw_line(a, b, &fdf);
 		mlx_key_hook(fdf.win, &handle_key, &fdf);
 		mlx_loop(fdf.mlx);

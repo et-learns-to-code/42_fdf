@@ -1,0 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/10 16:30:15 by etien             #+#    #+#             */
+/*   Updated: 2024/08/10 16:52:36 by etien            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/fdf.h"
+
+// This function initializes the fdf struct.
+// Initialization steps:
+// 1) Obtain fdf struct pointer via malloc.
+// 2) Obtain mlx connection pointer.
+// 3) Obtain window pointer.
+// 4) Obtain image pointer (metadata of entire image).
+// 5) Obtain image data address pointer (actual pixel data of image).
+// At all steps, check that the pointer is actually received, if not
+// error and exit the program.
+t_fdf fdf_init()
+{
+	t_fdf *fdf;
+
+	if (!(fdf = malloc(sizeof(t_fdf))))
+		err_and_exit(FDF_INIT_ERR);
+	if (!(fdf->mlx = mlx_init()))
+		err_and_exit(FDF_INIT_ERR);
+	if (!(fdf->win = mlx_new_window(fdf->mlx, WIN_WIDTH, WIN_HEIGHT, "Fil de Fer")))
+		err_and_exit(FDF_INIT_ERR);
+	if (!(fdf->img = mlx_new_image(fdf->mlx, IMG_WIDTH, IMG_HEIGHT)));
+		err_and_exit(FDF_INIT_ERR);
+	if (!(fdf->data_addr = mlx_get_data_addr(fdf->img, &(fdf->bits_per_pixel),
+			&(fdf->size_line), &(fdf->endian))));
+		err_and_exit(FDF_INIT_ERR);
+
+
+}
