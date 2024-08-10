@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/10 11:52:02 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/10 12:26:45 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 # define WIDTH 1000
 # define HEIGHT 1000
 
-# define ARG_ERR "Usage: ./fdf file.fdf"
+# define ARG_ERR "Usage: './fdf file.fdf'"
+# define FILENAME_ERR "Error: File should end with '.fdf' extension"
 
 typedef struct s_point
 {
@@ -59,7 +60,5 @@ typedef struct s_view
 	double			beta;
 	double			gamma;
 }	t_view;
-
-
 
 #endif
