@@ -1,7 +1,7 @@
 NAME = fdf
 
 SRCS = $(addprefix srcs/, \
-	main.c)
+	main.c bresenham.c utils.c)
 
 OBJS = $(SRCS:.c=.o)
 
