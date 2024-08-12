@@ -6,16 +6,16 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:47:03 by etien             #+#    #+#             */
-/*   Updated: 2024/08/10 19:17:37 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 16:31:56 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void print_panel(t_fdf *fdf)
+void	print_panel(t_fdf *fdf)
 {
-	int x;
-	int x_indent;
+	int	x;
+	int	x_indent;
 	int	y;
 
 	x = 15;

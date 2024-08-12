@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:13:51 by etien             #+#    #+#             */
-/*   Updated: 2024/08/10 19:05:37 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 16:30:22 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	setup_controls()
 // This function will be connected to the mlx hook, so
 // that the relevant view function will be called when its
 // associated key is pressed.
-int key_press(int key, t_fdf *fdf)
+int	key_press(int key, t_fdf *fdf)
 {
 	if (key == ESC_KEY)
 		exit(0);

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:00:00 by etien             #+#    #+#             */
-/*   Updated: 2024/08/12 13:04:34 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 16:31:25 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	put_pixel_on_img(int x, int y, int color, t_fdf *fdf)
 		dst = fdf->data_addr
 			+ (y * fdf->size_line)
 			+ (x * (fdf->bits_per_pixel / 8));
-		*(unsigned int*)dst = color;
+		*(unsigned int *)dst = color;
 	}
 }
 
@@ -47,9 +47,11 @@ void	draw(t_map *map, t_fdf *fdf)
 		while (x < map->width)
 		{
 			if ((x + 1) < map->width)
-				draw_line(create_point(x, y, map), create_point(x + 1, y, map), fdf);
+				draw_line(create_point(x, y, map),
+					create_point(x + 1, y, map), fdf);
 			if ((y + 1) < map->height)
-				draw_line(create_point(x, y, map), create_point(x, y + 1, map), fdf);
+				draw_line(create_point(x, y, map),
+					create_point(x, y + 1, map), fdf);
 			x++;
 		}
 		y++;

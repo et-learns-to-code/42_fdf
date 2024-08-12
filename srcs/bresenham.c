@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:20:38 by etien             #+#    #+#             */
-/*   Updated: 2024/08/12 15:28:51 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 16:16:43 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 // will be incremented and the error term will be adjusted accordingly.
 // error[0] is the error term and error[1] is (error[0] * 2) used
 // in the decision parameter.
-// Calculation of absolute values, determination of sign directions,
+// Absolute values in determining delta, determining step direction,
 // and using '!=' in the while loop condition (rather than '<' or '>')
 // are done to ensure the line drawing function correctly handles
 // all cases of slopes, including both positive and negative slopes,
@@ -43,14 +43,14 @@ void	draw_line(t_point start, t_point end, t_fdf *fdf)
 	t_point	current;
 	int		error[2];
 
-	delta.x = ft_abs(end.x - start.x);
-	delta.y = ft_abs(end.y - start.y);
-	determine_step(start, end, &step);
+	set_delta(start, end, &delta);
+	set_step(start, end, &step);
 	error[0] = delta.x - delta.y;
 	current = start;
 	while (current.x != end.x || current.y != end.y)
 	{
-		put_pixel_on_img(current.x, current.y, get_gradient_color(current, start, end, delta), fdf);
+		put_pixel_on_img(current.x, current.y,
+			get_gradient_color(current, start, end, delta), fdf);
 		error[1] = error[0] * 2;
 		if (error[1] > -delta.y)
 		{
@@ -65,17 +65,20 @@ void	draw_line(t_point start, t_point end, t_fdf *fdf)
 	}
 }
 
-// This function will return the absolute value of the given number.
-int	ft_abs(int nbr)
+// This function will set the deltas for x and y.
+// Deltas x and y will be cast as their absolute values.
+void	set_delta(t_point start, t_point end, t_point *delta)
 {
-	if (nbr < 0)
-		return (-nbr);
-	else
-		return (nbr);
+	delta->x = end.x - start.x;
+	delta->y = end.y - start.y;
+	if (delta->x < 0)
+		delta->x = -delta->x;
+	if (delta->y < 0)
+		delta->y = -delta->y;
 }
 
-// This function will determine the x and y step directions.
-void	determine_step(t_point start, t_point end, t_point *step)
+// This function will set the step directions for x and y.
+void	set_step(t_point start, t_point end, t_point *step)
 {
 	if (end.x > start.x)
 		step->x = 1;

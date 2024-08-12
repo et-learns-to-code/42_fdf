@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/12 15:14:50 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 16:14:56 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@
 # define PANEL_WIDTH 400
 # define PANEL_HEIGHT 800
 
-#define PANEL_TEXT 0x8F00FF
+# define PANEL_TEXT 0x8F00FF
 
-#define DEFAULT_COLOR 0xFFFFFF
+# define DEFAULT_COLOR 0xFFFFFF
 
 // Error message macros
 # define ARG_ERR "Usage: './fdf file.fdf'."
@@ -48,16 +48,17 @@
 bool	check_file_extension(const char *filename);
 
 // Structs initialisation functions
-t_view	*view_init();
+t_view	*view_init(void);
 t_fdf	*fdf_init(t_map *map, t_view *view);
 
 // Bresenham line drawing algorithm functions
 void	draw_line(t_point start, t_point end, t_fdf *fdf);
-int		ft_abs(int nbr);
-void	determine_step(t_point start, t_point end, t_point *sign);
+void	set_delta(t_point start, t_point end, t_point *delta);
+void	set_step(t_point start, t_point end, t_point *sign);
 
 // Color functions
-int		get_gradient_color(t_point current, t_point start, t_point end, t_point delta);
+int		get_gradient_color(t_point current, t_point start, t_point end,
+			t_point delta);
 double	get_relative_position(int current, int start, int end);
 int		modify_color_component(int start, int end, double relative_position);
 

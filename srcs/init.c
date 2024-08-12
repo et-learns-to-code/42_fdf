@@ -6,13 +6,13 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:30:15 by etien             #+#    #+#             */
-/*   Updated: 2024/08/10 18:34:00 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 16:32:15 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-t_view	*view_init()
+t_view	*view_init(void)
 {
 	t_view	*view;
 
@@ -42,7 +42,7 @@ t_view	*view_init()
 // and endian values for you.
 t_fdf	*fdf_init(t_map *map, t_view *view)
 {
-	t_fdf *fdf;
+	t_fdf	*fdf;
 
 	fdf = malloc(sizeof(t_fdf));
 	if (!fdf)

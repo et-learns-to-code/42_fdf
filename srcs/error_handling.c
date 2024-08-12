@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:22:03 by etien             #+#    #+#             */
-/*   Updated: 2024/08/10 18:02:57 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 16:32:29 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,3 @@ void	cleanup_and_exit(t_fdf *fdf, char *err_msg)
 	free(fdf);
 	err_and_exit(err_msg);
 }
-
-
