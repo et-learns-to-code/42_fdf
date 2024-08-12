@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:00:00 by etien             #+#    #+#             */
-/*   Updated: 2024/08/12 11:30:57 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 13:04:34 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 // *(unsigned int*)dst assumes a 32-bit color value.
 // We use unsigned int because color values are inherently positive.
 // Negative color values are undefined and could lead to unexpected behaviour.
-void	put_pixel_on_img(t_fdf *fdf, int x, int y, int color)
+void	put_pixel_on_img(int x, int y, int color, t_fdf *fdf)
 {
 	char	*dst;
 
@@ -43,9 +43,13 @@ void	draw(t_map *map, t_fdf *fdf)
 	y = 0;
 	while (y < map->height)
 	{
+		x = 0;
 		while (x < map->width)
 		{
-			draw_line()
+			if ((x + 1) < map->width)
+				draw_line(create_point(x, y, map), create_point(x + 1, y, map), fdf);
+			if ((y + 1) < map->height)
+				draw_line(create_point(x, y, map), create_point(x, y + 1, map), fdf);
 			x++;
 		}
 		y++;
@@ -53,13 +57,12 @@ void	draw(t_map *map, t_fdf *fdf)
 	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img, 0, 0);
 }
 
-
 int	get_index(int x, int y, int width)
 {
 	return (y * width + x);
 }
 
-t_point	create_point(t_map *map, int x, int y)
+t_point	create_point(int x, int y, t_map *map)
 {
 	t_point	point;
 	int		index;

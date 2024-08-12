@@ -6,14 +6,12 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:20:38 by etien             #+#    #+#             */
-/*   Updated: 2024/08/12 10:41:51 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 15:28:51 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-// a: starting point
-// b: ending point
 // This line drawing function employs Bresenham's algorithm
 // to approximate a true line when plotting the pixels onto
 // the image. The error term (which is the distance between
@@ -38,21 +36,21 @@
 // as well as steep and shallow lines.
 // '||' means while loop will run until BOTH coordinates equal
 // the coordinates of the final point.
-void	draw_line(t_point a, t_point b, t_fdf *fdf)
+void	draw_line(t_point start, t_point end, t_fdf *fdf)
 {
 	t_point	delta;
 	t_point	step;
 	t_point	current;
 	int		error[2];
 
-	delta.x = ft_abs(a.x - b.x);
-	delta.y = ft_abs(a.y - b.y);
-	determine_step(&step, a, b);
+	delta.x = ft_abs(end.x - start.x);
+	delta.y = ft_abs(end.y - start.y);
+	determine_step(start, end, &step);
 	error[0] = delta.x - delta.y;
-	current = a;
-	while (current.x != b.x || current.y != b.y)
+	current = start;
+	while (current.x != end.x || current.y != end.y)
 	{
-		put_pixel_on_img(fdf, current.x, current.y, current.color);
+		put_pixel_on_img(current.x, current.y, get_gradient_color(current, start, end, delta), fdf);
 		error[1] = error[0] * 2;
 		if (error[1] > -delta.y)
 		{
@@ -77,13 +75,13 @@ int	ft_abs(int nbr)
 }
 
 // This function will determine the x and y step directions.
-void	determine_step(t_point *step, t_point a, t_point b)
+void	determine_step(t_point start, t_point end, t_point *step)
 {
-	if (b.x > a.x)
+	if (end.x > start.x)
 		step->x = 1;
 	else
 		step->x = -1;
-	if (b.y > a.y)
+	if (end.y > start.y)
 		step->y = 1;
 	else
 		step->y = -1;

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/12 11:22:24 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 15:14:50 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,20 @@ t_view	*view_init();
 t_fdf	*fdf_init(t_map *map, t_view *view);
 
 // Bresenham line drawing algorithm functions
-void	draw_line(t_point a, t_point b, t_fdf *fdf);
+void	draw_line(t_point start, t_point end, t_fdf *fdf);
 int		ft_abs(int nbr);
-void	determine_step(t_point *sign, t_point a, t_point b);
+void	determine_step(t_point start, t_point end, t_point *sign);
+
+// Color functions
+int		get_gradient_color(t_point current, t_point start, t_point end, t_point delta);
+double	get_relative_position(int current, int start, int end);
+int		modify_color_component(int start, int end, double relative_position);
 
 // Drawing functions
-void	put_pixel_on_img(t_fdf *fdf, int x, int y, int color);
+void	put_pixel_on_img(int x, int y, int color, t_fdf *fdf);
+void	draw(t_map *map, t_fdf *fdf);
+int		get_index(int x, int y, int width);
+t_point	create_point(int x, int y, t_map *map);
 
 // Error handling functions
 void	err_and_exit(char *err_msg);
