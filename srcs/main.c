@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:26:44 by etien             #+#    #+#             */
-/*   Updated: 2024/08/10 18:57:38 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 10:48:03 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,12 @@ int	main(int ac, char **av)
 		fdf = fdf_init(map, view);
 		a.x = 100;
 		a.y = 100;
+		a.color = 0x0000ff;
 		b.x = 400;
 		b.y = 400;
-		// draw_line(a, b, fdf);
+		b.color = 0xff0000;
+		draw_line(a, b, fdf);
+		mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img, 0, 0);
 		mlx_key_hook(fdf->win, &handle_key, &fdf);
 		mlx_loop(fdf->mlx);
 	}

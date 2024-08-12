@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/10 19:12:36 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 11:22:24 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 
 #define PANEL_TEXT 0x8F00FF
 
+#define DEFAULT_COLOR 0xFFFFFF
+
 // Error message macros
 # define ARG_ERR "Usage: './fdf file.fdf'."
 # define FILENAME_ERR "Error: File should end with '.fdf' extension."
@@ -54,10 +56,13 @@ void	draw_line(t_point a, t_point b, t_fdf *fdf);
 int		ft_abs(int nbr);
 void	determine_step(t_point *sign, t_point a, t_point b);
 
+// Drawing functions
+void	put_pixel_on_img(t_fdf *fdf, int x, int y, int color);
+
 // Error handling functions
 void	err_and_exit(char *err_msg);
 void	cleanup_and_exit(t_fdf *fdf, char *err_msg);
 
-int key_press(int key, t_fdf *fdf)
+int		key_press(int key, t_fdf *fdf);
 
 #endif

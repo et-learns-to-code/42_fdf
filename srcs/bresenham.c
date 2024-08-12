@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:20:38 by etien             #+#    #+#             */
-/*   Updated: 2024/08/10 18:04:55 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 10:41:51 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	draw_line(t_point a, t_point b, t_fdf *fdf)
 	current = a;
 	while (current.x != b.x || current.y != b.y)
 	{
-		put_pixel(fdf, current.x, current.y);
+		put_pixel_on_img(fdf, current.x, current.y, current.color);
 		error[1] = error[0] * 2;
 		if (error[1] > -delta.y)
 		{

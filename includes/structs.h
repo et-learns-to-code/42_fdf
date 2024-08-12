@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:12:59 by etien             #+#    #+#             */
-/*   Updated: 2024/08/10 16:47:01 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 11:19:48 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef struct s_map
 {
 	int	width;
 	int	height;
-	int	**z;
-	int	**color;
+	int	*z_arr;
+	int	*color_arr;
 }	t_map;
 
 typedef enum projection

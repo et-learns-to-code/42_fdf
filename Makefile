@@ -1,7 +1,8 @@
 NAME = fdf
 
 SRCS = $(addprefix srcs/, \
-	main.c bresenham.c controls.c draw.c error_handling.c init.c panel.c parse_map.c utils.c)
+	main.c bresenham.c draw.c \
+	error_handling.c init.c panel.c parse_map.c)
 
 OBJS = $(SRCS:.c=.o)
 
