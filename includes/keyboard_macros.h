@@ -6,12 +6,16 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 11:25:43 by etien             #+#    #+#             */
-/*   Updated: 2024/08/10 19:18:06 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 16:52:33 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEYBOARD_MACROS_H
 # define KEYBOARD_MACROS_H
+
+// Event hooks
+#define ON_KEYDOWN 2
+#define ON_DESTROY 17
 
 // Exit key
 # define ESC_KEY 53

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/12 16:14:56 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 17:32:10 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ t_point	create_point(int x, int y, t_map *map);
 void	err_and_exit(char *err_msg);
 void	cleanup_and_exit(t_fdf *fdf, char *err_msg);
 
+// Set up hooks and callback functions
+void	setup_hooks(t_fdf *fdf);
 int		key_press(int key, t_fdf *fdf);
+int		close_window(t_fdf *fdf);
 
 #endif

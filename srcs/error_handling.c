@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:22:03 by etien             #+#    #+#             */
-/*   Updated: 2024/08/12 16:32:29 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 17:19:39 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	err_and_exit(char *err_msg)
 // mlx pointer has to be freed manually.
 // data_addr pointer doesn't have to be freed because it was not malloc'd
 // in the first place (see actual function in Minilibx).
+// The if else statement at the end allows for flexibility so that this
+// function becomes a general cleanup function. If no error message is
+// provided, it will exit with status 0 (normal exit).
 void	cleanup_and_exit(t_fdf *fdf, char *err_msg)
 {
 	if (fdf->img)
@@ -37,5 +40,8 @@ void	cleanup_and_exit(t_fdf *fdf, char *err_msg)
 	if (fdf->mlx)
 		free(fdf->mlx);
 	free(fdf);
-	err_and_exit(err_msg);
+	if (err_msg)
+		err_and_exit(err_msg);
+	else
+		exit(0);
 }

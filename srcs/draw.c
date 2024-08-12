@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:00:00 by etien             #+#    #+#             */
-/*   Updated: 2024/08/12 16:31:25 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 16:47:18 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void	put_pixel_on_img(int x, int y, int color, t_fdf *fdf)
 	}
 }
 
+// This is the main drawing function for the entire program.
+// It will iterate through the map struct and draw all the lines
+// that connect the points.
 void	draw(t_map *map, t_fdf *fdf)
 {
 	int	x;
@@ -59,11 +62,15 @@ void	draw(t_map *map, t_fdf *fdf)
 	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img, 0, 0);
 }
 
+// This function will return the index to access the correct element
+// in the z_arr and color_arr.
 int	get_index(int x, int y, int width)
 {
 	return (y * width + x);
 }
 
+// This function will create the point structs that will be fed into
+// the drawing function by extracting this data from the map struct.
 t_point	create_point(int x, int y, t_map *map)
 {
 	t_point	point;
