@@ -6,12 +6,28 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:30:15 by etien             #+#    #+#             */
-/*   Updated: 2024/08/12 16:32:15 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 18:19:46 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
+// This function initializes the map struct.
+t_map	*map_init(void)
+{
+	t_map	*map;
+
+	map = malloc(sizeof(t_map));
+	if (!map)
+		err_and_exit(MAP_INIT_ERR);
+	map->width = 0;
+	map->height = 0;
+	map->z_arr = NULL;
+	map->color_arr = NULL;
+	return (map);
+}
+
+// This function initializes the view struct.
 t_view	*view_init(void)
 {
 	t_view	*view;

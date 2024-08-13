@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:13:51 by etien             #+#    #+#             */
-/*   Updated: 2024/08/12 17:25:03 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 18:10:18 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	key_press(int key, t_fdf *fdf)
 
 // This function is also connected to the mlx hook and will clean up resources
 // and exit with status 0 (because of NULL parameter) when the window is closed.
-int close_window(t_fdf *fdf)
+int	close_window(t_fdf *fdf)
 {
 	cleanup_and_exit(fdf, NULL);
 }

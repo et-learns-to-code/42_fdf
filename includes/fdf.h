@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/12 17:32:10 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/12 18:17:33 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@
 
 // Error message macros
 # define ARG_ERR "Usage: './fdf file.fdf'."
-# define FILENAME_ERR "Error: File should end with '.fdf' extension."
 # define FDF_INIT_ERR "Error: An error occurred while initialising \
 	the fdf struct."
+# define FILENAME_ERR "Error: File should end with '.fdf' extension."
+# define MAP_INIT_ERR "Error: An error occurred while initialising \
+	the map struct."
 # define VIEW_INIT_ERR "Error: An error occurred while initialising \
 	the view struct."
 

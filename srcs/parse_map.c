@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:10 by etien             #+#    #+#             */
-/*   Updated: 2024/08/10 17:13:42 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/13 09:59:36 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,3 +32,10 @@ bool	check_file_extension(const char *filename)
 		&& ft_strncmp(filename + (len_filename - len_extension),
 			extension, len_extension) == 0);
 }
+
+// t_map	*parse_map(t_map *map)
+// {
+// 	int fd =
+
+
+// }
