@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:26:44 by etien             #+#    #+#             */
-/*   Updated: 2024/08/13 10:00:20 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/13 14:58:16 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int ac, char **av)
 		fdf = fdf_init(map, view);
 		a.x = 100;
 		a.y = 100;
-		a.color = 0xffff;
+		a.color = 16777215;
 		b.x = 400;
 		b.y = 400;
 		b.color = 0xff0000;

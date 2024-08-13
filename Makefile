@@ -4,7 +4,7 @@ SRCS = $(addprefix srcs/, \
 	main.c bresenham.c color.c draw.c \
 	error_handling.c init.c panel.c parse_map.c test.c)
 
-#SRCS = srcs/test.c
+# SRCS = srcs/test.c
 
 OBJS = $(SRCS:.c=.o)
 
