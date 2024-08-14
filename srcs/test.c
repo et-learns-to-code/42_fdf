@@ -38,11 +38,11 @@ int main(int ac, char **av)
 }
 
 //
-void parse_line(char *line, t_map *map)
+void	parse_line(char *line, t_map *map)
 {
-	char **unprocessed_arr;
-	int	i;
-	int width;
+	char	**unprocessed_arr;
+	int		i;
+	int		width;
 	// int *z_arr;
 	// int *color_arr;
 
@@ -63,11 +63,13 @@ void parse_line(char *line, t_map *map)
 // their separate arrays.
 void extract_z_and_color(char *unprocessed_str, int *z_arr, int *color_arr, int index)
 {
-	char *nbr;
-	char *hex;
-	int i = 0;
-	int nbr_len = 0;
+	char	*nbr;
+	char	*hex;
+	int		i;
+	int		nbr_len;
 
+	i = 0;
+	nbr_len = 0;
 	while (unprocessed_str[i] == '-' || ft_isdigit(unprocessed_str[i]))
 	{
 		nbr_len++;
@@ -92,10 +94,13 @@ void extract_z_and_color(char *unprocessed_str, int *z_arr, int *color_arr, int 
 // to move past its '0x' prefix.
 int     ft_atoi_base(const char *str, int str_base)
 {
-	int sign = 1;
-	int res = 0;
-	int dec = 0;
+	int	sign;
+	int	result;
+	int	decimal_value;
 
+	sign = 1;
+	result = 0;
+	decimal_value = 0;
 	if (str_base == 16)
 		str = str + 2;
 	while (*str && str_base <= 16)
@@ -103,16 +108,16 @@ int     ft_atoi_base(const char *str, int str_base)
 		if (*str == '-')
 			sign *= -1;
 		else if (*str >= '0' && *str <= '9')
-			dec = *str - '0';
+			decimal_value = *str - '0';
 		else if (*str >= 'A' && *str <= 'F')
-			dec = *str - 'A' + 10;
+			decimal_value = *str - 'A' + 10;
 		else if (*str >= 'a' && *str <= 'f')
-			dec = *str - 'a' + 10;
+			decimal_value = *str - 'a' + 10;
 		else
 			break;
-		res *= str_base;
-		res += dec;
+		result *= str_base;
+		result += decimal_value;
 		str++;
 	}
-	return (res * sign);
+	return (result * sign);
 }

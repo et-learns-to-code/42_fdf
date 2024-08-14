@@ -6,14 +6,14 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/12 18:17:33 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/14 14:31:38 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-// math.h - for float number math functions
+// math.h - for trigonometric functions
 // stdbool.h - for boolean data type
 // fcntl.h - for file open function
 # include <mlx.h>
@@ -49,7 +49,13 @@
 // Map parsing functions
 bool	check_file_extension(const char *filename);
 
+// Line parsing functions
+void	parse_line(char *line, t_map *map);
+void	extract_z_and_color(char *unprocessed_str, int *z_arr, int *color_arr, int index);
+int		ft_atoi_base(const char *str, int str_base);
+
 // Structs initialisation functions
+t_map	*map_init(void);
 t_view	*view_init(void);
 t_fdf	*fdf_init(t_map *map, t_view *view);
 
@@ -70,6 +76,9 @@ void	draw(t_map *map, t_fdf *fdf);
 int		get_index(int x, int y, int width);
 t_point	create_point(int x, int y, t_map *map);
 
+// Print panel function
+void	print_panel(t_fdf *fdf);
+
 // Error handling functions
 void	err_and_exit(char *err_msg);
 void	cleanup_and_exit(t_fdf *fdf, char *err_msg);
@@ -78,5 +87,17 @@ void	cleanup_and_exit(t_fdf *fdf, char *err_msg);
 void	setup_hooks(t_fdf *fdf);
 int		key_press(int key, t_fdf *fdf);
 int		close_window(t_fdf *fdf);
+
+// View modifying functions
+void	zoom(int key, t_fdf *fdf);
+void	move(int key, t_fdf *fdf);
+void	rotate(int key, t_fdf *fdf);
+void	change_projection(int key, t_fdf *fdf);
+
+// Projection functions
+void	rotate_x(int *y, int *z, double alpha);
+void	rotate_y(int *x, int *z, double beta);
+void	rotate_z(int *x, int *y, double gamma);
+void	convert_to_isometric(int *x, int *y, int z);
 
 #endif
