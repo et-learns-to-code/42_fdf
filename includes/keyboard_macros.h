@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 11:25:43 by etien             #+#    #+#             */
-/*   Updated: 2024/08/14 12:48:13 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/14 15:03:04 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@
 // Change projection key
 # define I_KEY 34
 # define P_KEY 35
+# define SPACE_KEY 49
 
 #endif

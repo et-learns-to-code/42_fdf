@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/14 14:31:38 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/14 15:10:41 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ void	rotate_x(int *y, int *z, double alpha);
 void	rotate_y(int *x, int *z, double beta);
 void	rotate_z(int *x, int *y, double gamma);
 void	convert_to_isometric(int *x, int *y, int z);
+t_point	project_point(t_point p, t_fdf *fdf);
 
 #endif

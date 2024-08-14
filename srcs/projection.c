@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 12:53:45 by etien             #+#    #+#             */
-/*   Updated: 2024/08/14 14:35:08 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/14 15:09:58 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,23 @@ void	convert_to_isometric(int *x, int *y, int z)
 	*y = (original_x + *y) * sin(iso_radian) - z;
 }
 
-t_point	project_point(t_point p)
+// This function will take into account all the view parameters to
+// plot each point at its correct position.
+// The sequence for transformation is important:
+// Center in window > zoom > isometric projection > rotate > move
+t_point	project_point(t_point p, t_fdf *fdf)
 {
-
+	p.x += WIN_WIDTH / 2;
+	p.y += WIN_HEIGHT / 2;
+	p.x	*= fdf->view->zoom;
+	p.y	*= fdf->view->zoom;
+	p.z	*= fdf->view->zoom;
+	if (fdf->view->projection == ISOMETRIC)
+		convert_to_isometric(&p.x, &p.y, p.z);
+	rotate_x(&p.y, &p.z, fdf->view->alpha);
+	rotate_y(&p.x, &p.z, fdf->view->beta);
+	rotate_z(&p.x, &p.y, fdf->view->gamma);
+	p.x += fdf->view->x_offset;
+	p.y += fdf->view->y_offset;
+	return (p);
 }
