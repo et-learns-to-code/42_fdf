@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:13:51 by etien             #+#    #+#             */
-/*   Updated: 2024/08/12 18:10:18 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/14 10:43:43 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ int	key_press(int key, t_fdf *fdf)
 {
 	if (key == ESC_KEY)
 		exit(0);
-	if (key == P_KEY)
-		change_projection(key, fdf);
-	else if (key == PLUS_KEY || key == MINUS_KEY)
+	if (key == PLUS_KEY || key == MINUS_KEY)
 		zoom(key, fdf);
 	else if (key == W_KEY || key == A_KEY || key == S_KEY || key == D_KEY)
 		move(key, fdf);
@@ -44,6 +42,8 @@ int	key_press(int key, t_fdf *fdf)
 		|| key == NUM_3_KEY || key == NUM_4_KEY
 		|| key == NUM_5_KEY || key == NUM_6_KEY)
 		rotate(key, fdf);
+	else if (key == P_KEY)
+		change_projection(key, fdf);
 	return (0);
 }
 

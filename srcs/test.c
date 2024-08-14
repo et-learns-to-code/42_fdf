@@ -37,6 +37,7 @@ int main(int ac, char **av)
 	return (0);
 }
 
+//
 void parse_line(char *line, t_map *map)
 {
 	char **unprocessed_arr;
@@ -57,6 +58,9 @@ void parse_line(char *line, t_map *map)
 	ft_printf("Width: %d\n", width);
 }
 
+// This function will extract the z value and the hexadecimal color value
+// from the unprocessed string (from ft_split of lines of the map) to
+// their separate arrays.
 void extract_z_and_color(char *unprocessed_str, int *z_arr, int *color_arr, int index)
 {
 	char *nbr;
@@ -112,12 +116,3 @@ int     ft_atoi_base(const char *str, int str_base)
 	}
 	return (res * sign);
 }
-
-
-// typedef struct s_map
-// {
-// 	int	width;
-// 	int	height;
-// 	int	*z_arr;
-// 	int	*color_arr;
-// }	t_map;

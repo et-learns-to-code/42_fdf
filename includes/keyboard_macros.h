@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 11:25:43 by etien             #+#    #+#             */
-/*   Updated: 2024/08/12 18:10:01 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/14 12:48:13 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@
 
 // Exit key
 # define ESC_KEY 53
-
-// Change projection key
-# define P_KEY 35
-# define I_KEY
 
 // Zoom keys
 # define PLUS_KEY 24
@@ -41,5 +37,9 @@
 # define NUM_4_KEY 21
 # define NUM_5_KEY 23
 # define NUM_6_KEY 22
+
+// Change projection key
+# define I_KEY 34
+# define P_KEY 35
 
 #endif
