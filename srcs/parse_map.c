@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:10 by etien             #+#    #+#             */
-/*   Updated: 2024/08/15 17:34:00 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/15 17:50:00 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,37 +109,6 @@ void	count_columns(char *line, int *column_count)
 	}
 }
 
-// int main(int ac, char **av)
-// {
-// 	int		fd;
-// 	int		height;
-// 	char	*line;
-// 	t_map *map = NULL;
-// 	int z_arr[10];
-// 	int color_arr[10];
-
-// 	(void) ac;
-// 	height = 0;
-
-// 	fd = open(av[1], O_RDONLY);
-// 	line = get_next_line(fd);
-// 	while (line)
-// 	{
-// 		parse_line(line, map);
-// 		height++;
-// 		free(line);
-// 		line = get_next_line(fd);
-// 	}
-// 	ft_printf("Height: %d\n", height);
-// 	ft_printf("%d\n", ft_atoi_base("0xFFFF", 16));
-// 	ft_printf("%d\n", ft_atoi_base("12345435", 10));
-// 	extract_z_and_color("20,0xFF0000", z_arr, color_arr, 1);
-// 	ft_printf("Z: %d\n", z_arr[1]);
-// 	ft_printf("Color: %d\n", color_arr[1]);
-// 	close(fd);
-// 	return (0);
-// }
-
 // This function will parse the line returned from get_next_line.
 // If the line is shorter than the map width, the line will be padded
 // with extra 0's (z = 0; color is not set).
@@ -153,7 +122,8 @@ void	parse_line(char *line, t_map *map, int *index)
 	char	**splitted_line;
 	int		i;
 
-	count_columns(line, column_count);
+	column_count = 0;
+	count_columns(line, &column_count);
 	while (column_count < map->width)
 	{
 		temp = line;

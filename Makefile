@@ -1,10 +1,10 @@
 NAME = fdf
 
 SRCS = $(addprefix srcs/, \
-	main.c bresenham.c color.c draw.c \
+	test.c bresenham.c color.c draw.c \
 	error_handling.c init.c panel.c parse_map.c)
 
-# SRCS = srcs/test.c
+# SRCS = srcs/main.c
 
 OBJS = $(SRCS:.c=.o)
 

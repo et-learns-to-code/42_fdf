@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/15 13:13:52 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/15 17:37:24 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	get_map_width(char **av, t_map *map);
 void	count_columns(char *line, int *column_count);
 
 // Line parsing functions
-void	parse_line(char *line, t_map *map);
-void	extract_z_and_color(char *unprocessed_str,
+void	parse_line(char *line, t_map *map, int *index);
+void	extract_z_and_color(char *raw_data,
 			int *z_arr, int *color_arr, int index);
 int		ft_atoi_base(const char *str, int str_base);
 
