@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   view_functions.c                                   :+:      :+:    :+:   */
+/*   view.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:25:32 by etien             #+#    #+#             */
-/*   Updated: 2024/08/14 13:36:53 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/15 11:21:35 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	rotate(int key, t_fdf *fdf)
 
 // This function will reset all rotation to neutral angles then
 // set the projection type to isometric or parallel.
-void change_projection(int key, t_fdf *fdf)
+void	change_projection(int key, t_fdf *fdf)
 {
 	fdf->view->alpha = 0;
 	fdf->view->beta = 0;

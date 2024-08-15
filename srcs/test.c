@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/15 11:22:17 by etien             #+#    #+#             */
+/*   Updated: 2024/08/15 11:23:22 by etien            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fcntl.h>
 #include <unistd.h>
 #include "../includes/fdf.h"
@@ -8,9 +20,9 @@ void	extract_z_and_color(char *unprocessed_str, int *z_arr, int *color_arr, int 
 
 int main(int ac, char **av)
 {
-	int fd;
-	int height;
-	char *line;
+	int		fd;
+	int		height;
+	char	*line;
 	t_map *map = NULL;
 	int z_arr[10];
 	int color_arr[10];
@@ -61,7 +73,8 @@ void	parse_line(char *line, t_map *map)
 // This function will extract the z value and the hexadecimal color value
 // from the unprocessed string (from ft_split of lines of the map) to
 // their separate arrays.
-void extract_z_and_color(char *unprocessed_str, int *z_arr, int *color_arr, int index)
+void	extract_z_and_color(char *unprocessed_str, int *z_arr, int *color_arr,
+			int index)
 {
 	char	*nbr;
 	char	*hex;
@@ -92,7 +105,7 @@ void extract_z_and_color(char *unprocessed_str, int *z_arr, int *color_arr, int 
 // based on the specified base.
 // The if condition for base 16 will move the string pointer two spaces
 // to move past its '0x' prefix.
-int     ft_atoi_base(const char *str, int str_base)
+int	ft_atoi_base(const char *str, int str_base)
 {
 	int	sign;
 	int	result;

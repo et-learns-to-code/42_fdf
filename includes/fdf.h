@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/14 15:10:41 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/15 10:56:38 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@
 # define ARG_ERR "Usage: './fdf file.fdf'."
 # define FDF_INIT_ERR "Error: An error occurred while initialising \
 	the fdf struct."
-# define FILENAME_ERR "Error: File should end with '.fdf' extension."
+# define FILE_NAME_ERR "Error: File should end with '.fdf' extension."
+# define FILE_OPEN_ERR "Error: File could not be opened."
 # define MAP_INIT_ERR "Error: An error occurred while initialising \
 	the map struct."
 # define VIEW_INIT_ERR "Error: An error occurred while initialising \
@@ -48,10 +49,13 @@
 
 // Map parsing functions
 bool	check_file_extension(const char *filename);
+void	get_map_height(char **av, t_map *map);
+void	get_map_width(char **av, t_map *map);
 
 // Line parsing functions
 void	parse_line(char *line, t_map *map);
-void	extract_z_and_color(char *unprocessed_str, int *z_arr, int *color_arr, int index);
+void	extract_z_and_color(char *unprocessed_str,
+			int *z_arr, int *color_arr, int index);
 int		ft_atoi_base(const char *str, int str_base);
 
 // Structs initialisation functions

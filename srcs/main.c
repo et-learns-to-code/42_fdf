@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:26:44 by etien             #+#    #+#             */
-/*   Updated: 2024/08/13 14:58:16 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/15 11:18:49 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,13 @@ int	main(int ac, char **av)
 	{
 		if (check_file_extension(av[1]))
 		{
-			// map = map_init();
+			map = map_init();
+			get_map_height(av, map);
+			get_map_width(av, map);
+			ft_printf("Height: %d\n Width: %d\n", map->height, map->width);
 		}
 		else
-			err_and_exit(FILENAME_ERR);
+			err_and_exit(FILE_NAME_ERR);
 		view = view_init();
 		fdf = fdf_init(map, view);
 		a.x = 100;
