@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 12:53:45 by etien             #+#    #+#             */
-/*   Updated: 2024/08/14 15:09:58 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/15 13:25:18 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	rotate_z(int *x, int *y, double gamma)
 // z is subtracted from the y coordinate to add depth.
 void	convert_to_isometric(int *x, int *y, int z)
 {
-	double iso_radian;
-	int original_x;
+	double	iso_radian;
+	int		original_x;
 
 	iso_radian = 0.5235987756;
 	original_x = *x;
@@ -69,9 +69,9 @@ t_point	project_point(t_point p, t_fdf *fdf)
 {
 	p.x += WIN_WIDTH / 2;
 	p.y += WIN_HEIGHT / 2;
-	p.x	*= fdf->view->zoom;
-	p.y	*= fdf->view->zoom;
-	p.z	*= fdf->view->zoom;
+	p.x *= fdf->view->zoom;
+	p.y *= fdf->view->zoom;
+	p.z *= fdf->view->zoom;
 	if (fdf->view->projection == ISOMETRIC)
 		convert_to_isometric(&p.x, &p.y, p.z);
 	rotate_x(&p.y, &p.z, fdf->view->alpha);

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/15 10:56:38 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/15 13:13:52 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@
 bool	check_file_extension(const char *filename);
 void	get_map_height(char **av, t_map *map);
 void	get_map_width(char **av, t_map *map);
+void	count_columns(char *line, int *column_count);
 
 // Line parsing functions
 void	parse_line(char *line, t_map *map);
