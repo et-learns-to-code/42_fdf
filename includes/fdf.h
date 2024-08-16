@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/16 19:05:18 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/16 19:54:41 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,17 @@
 
 // Structs initialisation functions
 t_map	*map_init(void);
-t_view	*view_init(void);
+t_view	*view_init(t_map *map);
 t_fdf	*fdf_init(t_map *map, t_view *view);
 
 // Error handling functions
-void	free_fdf_and_exit(t_fdf *fdf, char *err_msg);
 void	err_and_exit(char *err_msg);
+void	free_map_and_exit(t_map *map, char *err_msg);
+void	free_fdf_and_exit(t_fdf *fdf, char *err_msg);
 
 // Map parsing functions
+void	parse_map(char **av, t_map *map);
+void	malloc_arrays(char **av, t_map *map);
 void	parse_line(char *line, t_map *map, int *index);
 void	extract_z_and_color(char *raw_data,
 			int *z_arr, int *color_arr, int index);

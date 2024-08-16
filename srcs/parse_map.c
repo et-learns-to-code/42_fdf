@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 15:04:59 by etien             #+#    #+#             */
-/*   Updated: 2024/08/16 19:00:53 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/16 19:56:05 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 // This function will parse the map and set up all the data
 // in the map struct.
-// It will first check that the file extension is correct, otherwise
-// the program will error and exit.
-// Map width and height are will be set first.
-// Once the width and height are known, memory can be allocated for the
-// z and color arrays.
-// The file will be opened and the parse_line function will be called
-// in a while loop to parse and fill the arrays.
-// The file descriptor is closed once the parsing is complete.
+// It will first check that the file extension is correct,
+// otherwise the program will free the map struct and exit.
+// Map width and height will be set in the malloc_arrays function
+// and the function will also allocate memory for the z and color arrays.
+// The program will open the file and call parse_line in a while loop
+// to parse and fill the arrays.
+// Finally, the file descriptor is closed once the parsing is complete.
 void parse_map(char **av, t_map *map)
 {
 	int		fd;
@@ -29,15 +28,11 @@ void parse_map(char **av, t_map *map)
 	int		index;
 
 	if (!check_file_extension(av[1]))
-	{
-		free(map);
-		err_and_exit(FILE_NAME_ERR);
-	}
+		free_map_and_exit(map, FILE_NAME_ERR);
 	malloc_arrays(av, map);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
-
-		err_and_exit(FILE_OPEN_ERR);
+		free_map_and_exit(map, FILE_OPEN_ERR);
 	index = 0;
 	line = get_next_line(fd);
 	while (line)
@@ -49,23 +44,20 @@ void parse_map(char **av, t_map *map)
 	close(fd);
 }
 
+// This function allocates the memory for the z and color arrays
+// after determining the width and height of the map.
+// It also handles for error in case memory fails to be allocated
+// for the arrays.
 void	malloc_arrays(char **av, t_map *map)
 {
 	get_map_height(av, map);
 	get_map_width(av, map);
 	map->z_arr = malloc((map->height * map->width) * sizeof(int));
 	if (!map->z_arr)
-	{
-		free(map);
-		err_and_exit(MALLOC_ERR);
-	}
+		free_map_and_exit(map, MALLOC_ERR);
 	map->color_arr = malloc((map->height * map->width) * sizeof(int));
 	if (!map->color_arr)
-	{
-		free(map->z_arr);
-		free(map);
-		err_and_exit(MALLOC_ERR);
-	}
+		free_map_and_exit(map, MALLOC_ERR);
 }
 
 // This function will parse the line returned from get_next_line.

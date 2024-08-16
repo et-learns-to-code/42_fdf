@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:26:44 by etien             #+#    #+#             */
-/*   Updated: 2024/08/16 18:48:47 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/16 19:38:46 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		err_and_exit(ARG_ERR);
 	map = map_init();
-	parse_map();
-	view = view_init();
+	parse_map(av, map);
+	view = view_init(map);
 	fdf = fdf_init(map, view);
 	draw(map, fdf);
 	setup_hooks(fdf);

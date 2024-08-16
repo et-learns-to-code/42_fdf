@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:10 by etien             #+#    #+#             */
-/*   Updated: 2024/08/16 15:05:26 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/16 19:42:25 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	get_map_height(char **av, t_map *map)
 	height = 0;
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
-		err_and_exit(FILE_OPEN_ERR);
+		free_map_and_exit(map, FILE_OPEN_ERR);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -73,7 +73,7 @@ void	get_map_width(char **av, t_map *map)
 	width = 0;
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
-		err_and_exit(FILE_OPEN_ERR);
+		free_map_and_exit(map, FILE_OPEN_ERR);
 	line = get_next_line(fd);
 	while (line)
 	{
