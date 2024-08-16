@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:30:15 by etien             #+#    #+#             */
-/*   Updated: 2024/08/16 10:20:17 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/16 19:05:58 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,17 @@ t_fdf	*fdf_init(t_map *map, t_view *view)
 		err_and_exit(FDF_INIT_ERR);
 	fdf->mlx = mlx_init();
 	if (!fdf->mlx)
-		cleanup_and_exit(fdf, FDF_INIT_ERR);
+		free_fdf_and_exit(fdf, FDF_INIT_ERR);
 	fdf->win = mlx_new_window(fdf->mlx, WIN_WIDTH, WIN_HEIGHT, "Fil de Fer");
 	if (!fdf->win)
-		cleanup_and_exit(fdf, FDF_INIT_ERR);
+		free_fdf_and_exit(fdf, FDF_INIT_ERR);
 	fdf->img = mlx_new_image(fdf->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!fdf->img)
-		cleanup_and_exit(fdf, FDF_INIT_ERR);
+		free_fdf_and_exit(fdf, FDF_INIT_ERR);
 	fdf->data_addr = mlx_get_data_addr(fdf->img, &(fdf->bits_per_pixel),
 			&(fdf->size_line), &(fdf->endian));
 	if (!fdf->data_addr)
-		cleanup_and_exit(fdf, FDF_INIT_ERR);
+		free_fdf_and_exit(fdf, FDF_INIT_ERR);
 	fdf->map = map;
 	fdf->view = view;
 	return (fdf);

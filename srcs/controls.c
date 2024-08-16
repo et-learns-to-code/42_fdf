@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:13:51 by etien             #+#    #+#             */
-/*   Updated: 2024/08/16 15:17:59 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/16 19:05:45 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	setup_hooks(t_fdf *fdf)
 int	key_press(int key, t_fdf *fdf)
 {
 	if (key == ESC_KEY)
-		cleanup_and_exit(fdf, NULL);
+		free_fdf_and_exit(fdf, NULL);
 	else if (key == PLUS_KEY || key == MINUS_KEY)
 		zoom(key, fdf);
 	else if (key == W_KEY || key == A_KEY || key == S_KEY || key == D_KEY)
@@ -51,5 +51,5 @@ int	key_press(int key, t_fdf *fdf)
 // and exit with status 0 (because of NULL parameter) when the window is closed.
 int	close_window(t_fdf *fdf)
 {
-	cleanup_and_exit(fdf, NULL);
+	free_fdf_and_exit(fdf, NULL);
 }

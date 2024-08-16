@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/16 16:07:32 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/16 19:05:18 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define FILE_OPEN_ERR "Error: File could not be opened."
 # define MAP_INIT_ERR "Error: An error occurred while initialising \
 	the map struct."
+# define MALLOC_ERR "Error: Memory allocation failure"
 # define VIEW_INIT_ERR "Error: An error occurred while initialising \
 	the view struct."
 
@@ -53,7 +54,7 @@ t_view	*view_init(void);
 t_fdf	*fdf_init(t_map *map, t_view *view);
 
 // Error handling functions
-void	cleanup_and_exit(t_fdf *fdf, char *err_msg);
+void	free_fdf_and_exit(t_fdf *fdf, char *err_msg);
 void	err_and_exit(char *err_msg);
 
 // Map parsing functions
@@ -82,9 +83,9 @@ void	put_pixel_on_img(int x, int y, int color, t_fdf *fdf);
 
 // Drawing functions
 void	draw(t_map *map, t_fdf *fdf);
+void	print_panel(t_fdf *fdf);
 t_point	create_point(int x, int y, t_map *map);
 int		get_index(int x, int y, int width);
-void	print_panel(t_fdf *fdf);
 
 // Hook functions
 void	setup_hooks(t_fdf *fdf);
