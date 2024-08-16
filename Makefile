@@ -2,7 +2,7 @@ NAME = fdf
 
 SRCS = $(addprefix srcs/, \
 	test.c bresenham.c color.c draw.c \
-	error_handling.c init.c panel.c parse_map.c)
+	error_handling.c init.c parse_map.c parse_map_utils.c)
 
 # SRCS = srcs/main.c
 

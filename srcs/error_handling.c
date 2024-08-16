@@ -6,19 +6,11 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:22:03 by etien             #+#    #+#             */
-/*   Updated: 2024/08/12 17:19:39 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/16 16:07:21 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-// This function will print the error message to STDERR
-// and exit the program.
-void	err_and_exit(char *err_msg)
-{
-	ft_putendl_fd(err_msg, STDERR_FILENO);
-	exit(1);
-}
 
 // This function cleans up all the pointers when an error is encountered
 // to prevent memory leaks. The pointers have to be freed in the order of
@@ -39,9 +31,24 @@ void	cleanup_and_exit(t_fdf *fdf, char *err_msg)
 		mlx_destroy_window(fdf->mlx, fdf->win);
 	if (fdf->mlx)
 		free(fdf->mlx);
-	free(fdf);
+	if (fdf)
+	{
+		if (fdf->map)
+			free(fdf->map);
+		if (fdf->view)
+			free(fdf->view);
+		free(fdf);
+	}
 	if (err_msg)
 		err_and_exit(err_msg);
 	else
 		exit(0);
+}
+
+// This function will print the error message to STDERR
+// and exit the program.
+void	err_and_exit(char *err_msg)
+{
+	ft_putendl_fd(err_msg, STDERR_FILENO);
+	exit(1);
 }

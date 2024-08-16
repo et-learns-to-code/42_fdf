@@ -6,11 +6,50 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 12:53:45 by etien             #+#    #+#             */
-/*   Updated: 2024/08/16 14:43:35 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/16 15:49:17 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
+// This function will take into account all the view parameters to
+// plot each point at its correct position.
+// The sequence for transformation is important:
+// Center in window > zoom > isometric projection > rotate > move
+t_point	project_point(t_point p, t_fdf *fdf)
+{
+	p.x += WIN_WIDTH / 2;
+	p.y += WIN_HEIGHT / 2;
+	p.x *= fdf->view->zoom;
+	p.y *= fdf->view->zoom;
+	p.z *= fdf->view->zoom;
+	if (fdf->view->projection == ISOMETRIC)
+		convert_to_isometric(&p.x, &p.y, p.z);
+	rotate_x(&p.y, &p.z, fdf->view->alpha);
+	rotate_y(&p.x, &p.z, fdf->view->beta);
+	rotate_z(&p.x, &p.y, fdf->view->gamma);
+	p.x += fdf->view->x_offset;
+	p.y += fdf->view->y_offset;
+	return (p);
+}
+
+// This function will convert the coordinates to their correct
+// positions for the isometric projection.
+// We are creating the isometric illusion on a 2D space,
+// so only x and y coordinates are affected.
+// The z coordinate is merely used as a part of the calculation.
+// z is subtracted from the y coordinate to add depth.
+// 30 degrees = 0.52359877559 radians
+void	convert_to_isometric(int *x, int *y, int z)
+{
+	double	iso_radian;
+	int		original_x;
+
+	iso_radian = 0.52359877559;
+	original_x = *x;
+	*x = (*x - *y) * cos(iso_radian);
+	*y = (original_x + *y) * sin(iso_radian) - z;
+}
 
 // These three functions will modify the coordinates for rotation
 // around the x, y and z axes.
@@ -42,43 +81,4 @@ void	rotate_z(int *x, int *y, double gamma)
 	original_x = *x;
 	*x = *x * cos(gamma) - *y * sin(gamma);
 	*y = original_x * sin(gamma) + *y * cos(gamma);
-}
-
-// This function will convert the coordinates to their correct
-// positions for the isometric projection.
-// We are creating the isometric illusion on a 2D space,
-// so only x and y coordinates are affected.
-// The z coordinate is merely used as a part of the calculation.
-// z is subtracted from the y coordinate to add depth.
-// 30 degrees = 0.52359877559 radians
-void	convert_to_isometric(int *x, int *y, int z)
-{
-	double	iso_radian;
-	int		original_x;
-
-	iso_radian = 0.52359877559;
-	original_x = *x;
-	*x = (*x - *y) * cos(iso_radian);
-	*y = (original_x + *y) * sin(iso_radian) - z;
-}
-
-// This function will take into account all the view parameters to
-// plot each point at its correct position.
-// The sequence for transformation is important:
-// Center in window > zoom > isometric projection > rotate > move
-t_point	project_point(t_point p, t_fdf *fdf)
-{
-	p.x += WIN_WIDTH / 2;
-	p.y += WIN_HEIGHT / 2;
-	p.x *= fdf->view->zoom;
-	p.y *= fdf->view->zoom;
-	p.z *= fdf->view->zoom;
-	if (fdf->view->projection == ISOMETRIC)
-		convert_to_isometric(&p.x, &p.y, p.z);
-	rotate_x(&p.y, &p.z, fdf->view->alpha);
-	rotate_y(&p.x, &p.z, fdf->view->beta);
-	rotate_z(&p.x, &p.y, fdf->view->gamma);
-	p.x += fdf->view->x_offset;
-	p.y += fdf->view->y_offset;
-	return (p);
 }

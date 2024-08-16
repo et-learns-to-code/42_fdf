@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/16 10:25:05 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/16 16:07:32 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,26 @@
 # define VIEW_INIT_ERR "Error: An error occurred while initialising \
 	the view struct."
 
-// Map parsing functions
-bool	check_file_extension(const char *filename);
-void	get_map_height(char **av, t_map *map);
-void	get_map_width(char **av, t_map *map);
-void	count_columns(char *line, int *column_count);
-
-// Line parsing functions
-void	parse_line(char *line, t_map *map, int *index);
-void	extract_z_and_color(char *raw_data,
-			int *z_arr, int *color_arr, int index);
-int		ft_atoi_base(const char *str, int str_base);
-
 // Structs initialisation functions
 t_map	*map_init(void);
 t_view	*view_init(void);
 t_fdf	*fdf_init(t_map *map, t_view *view);
 
-// Bresenham line drawing algorithm functions
-void	draw_line(t_point start, t_point end, t_fdf *fdf);
-void	set_delta(t_point start, t_point end, t_point *delta);
-void	set_step(t_point start, t_point end, t_point *sign);
+// Error handling functions
+void	cleanup_and_exit(t_fdf *fdf, char *err_msg);
+void	err_and_exit(char *err_msg);
+
+// Map parsing functions
+void	parse_line(char *line, t_map *map, int *index);
+void	extract_z_and_color(char *raw_data,
+			int *z_arr, int *color_arr, int index);
+
+// Map parsing util functions
+bool	check_file_extension(const char *filename);
+void	get_map_height(char **av, t_map *map);
+void	get_map_width(char **av, t_map *map);
+void	count_columns(char *line, int *column_count);
+int		ft_atoi_base(const char *str, int str_base);
 
 // Color functions
 int		get_gradient_color(t_point current, t_point start, t_point end,
@@ -75,20 +74,19 @@ int		get_gradient_color(t_point current, t_point start, t_point end,
 double	get_relative_position(int current, int start, int end);
 int		modify_color_component(int start, int end, double relative_position);
 
-// Drawing functions
+// Bresenham line drawing algorithm functions
+void	draw_line(t_point start, t_point end, t_fdf *fdf);
+void	set_delta(t_point start, t_point end, t_point *delta);
+void	set_step(t_point start, t_point end, t_point *sign);
 void	put_pixel_on_img(int x, int y, int color, t_fdf *fdf);
-void	draw(t_map *map, t_fdf *fdf);
-int		get_index(int x, int y, int width);
-t_point	create_point(int x, int y, t_map *map);
 
-// Print panel function
+// Drawing functions
+void	draw(t_map *map, t_fdf *fdf);
+t_point	create_point(int x, int y, t_map *map);
+int		get_index(int x, int y, int width);
 void	print_panel(t_fdf *fdf);
 
-// Error handling functions
-void	err_and_exit(char *err_msg);
-void	cleanup_and_exit(t_fdf *fdf, char *err_msg);
-
-// Set up hooks and callback functions
+// Hook functions
 void	setup_hooks(t_fdf *fdf);
 int		key_press(int key, t_fdf *fdf);
 int		close_window(t_fdf *fdf);
@@ -101,10 +99,10 @@ void	change_projection(int key, t_fdf *fdf);
 void	change_parallel_view(t_fdf *fdf);
 
 // Projection functions
+t_point	project_point(t_point p, t_fdf *fdf);
+void	convert_to_isometric(int *x, int *y, int z);
 void	rotate_x(int *y, int *z, double alpha);
 void	rotate_y(int *x, int *z, double beta);
 void	rotate_z(int *x, int *y, double gamma);
-void	convert_to_isometric(int *x, int *y, int z);
-t_point	project_point(t_point p, t_fdf *fdf);
 
 #endif
