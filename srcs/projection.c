@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 12:53:45 by etien             #+#    #+#             */
-/*   Updated: 2024/08/15 13:25:18 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/16 14:43:35 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ void	rotate_z(int *x, int *y, double gamma)
 // so only x and y coordinates are affected.
 // The z coordinate is merely used as a part of the calculation.
 // z is subtracted from the y coordinate to add depth.
+// 30 degrees = 0.52359877559 radians
 void	convert_to_isometric(int *x, int *y, int z)
 {
 	double	iso_radian;
 	int		original_x;
 
-	iso_radian = 0.5235987756;
+	iso_radian = 0.52359877559;
 	original_x = *x;
 	*x = (*x - *y) * cos(iso_radian);
 	*y = (original_x + *y) * sin(iso_radian) - z;

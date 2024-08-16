@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:30:15 by etien             #+#    #+#             */
-/*   Updated: 2024/08/12 18:19:46 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/16 10:20:17 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_view	*view_init(void)
 	if (!view)
 		err_and_exit(VIEW_INIT_ERR);
 	view->projection = ISOMETRIC;
+	view->parallel_view = TOP_VIEW;
 	view->zoom = 1;
 	view->x_offset = 0;
 	view->y_offset = 0;

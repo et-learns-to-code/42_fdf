@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:12:59 by etien             #+#    #+#             */
-/*   Updated: 2024/08/12 11:19:48 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/16 14:58:58 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,17 @@ typedef enum projection
 	PARALLEL
 }	t_projection;
 
+typedef enum parallel_view
+{
+	TOP_VIEW,
+	FRONT_VIEW,
+	LEFT_SIDE_VIEW
+}	t_parallel_view;
+
 typedef struct s_view
 {
 	t_projection	projection;
+	t_parallel_view	parallel_view;
 	int				zoom;
 	int				x_offset;
 	int				y_offset;

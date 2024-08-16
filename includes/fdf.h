@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/15 17:37:24 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/16 10:25:05 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	zoom(int key, t_fdf *fdf);
 void	move(int key, t_fdf *fdf);
 void	rotate(int key, t_fdf *fdf);
 void	change_projection(int key, t_fdf *fdf);
+void	change_parallel_view(t_fdf *fdf);
 
 // Projection functions
 void	rotate_x(int *y, int *z, double alpha);

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:25:32 by etien             #+#    #+#             */
-/*   Updated: 2024/08/15 11:21:35 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/16 14:59:31 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,41 @@ void	change_projection(int key, t_fdf *fdf)
 	if (key == I_KEY)
 		fdf->view->projection = ISOMETRIC;
 	else if (key == P_KEY)
+	{
 		fdf->view->projection = PARALLEL;
+		change_parallel_view(fdf);
+	}
 	draw(fdf->map, fdf);
+}
+
+// This function is a helper function of the change projection function.
+// Each time the P key is pressed, the parallel view will cycle to the
+// next one in the sequence: top > front > side.
+// 90 degrees = 1.57079632679 radians
+void change_parallel_view(t_fdf *fdf)
+{
+	double parallel_radian;
+	t_parallel_view direction;
+
+	parallel_radian = 1.57079632679;
+	direction = fdf->view->parallel_view;
+	if (direction == TOP_VIEW)
+	{
+		fdf->view->alpha = 0;
+		fdf->view->beta = 0;
+		fdf->view->gamma = 0;
+	}
+	else if (direction == FRONT_VIEW)
+	{
+		fdf->view->alpha = parallel_radian;
+		fdf->view->beta = 0;
+		fdf->view->gamma = 0;
+	}
+	else if (direction == LEFT_SIDE_VIEW)
+	{
+		fdf->view->alpha = 0;
+		fdf->view->beta = -parallel_radian;
+		fdf->view->gamma = parallel_radian;
+	}
+	fdf->view->parallel_view = (direction + 1) % 3;
 }
