@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:25:32 by etien             #+#    #+#             */
-/*   Updated: 2024/08/16 14:59:31 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/17 12:10:20 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,15 @@
 void	zoom(int key, t_fdf *fdf)
 {
 	if (key == PLUS_KEY)
+	{
 		fdf->view->zoom++;
+		ft_printf("Zoom increased: %i\n", fdf->view->zoom);
+	}
 	else if (key == MINUS_KEY)
+	{
 		fdf->view->zoom--;
+		ft_printf("Zoom decreased: %i\n", fdf->view->zoom);
+	}
 	draw(fdf->map, fdf);
 }
 

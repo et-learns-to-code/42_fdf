@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 15:04:59 by etien             #+#    #+#             */
-/*   Updated: 2024/08/17 11:43:41 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/17 14:43:54 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,36 +60,41 @@ void	malloc_arrays(char **av, t_map *map)
 }
 
 // This function will parse the line returned from get_next_line.
-// If the line is shorter than the map width, the line will be padded
-// with extra 0's (z = 0; color is not set).
-// The line is split to separate the data for each coordinate then
-// the extract function parses and stores the individual z and color
+// First, it will replace the newline character at the end of the
+// line with a null terminator. This will ensure that the newline
+// character is not incorrectly saved to the array when the line
+// is split.
+// The line is split to separate the data for each coordinate
+// then the extract function parses and stores the z and color
 // data into their correct arrays.
-// The logic for freeing is to free as soon as the data is no longer
-// needed (see freeing for temp, line and splitted line).
+// If there are fewer coordinates in a line than the map width,
+// the second while loop will pad the arrays and set up default
+// values as placeholders with z = 0 and color = DEFAULT_COLOR.
+// Allocated memory is always freed as soon as the data is
+// no longer needed (see freeing for line and splitted line).
 void	parse_line(char *line, t_map *map, int *index)
 {
-	int		column_count;
-	char	*temp;
+	int		line_length;
 	char	**splitted_line;
 	int		i;
 
-	column_count = 0;
-	count_columns(line, &column_count);
-	while (column_count < map->width)
-	{
-		temp = line;
-		line = ft_strjoin(temp, " 0 ");
-		free(temp);
-		column_count++;
-	}
+	line_length = ft_strlen(line);
+	if (line_length > 0 && line[line_length - 1] == '\n')
+		line[line_length - 1] = '\0';
 	splitted_line = ft_split(line, ' ');
 	free(line);
 	i = 0;
-	while (splitted_line[i])
+	while (splitted_line[i] && i < map->width)
 	{
 		extract_z_and_color(splitted_line[i], map->z_arr, map->color_arr,
 			*index);
+		(*index)++;
+		i++;
+	}
+	while (i < map->width)
+	{
+		map->z_arr[*index] = 0;
+		map->color_arr[*index] = DEFAULT_COLOR;
 		(*index)++;
 		i++;
 	}
