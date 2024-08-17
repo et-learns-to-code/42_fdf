@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 15:04:59 by etien             #+#    #+#             */
-/*   Updated: 2024/08/16 19:56:05 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/17 11:43:41 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void parse_map(char **av, t_map *map)
 	while (line)
 	{
 		parse_line(line, map, &index);
-		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
@@ -66,6 +65,8 @@ void	malloc_arrays(char **av, t_map *map)
 // The line is split to separate the data for each coordinate then
 // the extract function parses and stores the individual z and color
 // data into their correct arrays.
+// The logic for freeing is to free as soon as the data is no longer
+// needed (see freeing for temp, line and splitted line).
 void	parse_line(char *line, t_map *map, int *index)
 {
 	int		column_count;
@@ -92,6 +93,7 @@ void	parse_line(char *line, t_map *map, int *index)
 		(*index)++;
 		i++;
 	}
+	free_double_arr(splitted_line);
 }
 
 // This function will extract the z and hexadecimal color value

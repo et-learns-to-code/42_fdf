@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:13:51 by etien             #+#    #+#             */
-/*   Updated: 2024/08/16 19:05:45 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/16 20:04:49 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ int	key_press(int key, t_fdf *fdf)
 int	close_window(t_fdf *fdf)
 {
 	free_fdf_and_exit(fdf, NULL);
+	return(0);
 }

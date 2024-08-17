@@ -1,10 +1,9 @@
 NAME = fdf
 
 SRCS = $(addprefix srcs/, \
-	test.c bresenham.c color.c draw.c \
-	error_handling.c init.c parse_map.c parse_map_utils.c)
-
-# SRCS = srcs/main.c
+	bresenham.c color.c controls.c draw.c error_handling.c \
+	init.c main.c parse_map_utils.c parse_map.c projection.c \
+	view.c)
 
 OBJS = $(SRCS:.c=.o)
 
@@ -28,7 +27,7 @@ LIBRARIES = -lmlx -lm -lft -L$(LIBFT_DIR) -framework OpenGL -framework AppKit
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	@$(CC) $(LIBRARIES) $(OBJS) -o $(NAME)
+	@$(CC) -fsanitize=address -g $(LIBRARIES) $(OBJS) -o $(NAME)
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:26:44 by etien             #+#    #+#             */
-/*   Updated: 2024/08/16 19:38:46 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/17 11:45:22 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	main(int ac, char **av)
 	t_map	*map;
 	t_view	*view;
 	t_fdf	*fdf;
-	t_point	a;
-	t_point	b;
 
 	if (ac != 2)
 		err_and_exit(ARG_ERR);

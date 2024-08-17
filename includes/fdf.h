@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/16 19:54:41 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/17 11:44:43 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_fdf	*fdf_init(t_map *map, t_view *view);
 void	err_and_exit(char *err_msg);
 void	free_map_and_exit(t_map *map, char *err_msg);
 void	free_fdf_and_exit(t_fdf *fdf, char *err_msg);
+void	free_double_arr(char **arr);
 
 // Map parsing functions
 void	parse_map(char **av, t_map *map);

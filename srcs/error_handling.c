@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:22:03 by etien             #+#    #+#             */
-/*   Updated: 2024/08/16 19:59:40 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/17 11:44:39 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,17 @@ void	free_fdf_and_exit(t_fdf *fdf, char *err_msg)
 		err_and_exit(err_msg);
 	else
 		exit(0);
+}
+
+// A helper function to free double arrays for proper memory management.
+// This function is called in the parse_line function to free the
+// splitted line after it has been processed.
+void	free_double_arr(char **arr)
+{
+	int	i;
+
+	i = -1;
+	while (arr[++i])
+		free(arr[i]);
+	free(arr);
 }
