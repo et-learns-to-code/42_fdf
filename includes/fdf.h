@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/17 14:44:48 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/17 14:55:46 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	free_double_arr(char **arr);
 void	parse_map(char **av, t_map *map);
 void	malloc_arrays(char **av, t_map *map);
 void	parse_line(char *line, t_map *map, int *index);
-void	extract_z_and_color(char *raw_data,
+void	extract_z_and_color(char *coord_data,
 			int *z_arr, int *color_arr, int index);
 
 // Map parsing util functions

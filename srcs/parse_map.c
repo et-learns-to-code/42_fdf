@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 15:04:59 by etien             #+#    #+#             */
-/*   Updated: 2024/08/17 14:43:54 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/17 15:12:12 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,22 @@ void	malloc_arrays(char **av, t_map *map)
 // the second while loop will pad the arrays and set up default
 // values as placeholders with z = 0 and color = DEFAULT_COLOR.
 // Allocated memory is always freed as soon as the data is
-// no longer needed (see freeing for line and splitted line).
+// no longer needed (see freeing for line and coord data).
 void	parse_line(char *line, t_map *map, int *index)
 {
 	int		line_length;
-	char	**splitted_line;
+	char	**coord_data;
 	int		i;
 
 	line_length = ft_strlen(line);
 	if (line_length > 0 && line[line_length - 1] == '\n')
 		line[line_length - 1] = '\0';
-	splitted_line = ft_split(line, ' ');
+	coord_data = ft_split(line, ' ');
 	free(line);
 	i = 0;
-	while (splitted_line[i] && i < map->width)
+	while (coord_data[i] && i < map->width)
 	{
-		extract_z_and_color(splitted_line[i], map->z_arr, map->color_arr,
+		extract_z_and_color(coord_data[i], map->z_arr, map->color_arr,
 			*index);
 		(*index)++;
 		i++;
@@ -98,12 +98,12 @@ void	parse_line(char *line, t_map *map, int *index)
 		(*index)++;
 		i++;
 	}
-	free_double_arr(splitted_line);
+	free_double_arr(coord_data);
 }
 
 // This function will extract the z and hexadecimal color value
-// from the raw data for each coordinate to their correct arrays.
-void	extract_z_and_color(char *raw_data, int *z_arr, int *color_arr,
+// from the coordinate's data to their correct arrays.
+void	extract_z_and_color(char *coord_data, int *z_arr, int *color_arr,
 			int index)
 {
 	char	*nbr;
@@ -113,18 +113,18 @@ void	extract_z_and_color(char *raw_data, int *z_arr, int *color_arr,
 
 	i = 0;
 	nbr_len = 0;
-	while (raw_data[i] == '-' || ft_isdigit(raw_data[i]))
+	while (coord_data[i] == '-' || ft_isdigit(coord_data[i]))
 	{
 		nbr_len++;
 		i++;
 	}
-	nbr = ft_substr(raw_data, 0, nbr_len);
+	nbr = ft_substr(coord_data, 0, nbr_len);
 	z_arr[index] = ft_atoi_base(nbr, 10);
 	free(nbr);
-	if (raw_data[i] == ',')
+	if (coord_data[i] == ',')
 	{
-		hex = ft_substr(raw_data, i + 1,
-				ft_strlen(raw_data) - (i + 1));
+		hex = ft_substr(coord_data, i + 1,
+				ft_strlen(coord_data) - (i + 1));
 		color_arr[index] = ft_atoi_base(hex, 16);
 		free(hex);
 	}
