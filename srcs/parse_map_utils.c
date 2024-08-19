@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:10 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 14:34:46 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 15:23:51 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,5 +151,7 @@ void	set_z_range(t_map *map, int index)
 	z_range = z_max - z_min;
 	if (z_range < 0)
 		z_range = -z_range;
+	map->z_min = z_min;
+	map->z_max = z_max;
 	map->z_range = z_range;
 }

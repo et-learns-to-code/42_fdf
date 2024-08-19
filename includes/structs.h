@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:12:59 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 13:51:51 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 15:22:16 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct s_map
 	int	height;
 	int	*z_arr;
 	int	*color_arr;
+	int	z_min;
+	int	z_max;
 	int	z_range;
 }	t_map;
 

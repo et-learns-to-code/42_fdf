@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:00:00 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 14:36:37 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 17:10:14 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,7 @@ t_point	create_point(int x, int y, t_map *map)
 	point.x = x;
 	point.y = y;
 	point.z = map->z_arr[index];
-	if (map->color_arr[index] == -1)
-		point.color = DEFAULT_COLOR;
-	else
-		point.color = map->color_arr[index];
+	point.color = map->color_arr[index];
 	return (point);
 }
 

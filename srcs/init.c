@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:30:15 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 14:35:17 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 15:22:47 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_map	*map_init(void)
 	map->height = 0;
 	map->z_arr = NULL;
 	map->color_arr = NULL;
+	map->z_min = 0;
+	map->z_max = 0;
 	map->z_range = 0;
 	return (map);
 }

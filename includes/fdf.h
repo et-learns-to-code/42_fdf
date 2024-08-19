@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 14:27:26 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 17:27:51 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@
 # define PANEL_TEXT 0x8F00FF
 
 # define DEFAULT_COLOR 0xFFFFFF
+// Colours for elevation zones.
+// 1 is lowest and 5 is highest.
+# define ZONE_1 0xFF0000
+# define ZONE_2 0xFFFF00
+# define ZONE_3 0x00FFFF
+# define ZONE_4 0x0000FF
+# define ZONE_5 0xFF00FF
 
 // Error message macros
 # define ARG_ERR "Usage: './fdf file.fdf'."
@@ -67,6 +74,7 @@ void	malloc_arrays(char **av, t_map *map);
 void	parse_line(char *line, t_map *map, int *index);
 void	extract_z_and_color(char *coord_data,
 			int *z_arr, int *color_arr, int index);
+void	update_elevation_colors(t_map *map, int index);
 
 // Map parsing util functions
 void	set_map_height(char **av, t_map *map);
@@ -80,6 +88,7 @@ int		get_gradient_color(t_point current, t_point start, t_point end,
 			t_point delta);
 double	get_relative_position(int current, int start, int end);
 int		modify_color_component(int start, int end, double relative_position);
+int		get_elevation_color(int z, t_map *map);
 
 // Bresenham line drawing algorithm functions
 void	draw_line(t_point start, t_point end, t_fdf *fdf);
