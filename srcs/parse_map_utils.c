@@ -6,38 +6,17 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:10 by etien             #+#    #+#             */
-/*   Updated: 2024/08/17 14:44:42 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 14:34:46 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-// This function will check that the file inputted as the argument
-// ends with the required extension of ".fdf".
-// It will check the difference in length in the filename and extension,
-// and move the filename's pointer to the position where the extension
-// is expected to start.
-// If the filename is longer than the extension and the comparison evaluates
-// to 0 (i.e. no difference), the function will return true.
-// Otherwise, it will return false.
-bool	check_file_extension(const char *filename)
-{
-	const char	*extension = ".fdf";
-	size_t		len_filename;
-	size_t		len_extension;
-
-	len_filename = ft_strlen(filename);
-	len_extension = ft_strlen(extension);
-	return (len_filename > len_extension
-		&& ft_strncmp(filename + (len_filename - len_extension),
-			extension, len_extension) == 0);
-}
-
 // This function will count the number of lines in the file
-// to determine the height of the map.
+// to set the height of the map.
 // Read permissions are sufficient because we are not
 // modifying the file, only reading it to count the lines.
-void	get_map_height(char **av, t_map *map)
+void	set_map_height(char **av, t_map *map)
 {
 	int		height;
 	int		fd;
@@ -63,7 +42,7 @@ void	get_map_height(char **av, t_map *map)
 // This info is necessary because some lines may have more columns
 // than others and we have to pad the shorter lines so that the
 // map can render without issues.
-void	get_map_width(char **av, t_map *map)
+void	set_map_width(char **av, t_map *map)
 {
 	int		width;
 	int		fd;
@@ -140,4 +119,37 @@ int	ft_atoi_base(const char *str, int str_base)
 		str++;
 	}
 	return (sign * result);
+}
+
+// This function will set the z_range in the map struct.
+// z_min and z_max are initialized to the first value in the z_arr.
+// Their values will be updated from subsequent comparisons.
+// Since z_arr is an integer array, the safe way to iterate
+// through the array is to use the array size to terminate
+// the while loop. The array size will be available from the
+// previously used index variable.
+void	set_z_range(t_map *map, int index)
+{
+	int	z_min;
+	int	z_max;
+	int	z_range;
+	int	i;
+
+	if (index <= 0 || map->z_arr == NULL)
+		return ;
+	z_min = map->z_arr[0];
+	z_max = map->z_arr[0];
+	i = 1;
+	while (i < index)
+	{
+		if (map->z_arr[i] < z_min)
+			z_min = map->z_arr[i];
+		if (map->z_arr[i] > z_max)
+			z_max = map->z_arr[i];
+		i++;
+	}
+	z_range = z_max - z_min;
+	if (z_range < 0)
+		z_range = -z_range;
+	map->z_range = z_range;
 }

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:30:15 by etien             #+#    #+#             */
-/*   Updated: 2024/08/17 11:57:42 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 14:35:17 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,33 @@ t_map	*map_init(void)
 	map->height = 0;
 	map->z_arr = NULL;
 	map->color_arr = NULL;
+	map->z_range = 0;
 	return (map);
 }
 
 // This function initializes the view struct.
 // If the view struct fails to be malloc'd, the
 // previously allocated map struct has to be freed first.
+// The zoom factor has to be initialised to fit the entire map
+// within the window upon first render. The lower of zoom_x/zoom_y
+// will be chosen as the starting zoom factor.
 t_view	*view_init(t_map *map)
 {
 	t_view	*view;
+	double	zoom_x;
+	double	zoom_y;
 
 	view = malloc(sizeof(t_view));
 	if (!view)
 		free_map_and_exit(map, VIEW_INIT_ERR);
 	view->projection = ISOMETRIC;
 	view->parallel_view = TOP_VIEW;
-	view->zoom = 1;
+	zoom_x = (double)(WIN_WIDTH - MARGIN) / map->width;
+	zoom_y = (double)(WIN_HEIGHT - MARGIN) / map->height;
+	if (zoom_x < zoom_y)
+		view->zoom = zoom_x;
+	else
+		view->zoom = zoom_y;
 	view->x_offset = 0;
 	view->y_offset = 0;
 	view->alpha = 0;

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:00:00 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 10:43:36 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 14:36:37 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	draw(t_map *map, t_fdf *fdf)
 	int	y;
 
 	y = 0;
-
-	clear_screen(fdf);
+	clear_image(fdf);
 	while (y < map->height)
 	{
 		x = 0;
@@ -49,9 +48,9 @@ void	draw(t_map *map, t_fdf *fdf)
 // For ft_bzero to work, you still have to multiply by the number of bytes.
 void	clear_image(t_fdf *fdf)
 {
-	ft_bzero(fdf->data_addr, (WIN_WIDTH * WIN_HEIGHT * (fdf->bits_per_pixel / 8)));
+	ft_bzero(fdf->data_addr, (WIN_WIDTH * WIN_HEIGHT
+			* (fdf->bits_per_pixel / 8)));
 }
-
 
 // This function will print out the side panel with usage instructions.
 void	print_panel(t_fdf *fdf)
@@ -99,5 +98,3 @@ int	get_index(int x, int y, int width)
 {
 	return (y * width + x);
 }
-
-

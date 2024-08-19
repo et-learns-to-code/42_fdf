@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 15:04:59 by etien             #+#    #+#             */
-/*   Updated: 2024/08/17 15:12:12 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 14:35:07 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 // The program will open the file and call parse_line in a while loop
 // to parse and fill the arrays.
 // Finally, the file descriptor is closed once the parsing is complete.
-void parse_map(char **av, t_map *map)
+void	parse_map(char **av, t_map *map)
 {
 	int		fd;
 	char	*line;
@@ -40,7 +40,29 @@ void parse_map(char **av, t_map *map)
 		parse_line(line, map, &index);
 		line = get_next_line(fd);
 	}
+	set_z_range(map, index);
 	close(fd);
+}
+
+// This function will check that the file inputted as the argument
+// ends with the required extension of ".fdf".
+// It will check the difference in length in the filename and extension,
+// and move the filename's pointer to the position where the extension
+// is expected to start.
+// If the filename is longer than the extension and the comparison evaluates
+// to 0 (i.e. no difference), the function will return true.
+// Otherwise, it will return false.
+bool	check_file_extension(const char *filename)
+{
+	const char	*extension = ".fdf";
+	size_t		len_filename;
+	size_t		len_extension;
+
+	len_filename = ft_strlen(filename);
+	len_extension = ft_strlen(extension);
+	return (len_filename > len_extension
+		&& ft_strncmp(filename + (len_filename - len_extension),
+			extension, len_extension) == 0);
 }
 
 // This function allocates the memory for the z and color arrays
@@ -49,8 +71,8 @@ void parse_map(char **av, t_map *map)
 // for the arrays.
 void	malloc_arrays(char **av, t_map *map)
 {
-	get_map_height(av, map);
-	get_map_width(av, map);
+	set_map_height(av, map);
+	set_map_width(av, map);
 	map->z_arr = malloc((map->height * map->width) * sizeof(int));
 	if (!map->z_arr)
 		free_map_and_exit(map, MALLOC_ERR);

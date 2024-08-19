@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:25:32 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 10:26:35 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 14:34:26 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ void	change_projection(int key, t_fdf *fdf)
 // Each time the P key is pressed, the parallel view will cycle to the
 // next one in the sequence: top > front > side.
 // 90 degrees = 1.57079632679 radians
-void change_parallel_view(t_fdf *fdf)
+void	change_parallel_view(t_fdf *fdf)
 {
-	double parallel_radian;
-	t_parallel_view direction;
+	double			parallel_radian;
+	t_parallel_view	direction;
 
 	parallel_radian = 1.57079632679;
 	direction = fdf->view->parallel_view;

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:22:03 by etien             #+#    #+#             */
-/*   Updated: 2024/08/17 11:44:39 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 14:35:34 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	err_and_exit(char *err_msg)
 // has not been initialized yet, so this cleanup function
 // will handle for cases where error is encountered when
 // setting up the map struct and early exit is necessary.
-void free_map_and_exit(t_map *map, char *err_msg)
+void	free_map_and_exit(t_map *map, char *err_msg)
 {
 	if (map)
 	{

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 12:53:45 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 10:32:47 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 13:46:35 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,22 @@
 // This function will take into account all the view parameters to
 // plot each point at its correct position.
 // The sequence for transformation is important:
-// Center in window > zoom > isometric projection > rotate > move
+// Apply zoom > center at origin (0,0) > isometric projection > rotate
+// > center in center of window > apply move offset
 t_point	project_point(t_point p, t_fdf *fdf)
 {
-	p.x *= 50;
-	p.y *= 50;
-	p.x += WIN_WIDTH / 2;
-	p.y += WIN_HEIGHT / 2;
 	p.x *= fdf->view->zoom;
 	p.y *= fdf->view->zoom;
 	p.z *= fdf->view->zoom;
+	p.x -= (WIN_WIDTH - MARGIN) / 2;
+	p.y -= (WIN_HEIGHT - MARGIN) / 2;
 	if (fdf->view->projection == ISOMETRIC)
 		convert_to_isometric(&p.x, &p.y, p.z);
 	rotate_x(&p.y, &p.z, fdf->view->alpha);
 	rotate_y(&p.x, &p.z, fdf->view->beta);
 	rotate_z(&p.x, &p.y, fdf->view->gamma);
-	p.x += fdf->view->x_offset;
-	p.y += fdf->view->y_offset;
+	p.x += (WIN_WIDTH - MARGIN) / 2 + fdf->view->x_offset;
+	p.y += (WIN_WIDTH - MARGIN) / 2 + fdf->view->y_offset;
 	return (p);
 }
 
@@ -50,7 +49,7 @@ void	convert_to_isometric(int *x, int *y, int z)
 	iso_radian = 0.52359877559;
 	original_x = *x;
 	*x = (*x - *y) * cos(iso_radian);
-	*y = (original_x + *y) * sin(iso_radian) - 10 * z;
+	*y = (original_x + *y) * sin(iso_radian) - z;
 }
 
 // These three functions will modify the coordinates for rotation

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:13:51 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 09:59:12 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 14:37:22 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	key_press(int key, t_fdf *fdf)
 		free_fdf_and_exit(fdf, NULL);
 	else if (key == PLUS_KEY || key == MINUS_KEY)
 		zoom(key, fdf);
-	else if (key == UP_KEY || key == DOWN_KEY || key == LEFT_KEY || key == RIGHT_KEY)
+	else if (key == UP_KEY || key == DOWN_KEY
+		|| key == LEFT_KEY || key == RIGHT_KEY)
 		move(key, fdf);
 	else if (key == NUM_1_KEY || key == NUM_2_KEY
 		|| key == NUM_3_KEY || key == NUM_4_KEY
@@ -52,5 +53,5 @@ int	key_press(int key, t_fdf *fdf)
 int	close_window(t_fdf *fdf)
 {
 	free_fdf_and_exit(fdf, NULL);
-	return(0);
+	return (0);
 }
