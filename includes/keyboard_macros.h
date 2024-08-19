@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 11:25:43 by etien             #+#    #+#             */
-/*   Updated: 2024/08/14 15:03:04 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 09:59:18 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 # define MINUS_KEY 27
 
 // Translation/movement keys
-# define W_KEY 13
-# define A_KEY 0
-# define S_KEY 1
-# define D_KEY 2
+# define UP_KEY 126
+# define DOWN_KEY 125
+# define LEFT_KEY 123
+# define RIGHT_KEY 124
 
 // Rotation keys
 # define NUM_1_KEY 18

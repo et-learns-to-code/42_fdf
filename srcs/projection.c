@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 12:53:45 by etien             #+#    #+#             */
-/*   Updated: 2024/08/16 15:49:17 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 10:32:47 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 // Center in window > zoom > isometric projection > rotate > move
 t_point	project_point(t_point p, t_fdf *fdf)
 {
+	p.x *= 50;
+	p.y *= 50;
 	p.x += WIN_WIDTH / 2;
 	p.y += WIN_HEIGHT / 2;
 	p.x *= fdf->view->zoom;
@@ -48,7 +50,7 @@ void	convert_to_isometric(int *x, int *y, int z)
 	iso_radian = 0.52359877559;
 	original_x = *x;
 	*x = (*x - *y) * cos(iso_radian);
-	*y = (original_x + *y) * sin(iso_radian) - z;
+	*y = (original_x + *y) * sin(iso_radian) - 10 * z;
 }
 
 // These three functions will modify the coordinates for rotation

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:00:00 by etien             #+#    #+#             */
-/*   Updated: 2024/08/16 15:59:41 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 10:43:36 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	draw(t_map *map, t_fdf *fdf)
 
 	y = 0;
 
-	print_panel(fdf);
+	clear_screen(fdf);
 	while (y < map->height)
 	{
 		x = 0;
@@ -40,6 +40,18 @@ void	draw(t_map *map, t_fdf *fdf)
 	}
 	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img, 0, 0);
 }
+
+// This function will clear the image buffer by calling ft_bzero which
+// will zero out all the pixel data. Since 0 = 0x000000 (black), this
+// will set all the pixels to black, essentially clearing the screen.
+// The dimensions input to ft_bzero will be the size of the window.
+// WIN_WIDTH * WIN_HEIGHT is just the number of pixels.
+// For ft_bzero to work, you still have to multiply by the number of bytes.
+void	clear_image(t_fdf *fdf)
+{
+	ft_bzero(fdf->data_addr, (WIN_WIDTH * WIN_HEIGHT * (fdf->bits_per_pixel / 8)));
+}
+
 
 // This function will print out the side panel with usage instructions.
 void	print_panel(t_fdf *fdf)

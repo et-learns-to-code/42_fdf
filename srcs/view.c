@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:25:32 by etien             #+#    #+#             */
-/*   Updated: 2024/08/17 12:10:20 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 10:26:35 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 // This function will increase or decrease the zoom on the 3D object.
 // ++ or -- to modify the zoom factor (which will be multiplied
 // with each coordinate).
+// There has to be a hard limit of zoom factor = 1, otherwise the 3D object
+// will fail to render once the zoom turns negative.
 void	zoom(int key, t_fdf *fdf)
 {
 	if (key == PLUS_KEY)
@@ -25,25 +27,27 @@ void	zoom(int key, t_fdf *fdf)
 	else if (key == MINUS_KEY)
 	{
 		fdf->view->zoom--;
+		if (fdf->view->zoom <= 0)
+			fdf->view->zoom = 1;
 		ft_printf("Zoom decreased: %i\n", fdf->view->zoom);
 	}
 	draw(fdf->map, fdf);
 }
 
 // This function will modify the x and y offsets depending
-// on the WASD keys pressed to move the 3D object.
-// W decreases the y offset and S increases it because the
-// y-axis is flipped in minilibx.
+// on the arrow keys pressed to move the 3D object.
+// The up key decreases the y offset and the down key increases
+// it because the y-axis is flipped in minilibx.
 // x and y offsets are in pixel units.
 void	move(int key, t_fdf *fdf)
 {
-	if (key == W_KEY)
+	if (key == UP_KEY)
 		fdf->view->y_offset -= 15;
-	else if (key == A_KEY)
-		fdf->view->x_offset -= 15;
-	else if (key == S_KEY)
+	else if (key == DOWN_KEY)
 		fdf->view->y_offset += 15;
-	else if (key == D_KEY)
+	else if (key == LEFT_KEY)
+		fdf->view->x_offset -= 15;
+	else if (key == RIGHT_KEY)
 		fdf->view->x_offset += 15;
 	draw(fdf->map, fdf);
 }
@@ -117,4 +121,5 @@ void change_parallel_view(t_fdf *fdf)
 		fdf->view->gamma = parallel_radian;
 	}
 	fdf->view->parallel_view = (direction + 1) % 3;
+	draw(fdf->map, fdf);
 }

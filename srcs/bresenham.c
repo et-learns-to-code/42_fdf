@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:20:38 by etien             #+#    #+#             */
-/*   Updated: 2024/08/16 15:56:38 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 09:54:27 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ void	put_pixel_on_img(int x, int y, int color, t_fdf *fdf)
 {
 	char	*dst;
 
-	if (x >= 0 && x < IMG_WIDTH
-		&& y >= 0 && y < IMG_HEIGHT)
+	if (x >= 0 && x < WIN_WIDTH
+		&& y >= 0 && y < WIN_HEIGHT)
 	{
 		dst = fdf->data_addr
 			+ (y * fdf->size_line)

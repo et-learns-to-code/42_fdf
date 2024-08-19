@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/17 14:55:46 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 10:43:28 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 // Width and height macros
 # define WIN_WIDTH 1400
 # define WIN_HEIGHT 800
-# define IMG_WIDTH 1000
-# define IMG_HEIGHT 800
-# define PANEL_WIDTH 400
-# define PANEL_HEIGHT 800
+// # define IMG_WIDTH 1000
+// # define IMG_HEIGHT 800
+// # define PANEL_WIDTH 400
+// # define PANEL_HEIGHT 800
 
 # define PANEL_TEXT 0x8F00FF
 
@@ -87,6 +87,7 @@ void	put_pixel_on_img(int x, int y, int color, t_fdf *fdf);
 
 // Drawing functions
 void	draw(t_map *map, t_fdf *fdf);
+void	clear_image(t_fdf *fdf);
 void	print_panel(t_fdf *fdf);
 t_point	create_point(int x, int y, t_map *map);
 int		get_index(int x, int y, int width);
