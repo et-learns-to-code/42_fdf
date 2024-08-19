@@ -6,13 +6,14 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 17:27:51 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 22:20:19 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+// mlx.h - for MiniLibX library
 // math.h - for trigonometric functions
 // stdbool.h - for boolean data type
 // fcntl.h - for file open function
@@ -21,8 +22,18 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # include "structs.h"
-# include "keyboard_macros.h"
 # include "../libft/libft/libft.h"
+
+// The relevant keycode header file will be included based on
+// the operating system running.
+// __linux__ and __APPLE__ macros are predefined by the compiler.
+# ifdef __linux__
+#  include "keycode_linux.h"
+# elif __APPLE__
+#  include "keycode_macos.h"
+# else
+#  error "Unsupported OS"
+# endif
 
 // Width and height macros
 # define WIN_WIDTH 1400
@@ -36,8 +47,8 @@
 # define PANEL_TEXT 0x8F00FF
 
 # define DEFAULT_COLOR 0xFFFFFF
-// Colours for elevation zones.
-// 1 is lowest and 5 is highest.
+// Colours for the different elevation zones.
+// 1 is the lowest and 5 is the highest.
 # define ZONE_1 0xFF0000
 # define ZONE_2 0xFFFF00
 # define ZONE_3 0x00FFFF

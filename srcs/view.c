@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:25:32 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 14:34:26 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 22:57:13 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,12 @@ void	zoom(int key, t_fdf *fdf)
 	if (key == PLUS_KEY)
 	{
 		fdf->view->zoom++;
-		ft_printf("Zoom increased: %i\n", fdf->view->zoom);
 	}
 	else if (key == MINUS_KEY)
 	{
 		fdf->view->zoom--;
 		if (fdf->view->zoom <= 0)
 			fdf->view->zoom = 1;
-		ft_printf("Zoom decreased: %i\n", fdf->view->zoom);
 	}
 	draw(fdf->map, fdf);
 }
@@ -41,13 +39,13 @@ void	zoom(int key, t_fdf *fdf)
 // x and y offsets are in pixel units.
 void	move(int key, t_fdf *fdf)
 {
-	if (key == UP_KEY)
+	if (key == UP_KEY || key == W_KEY)
 		fdf->view->y_offset -= 15;
-	else if (key == DOWN_KEY)
+	else if (key == DOWN_KEY || key == S_KEY)
 		fdf->view->y_offset += 15;
-	else if (key == LEFT_KEY)
+	else if (key == LEFT_KEY || key == A_KEY)
 		fdf->view->x_offset -= 15;
-	else if (key == RIGHT_KEY)
+	else if (key == RIGHT_KEY || key == D_KEY)
 		fdf->view->x_offset += 15;
 	draw(fdf->map, fdf);
 }
@@ -57,19 +55,22 @@ void	move(int key, t_fdf *fdf)
 // respectively.
 // alpha, beta and gamma are radian values, so 0.1 will be a
 // reasonable step for adjustment.
+// The keycodes are not random, but are mapped out for more
+// intuitive controls. Opposite rotations will be symmetrical
+// in finger placement on the keyboard.
 void	rotate(int key, t_fdf *fdf)
 {
-	if (key == NUM_1_KEY)
+	if (key == NUM_3_KEY)
 		fdf->view->alpha += 0.1;
-	else if (key == NUM_2_KEY)
+	else if (key == NUM_7_KEY)
 		fdf->view->alpha -= 0.1;
-	else if (key == NUM_3_KEY)
+	else if (key == NUM_2_KEY)
 		fdf->view->beta += 0.1;
-	else if (key == NUM_4_KEY)
+	else if (key == NUM_8_KEY)
 		fdf->view->beta -= 0.1;
-	else if (key == NUM_5_KEY)
+	else if (key == NUM_1_KEY)
 		fdf->view->gamma += 0.1;
-	else if (key == NUM_6_KEY)
+	else if (key == NUM_9_KEY)
 		fdf->view->gamma -= 0.1;
 	draw(fdf->map, fdf);
 }

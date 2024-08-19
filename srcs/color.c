@@ -31,7 +31,7 @@ int	get_gradient_color(t_point current, t_point start, t_point end,
 	int		blue;
 
 	if (start.color == end.color)
-		return start.color;
+		return (start.color);
 	if (delta.x > delta.y)
 		relative_position = get_relative_position(current.x, start.x, end.x);
 	else
@@ -96,9 +96,9 @@ int	modify_color_component(int start, int end, double relative_position)
 // Early return is necessary to avoid division by zero.
 // Multiplying 100 before division can preserve the numerical precision
 // otherwise lost from integer division.
-int get_elevation_color(int z, t_map *map)
+int	get_elevation_color(int z, t_map *map)
 {
-	int percent_elevation;
+	int	percent_elevation;
 
 	if (map->z_range == 0)
 		return (DEFAULT_COLOR);

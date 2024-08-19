@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:13:51 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 14:37:22 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/19 22:55:18 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 // However, for this project, we will set it to 0 and not bother with it.
 void	setup_hooks(t_fdf *fdf)
 {
-	mlx_hook(fdf->win, ON_KEYDOWN, 0, key_press, fdf);
-	mlx_hook(fdf->win, ON_DESTROY, 0, close_window, fdf);
+	mlx_hook(fdf->win, ON_KEYDOWN, KEY_PRESS_MASK, key_press, fdf);
+	mlx_hook(fdf->win, ON_DESTROY, KEY_PRESS_MASK, close_window, fdf);
 }
 
 // This function is connected to the mlx hook and will call the relevant
@@ -37,11 +37,13 @@ int	key_press(int key, t_fdf *fdf)
 	else if (key == PLUS_KEY || key == MINUS_KEY)
 		zoom(key, fdf);
 	else if (key == UP_KEY || key == DOWN_KEY
-		|| key == LEFT_KEY || key == RIGHT_KEY)
+		|| key == LEFT_KEY || key == RIGHT_KEY
+		|| key == W_KEY || key == S_KEY
+		|| key == A_KEY || key == D_KEY)
 		move(key, fdf);
 	else if (key == NUM_1_KEY || key == NUM_2_KEY
-		|| key == NUM_3_KEY || key == NUM_4_KEY
-		|| key == NUM_5_KEY || key == NUM_6_KEY)
+		|| key == NUM_3_KEY || key == NUM_7_KEY
+		|| key == NUM_8_KEY || key == NUM_9_KEY)
 		rotate(key, fdf);
 	else if (key == P_KEY)
 		change_projection(key, fdf);
