@@ -13,19 +13,29 @@
 #include "../includes/fdf.h"
 
 // This function will increase or decrease the zoom on the 3D object.
+// New method:
+// Multiply or divide the previous zoom factor by a constant zoom factor. 
+// This ensures smoother zooming that is proportional to high and low 
+// levels of zoom.
+// +0.5 before casting ensures proper rounding to the nearest integer
+// (round upwards if decimal is above 0.5).
+// Old method:
 // ++ or -- to modify the zoom factor (which will be multiplied
 // with each coordinate).
 // There has to be a hard limit of zoom factor = 1, otherwise the 3D object
 // will fail to render once the zoom turns negative.
 void	zoom(int key, t_fdf *fdf)
 {
+	double zoom_factor;
+
+	zoom_factor = 1.1;
 	if (key == PLUS_KEY)
 	{
-		fdf->view->zoom++;
+		fdf->view->zoom = (int)(fdf->view->zoom * zoom_factor + 0.5);
 	}
 	else if (key == MINUS_KEY)
 	{
-		fdf->view->zoom--;
+		fdf->view->zoom = (int)(fdf->view->zoom / zoom_factor + 0.5);
 		if (fdf->view->zoom <= 0)
 			fdf->view->zoom = 1;
 	}

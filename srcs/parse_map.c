@@ -155,6 +155,9 @@ void	extract_z_and_color(char *coord_data, int *z_arr, int *color_arr,
 		color_arr[index] = DEFAULT_COLOR;
 }
 
+// This function will update the elevation colors for each
+// map coordinate that was previously set to default color based 
+// on their respective z-values.
 void	update_elevation_colors(t_map *map, int index)
 {
 	int	i;
