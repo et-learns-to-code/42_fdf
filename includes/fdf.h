@@ -57,6 +57,7 @@
 
 // Error message macros
 # define ARG_ERR "Usage: './fdf file.fdf'."
+# define EMPTY_FILE_ERR "Error: File was empty."
 # define FDF_INIT_ERR "Error: An error occurred while initialising \
 	the fdf struct."
 # define FILE_NAME_ERR "Error: File should end with '.fdf' extension."

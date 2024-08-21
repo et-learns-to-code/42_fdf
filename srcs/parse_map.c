@@ -74,6 +74,8 @@ void	malloc_arrays(char **av, t_map *map)
 {
 	set_map_height(av, map);
 	set_map_width(av, map);
+	if (map->height == 0 || map->width == 0)
+		free_map_and_exit(map, EMPTY_FILE_ERR);
 	map->z_arr = malloc((map->height * map->width) * sizeof(int));
 	if (!map->z_arr)
 		free_map_and_exit(map, MALLOC_ERR);
@@ -156,7 +158,7 @@ void	extract_z_and_color(char *coord_data, int *z_arr, int *color_arr,
 }
 
 // This function will update the elevation colors for each
-// map coordinate that was previously set to default color based 
+// map coordinate that was previously set to default color based
 // on their respective z-values.
 void	update_elevation_colors(t_map *map, int index)
 {
