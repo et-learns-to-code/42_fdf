@@ -92,7 +92,8 @@ int	modify_color_component(int start, int end, double relative_position)
 // each with their own unique colors. This will make the
 // difference in elevation across the map immediately clear
 // through distinct colors.
-// Default color will be returned in edge cases e.g. when range = 0.
+// Lowest elevation zone color will be returned in edge cases 
+// e.g. when range = 0.
 // Early return is necessary to avoid division by zero.
 // Multiplying 100 before division can preserve the numerical precision
 // otherwise lost from integer division.
@@ -101,7 +102,7 @@ int	get_elevation_color(int z, t_map *map)
 	int	percent_elevation;
 
 	if (map->z_range == 0)
-		return (DEFAULT_COLOR);
+		return (ZONE_1);
 	percent_elevation = (z - map->z_min) * 100 / map->z_range;
 	if (percent_elevation >= 0 && percent_elevation <= 20)
 		return (ZONE_1);
@@ -114,5 +115,5 @@ int	get_elevation_color(int z, t_map *map)
 	else if (percent_elevation > 80 && percent_elevation <= 100)
 		return (ZONE_5);
 	else
-		return (DEFAULT_COLOR);
+		return (ZONE_1);
 }

@@ -47,8 +47,8 @@ t_view	*view_init(t_map *map)
 		free_map_and_exit(map, VIEW_INIT_ERR);
 	view->projection = ISOMETRIC;
 	view->parallel_view = TOP_VIEW;
-	zoom_x = (double)(WIN_WIDTH - MARGIN) / map->width;
-	zoom_y = (double)(WIN_HEIGHT - MARGIN) / map->height;
+	zoom_x = (double)(WIN_WIDTH - 2 * MARGIN) / map->width;
+	zoom_y = (double)(WIN_HEIGHT - 2 * MARGIN) / map->height;
 	if (zoom_x < zoom_y)
 		view->zoom = zoom_x;
 	else

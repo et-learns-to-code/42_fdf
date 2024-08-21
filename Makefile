@@ -12,7 +12,7 @@ MLX_DIR = mlx_linux/
 LIBFT_DIR = libft/
 LIBFT = $(LIBFT_DIR)libft.a
 
-CC = cc
+CC = cc -g
 CFLAGS = -Wall -Wextra -Werror -Iincludes -I$(MLX_DIR)
 
 # Operating system detection.
