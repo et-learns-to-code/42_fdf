@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 13:06:38 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 16:56:15 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/21 16:32:38 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,36 +84,4 @@ int	modify_color_component(int start, int end, double relative_position)
 {
 	return ((int)((start * (1 - relative_position))
 		+ (end * relative_position)));
-}
-
-// This function will return the correct elevation colour for
-// a given z value by calculating its percentage elevation.
-// The z_range will be segmented into five elevation zones,
-// each with their own unique colors. This will make the
-// difference in elevation across the map immediately clear
-// through distinct colors.
-// Lowest elevation zone color will be returned in edge cases 
-// e.g. when range = 0.
-// Early return is necessary to avoid division by zero.
-// Multiplying 100 before division can preserve the numerical precision
-// otherwise lost from integer division.
-int	get_elevation_color(int z, t_map *map)
-{
-	int	percent_elevation;
-
-	if (map->z_range == 0)
-		return (DEFAULT_COLOR);
-	percent_elevation = (z - map->z_min) * 100 / map->z_range;
-	if (percent_elevation >= 0 && percent_elevation <= 20)
-		return (ZONE_1);
-	else if (percent_elevation > 20 && percent_elevation <= 40)
-		return (ZONE_2);
-	else if (percent_elevation > 40 && percent_elevation <= 60)
-		return (ZONE_3);
-	else if (percent_elevation > 60 && percent_elevation <= 80)
-		return (ZONE_4);
-	else if (percent_elevation > 80 && percent_elevation <= 100)
-		return (ZONE_5);
-	else
-		return (DEFAULT_COLOR);
 }

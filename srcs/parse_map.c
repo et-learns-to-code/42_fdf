@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 15:04:59 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 17:25:59 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/21 16:31:33 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	parse_line(char *line, t_map *map, int *index)
 	while (i < map->width)
 	{
 		map->z_arr[*index] = 0;
-		map->color_arr[*index] = DEFAULT_COLOR;
+		map->color_arr[*index] = -1;
 		(*index)++;
 		i++;
 	}
@@ -154,25 +154,5 @@ void	extract_z_and_color(char *coord_data, int *z_arr, int *color_arr,
 		free(hex);
 	}
 	else
-		color_arr[index] = DEFAULT_COLOR;
-}
-
-// This function will update the elevation colors for each
-// map coordinate that was previously set to default color based
-// on their respective z-values.
-void	update_elevation_colors(t_map *map, int index)
-{
-	int	i;
-	int	z;
-
-	if (index <= 0 || map->color_arr == NULL)
-		return ;
-	i = 0;
-	while (i < index)
-	{
-		z = map->z_arr[i];
-		if (map->color_arr[i] == DEFAULT_COLOR)
-			map->color_arr[i] = get_elevation_color(z, map);
-		i++;
-	}
+		color_arr[index] = -1;
 }

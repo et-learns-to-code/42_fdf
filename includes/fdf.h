@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 22:20:19 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/21 16:50:34 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	malloc_arrays(char **av, t_map *map);
 void	parse_line(char *line, t_map *map, int *index);
 void	extract_z_and_color(char *coord_data,
 			int *z_arr, int *color_arr, int index);
-void	update_elevation_colors(t_map *map, int index);
 
 // Map parsing util functions
 void	set_map_height(char **av, t_map *map);
@@ -95,12 +94,16 @@ void	count_columns(char *line, int *column_count);
 int		ft_atoi_base(const char *str, int str_base);
 void	set_z_range(t_map *map, int index);
 
-// Color functions
+// Elevation color functions
+void	update_elevation_colors(t_map *map, int index);
+void	check_specified_colors(t_map *map, int index, bool *elevation_colors);
+int		get_elevation_color(int z, t_map *map);
+
+// Gradient color functions
 int		get_gradient_color(t_point current, t_point start, t_point end,
 			t_point delta);
 double	get_relative_position(int current, int start, int end);
 int		modify_color_component(int start, int end, double relative_position);
-int		get_elevation_color(int z, t_map *map);
 
 // Bresenham line drawing algorithm functions
 void	draw_line(t_point start, t_point end, t_fdf *fdf);
