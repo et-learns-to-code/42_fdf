@@ -12,32 +12,32 @@
 
 #include "../includes/fdf.h"
 
-// This function will increase or decrease the zoom on the 3D object.
-// New method:
-// Multiply or divide the previous zoom factor by a constant zoom factor. 
-// This ensures smoother zooming that is proportional to high and low 
+// This function will increase or decrease the zoom on the 3D object by
+// multiplying or dividing the previous zoom factor by a constant zoom factor.
+// This ensures smoother zooming that is proportional to high and low
 // levels of zoom.
-// +0.5 before casting ensures proper rounding to the nearest integer
+// + 0.5 before casting ensures proper rounding to the nearest integer
 // (round upwards if decimal is above 0.5).
-// Old method:
-// ++ or -- to modify the zoom factor (which will be multiplied
-// with each coordinate).
-// There has to be a hard limit of zoom factor = 1, otherwise the 3D object
-// will fail to render once the zoom turns negative.
+// Max zoom: (5 * initial_zoom)
+// Min zoom: 5 (due to division by 1.1 constant zoom and + 0.5 rounding,
+// the zoom will mathematically bottom out at 5.)
+// Zoom cannot be 0 or negative otherwise object won't render.
 void	zoom(int key, t_fdf *fdf)
 {
-	double zoom_factor;
+	double	zoom_factor;
+	int		max_zoom;
 
 	zoom_factor = 1.1;
+	max_zoom = fdf->view->initial_zoom * 5;
 	if (key == PLUS_KEY)
 	{
 		fdf->view->zoom = (int)(fdf->view->zoom * zoom_factor + 0.5);
+		if (fdf->view->zoom > max_zoom)
+			fdf->view->zoom = max_zoom;
 	}
 	else if (key == MINUS_KEY)
 	{
 		fdf->view->zoom = (int)(fdf->view->zoom / zoom_factor + 0.5);
-		if (fdf->view->zoom <= 0)
-			fdf->view->zoom = 1;
 	}
 	draw(fdf->map, fdf);
 }
@@ -47,16 +47,23 @@ void	zoom(int key, t_fdf *fdf)
 // The up key decreases the y offset and the down key increases
 // it because the y-axis is flipped in minilibx.
 // x and y offsets are in pixel units.
+// The move_step is modified based on the zoom level.
+// This ensures that the movement step is always proportional
+// to the zoom and solves the issue of slow movement of the object
+// across the screen when the zoom level is high.
 void	move(int key, t_fdf *fdf)
 {
+	int move_step;
+
+	move_step = 15 * fdf->view->zoom / fdf->view->initial_zoom;
 	if (key == UP_KEY || key == W_KEY)
-		fdf->view->y_offset -= 15;
+		fdf->view->y_offset -= move_step;
 	else if (key == DOWN_KEY || key == S_KEY)
-		fdf->view->y_offset += 15;
+		fdf->view->y_offset += move_step;
 	else if (key == LEFT_KEY || key == A_KEY)
-		fdf->view->x_offset -= 15;
+		fdf->view->x_offset -= move_step;
 	else if (key == RIGHT_KEY || key == D_KEY)
-		fdf->view->x_offset += 15;
+		fdf->view->x_offset += move_step;
 	draw(fdf->map, fdf);
 }
 

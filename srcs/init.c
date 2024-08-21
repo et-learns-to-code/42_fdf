@@ -39,20 +39,21 @@ t_map	*map_init(void)
 t_view	*view_init(t_map *map)
 {
 	t_view	*view;
-	double	zoom_x;
-	double	zoom_y;
+	int		zoom_x;
+	int		zoom_y;
 
 	view = malloc(sizeof(t_view));
 	if (!view)
 		free_map_and_exit(map, VIEW_INIT_ERR);
 	view->projection = ISOMETRIC;
 	view->parallel_view = TOP_VIEW;
-	zoom_x = (double)(WIN_WIDTH - 2 * MARGIN) / map->width;
-	zoom_y = (double)(WIN_HEIGHT - 2 * MARGIN) / map->height;
+	zoom_x = (WIN_WIDTH - 2 * MARGIN) / map->width;
+	zoom_y = (WIN_HEIGHT - 2 * MARGIN) / map->height;
 	if (zoom_x < zoom_y)
-		view->zoom = zoom_x;
+		view->initial_zoom = zoom_x;
 	else
-		view->zoom = zoom_y;
+		view->initial_zoom = zoom_y;
+	view->zoom = view->initial_zoom;
 	view->x_offset = 0;
 	view->y_offset = 0;
 	view->alpha = 0;
