@@ -36,8 +36,8 @@
 # endif
 
 // Width and height macros
-# define WIN_WIDTH 1400
-# define WIN_HEIGHT 800
+# define WIN_WIDTH 2800
+# define WIN_HEIGHT 1600
 # define MARGIN 20
 // # define IMG_WIDTH 1000
 // # define IMG_HEIGHT 800
@@ -70,7 +70,7 @@
 // Structs initialisation functions
 t_map	*map_init(void);
 t_view	*view_init(t_map *map);
-t_fdf	*fdf_init(t_map *map, t_view *view);
+t_fdf	*fdf_init(t_map *map, t_view *view, char **av);
 
 // Error handling functions
 void	err_and_exit(char *err_msg);

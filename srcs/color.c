@@ -102,7 +102,7 @@ int	get_elevation_color(int z, t_map *map)
 	int	percent_elevation;
 
 	if (map->z_range == 0)
-		return (ZONE_1);
+		return (DEFAULT_COLOR);
 	percent_elevation = (z - map->z_min) * 100 / map->z_range;
 	if (percent_elevation >= 0 && percent_elevation <= 20)
 		return (ZONE_1);
@@ -115,5 +115,5 @@ int	get_elevation_color(int z, t_map *map)
 	else if (percent_elevation > 80 && percent_elevation <= 100)
 		return (ZONE_5);
 	else
-		return (ZONE_1);
+		return (DEFAULT_COLOR);
 }

@@ -74,7 +74,7 @@ t_view	*view_init(t_map *map)
 // free the fdf struct and exit the program.
 // mlx_get_data_addr() will automatically set the bits_per_pixel, size_line
 // and endian values for you.
-t_fdf	*fdf_init(t_map *map, t_view *view)
+t_fdf	*fdf_init(t_map *map, t_view *view, char **av)
 {
 	t_fdf	*fdf;
 
@@ -86,7 +86,7 @@ t_fdf	*fdf_init(t_map *map, t_view *view)
 	fdf->mlx = mlx_init();
 	if (!fdf->mlx)
 		free_fdf_and_exit(fdf, FDF_INIT_ERR);
-	fdf->win = mlx_new_window(fdf->mlx, WIN_WIDTH, WIN_HEIGHT, "Fil de Fer");
+	fdf->win = mlx_new_window(fdf->mlx, WIN_WIDTH, WIN_HEIGHT, av[1]);
 	if (!fdf->win)
 		free_fdf_and_exit(fdf, FDF_INIT_ERR);
 	fdf->img = mlx_new_image(fdf->mlx, WIN_WIDTH, WIN_HEIGHT);
