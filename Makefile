@@ -2,8 +2,8 @@ NAME = fdf
 
 SRCS = $(addprefix srcs/, \
 	bresenham.c controls.c draw.c elevation_color.c error_handling.c\
-	gradient_color.c init.c main.c parse_map_utils.c parse_map.c \
-	projection.c view.c)
+	gradient_color.c init.c inverted_color.c main.c parse_map_utils.c \
+	parse_map.c projection.c view.c)
 
 OBJS = $(SRCS:.c=.o)
 

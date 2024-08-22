@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 11:25:43 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 23:09:18 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/22 11:16:49 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,11 @@
 # define NUM_8_KEY 56
 # define NUM_9_KEY 57
 
-// Change projection key
+// Change projection keys
 # define I_KEY 105
 # define P_KEY 112
+
+// Invert colors key
+# define SPACE_BAR 57
 
 #endif

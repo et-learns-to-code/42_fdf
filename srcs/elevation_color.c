@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:30:59 by etien             #+#    #+#             */
-/*   Updated: 2024/08/21 16:50:24 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/22 10:19:45 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	update_elevation_colors(t_map *map, int index)
 // specified colors.
 void	check_specified_colors(t_map *map, int index, bool *elevation_colors)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < index)

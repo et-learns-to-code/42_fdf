@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:25:32 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 22:57:13 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/22 10:19:40 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	zoom(int key, t_fdf *fdf)
 // across the screen when the zoom level is high.
 void	move(int key, t_fdf *fdf)
 {
-	int move_step;
+	int	move_step;
 
 	move_step = 15 * fdf->view->zoom / fdf->view->initial_zoom;
 	if (key == UP_KEY || key == W_KEY)
