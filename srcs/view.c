@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:25:32 by etien             #+#    #+#             */
-/*   Updated: 2024/08/22 13:23:14 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/22 16:16:25 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@
 // levels of zoom.
 // + 0.5 before casting ensures proper rounding to the nearest integer
 // (round upwards if decimal is above 0.5).
-// Max zoom: (5 * initial_zoom)
-// Min zoom: 5 (due to division by 1.1 constant zoom and + 0.5 rounding,
-// the zoom will mathematically bottom out at 5.)
+// Max zoom: (10 * initial_zoom)
+// Min zoom: 3 (due to division by 1.2 constant zoom and + 0.5 rounding,
+// the zoom will mathematically bottom out at 3.)
 // Zoom cannot be 0 or negative otherwise object won't render.
 void	zoom(int key, t_fdf *fdf)
 {
 	double	zoom_factor;
 	int		max_zoom;
 
-	zoom_factor = 1.1;
-	max_zoom = fdf->view->initial_zoom * 5;
+	zoom_factor = 1.2;
+	max_zoom = fdf->view->initial_zoom * 10;
 	if (key == PLUS_KEY)
 	{
 		fdf->view->zoom = (int)(fdf->view->zoom * zoom_factor + 0.5);

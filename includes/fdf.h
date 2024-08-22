@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/22 14:18:33 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/22 15:32:18 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@
 // __linux__ and __APPLE__ macros are predefined by the compiler.
 # ifdef __linux__
 #  include "keycode_linux.h"
-#  define WIN_WIDTH 2800
-#  define WIN_HEIGHT 1600
+#  define WIN_WIDTH 2400
+#  define WIN_HEIGHT 1350
 # elif __APPLE__
 #  include "keycode_macos.h"
-#  define WIN_WIDTH 1400
-#  define WIN_HEIGHT 800
+#  define WIN_WIDTH 1200
+#  define WIN_HEIGHT 675
 # else
 #  error "Unsupported OS"
 # endif
@@ -67,6 +67,7 @@
 // Structs initialisation functions
 t_map	*map_init(void);
 t_view	*view_init(t_map *map);
+void	initialise_zoom(t_map *map, t_view *view);
 t_fdf	*fdf_init(t_map *map, t_view *view, char **av);
 
 // Error handling functions
