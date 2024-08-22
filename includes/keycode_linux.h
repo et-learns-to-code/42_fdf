@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 11:25:43 by etien             #+#    #+#             */
-/*   Updated: 2024/08/22 11:16:49 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/22 12:50:15 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@
 # define P_KEY 112
 
 // Invert colors key
-# define SPACE_BAR 57
+# define SPACE_BAR 32
 
 #endif

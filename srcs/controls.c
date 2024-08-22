@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:13:51 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 22:55:18 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/22 12:52:12 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	key_press(int key, t_fdf *fdf)
 		rotate(key, fdf);
 	else if (key == P_KEY)
 		change_projection(key, fdf);
+	else if (key == SPACE_BAR)
+		invert_colors(key, fdf);
 	return (0);
 }
 

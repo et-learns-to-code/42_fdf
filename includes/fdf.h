@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/21 16:50:34 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/22 12:44:14 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,5 +136,9 @@ void	convert_to_isometric(int *x, int *y, int z);
 void	rotate_x(int *y, int *z, double alpha);
 void	rotate_y(int *x, int *z, double beta);
 void	rotate_z(int *x, int *y, double gamma);
+
+// Color inversion function for bonus
+void	invert_colors(int key, t_fdf *fdf);
+int		get_inverted_color(int color);
 
 #endif
