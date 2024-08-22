@@ -6,14 +6,17 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:45:38 by etien             #+#    #+#             */
-/*   Updated: 2024/08/22 12:44:10 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/22 13:12:00 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
 // This function is another key callback function that will update all the
-// integers in the color array to their inverse color representations.
+// integers in the color array to their inverse color representations as
+// long as they are not the default color.
+// The if check prevents lines from disappearing from the screen when they
+// are inverted from white to black on a black background.
 void	invert_colors(int key, t_fdf *fdf)
 {
 	int i;
@@ -23,7 +26,8 @@ void	invert_colors(int key, t_fdf *fdf)
 	{
 		while (i < fdf->map->width * fdf->map->height)
 		{
-			fdf->map->color_arr[i] = get_inverted_color(fdf->map->color_arr[i]);
+			if (fdf->map->color_arr[i] != DEFAULT_COLOR)
+				fdf->map->color_arr[i] = get_inverted_color(fdf->map->color_arr[i]);
 			i++;
 		}
 	}

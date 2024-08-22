@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:25:32 by etien             #+#    #+#             */
-/*   Updated: 2024/08/22 10:19:40 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/22 13:23:14 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,15 @@ void	change_projection(int key, t_fdf *fdf)
 	fdf->view->beta = 0;
 	fdf->view->gamma = 0;
 	if (key == I_KEY)
+	{
 		fdf->view->projection = ISOMETRIC;
+		draw(fdf->map, fdf);
+	}
 	else if (key == P_KEY)
 	{
 		fdf->view->projection = PARALLEL;
 		change_parallel_view(fdf);
 	}
-	draw(fdf->map, fdf);
 }
 
 // This function is a helper function of the change projection function.
