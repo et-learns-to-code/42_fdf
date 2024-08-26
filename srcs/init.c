@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:30:15 by etien             #+#    #+#             */
-/*   Updated: 2024/08/22 16:04:18 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/26 15:00:22 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ t_map	*map_init(void)
 // This function initializes the view struct.
 // If the view struct fails to be malloc'd, the
 // previously allocated map struct has to be freed first.
+// Zoom has to be initialized to fit the entire top view within the map.
+// Initial zoom cannot go below 5, otherwise the zoom in and out functions
+// will be locked due to the 1.2 zoom factor that will bottom out at 3.
 t_view	*view_init(t_map *map)
 {
 	t_view	*view;
@@ -42,7 +45,9 @@ t_view	*view_init(t_map *map)
 		free_map_and_exit(map, VIEW_INIT_ERR);
 	view->projection = ISOMETRIC;
 	view->parallel_view = TOP_VIEW;
-	initialise_zoom(map, view);
+	view->initial_zoom = WIN_WIDTH / map->width / 3;
+	if (view->initial_zoom < 5)
+		view->initial_zoom = 5;
 	view->zoom = view->initial_zoom;
 	view->x_offset = 0;
 	view->y_offset = 0;
@@ -50,32 +55,6 @@ t_view	*view_init(t_map *map)
 	view->beta = 0;
 	view->gamma = 0;
 	return (view);
-}
-
-// This function will set the initial_zoom variable in the view struct.
-// The zoom factor has to be initialised to fit the entire map
-// within the window upon first render. The lower of zoom_x/zoom_y
-// will be chosen as the starting zoom factor.
-// Isometric projections will appear to scale each axis by a factor of sqrt(2).
-// To estimate max_width and max_height, we round up the scaling factor to 2
-// to simplify working with integers.
-void	initialise_zoom(t_map *map, t_view *view)
-{
-	int		zoom_x;
-	int		zoom_y;
-	int		max_width;
-	int		max_height;
-
-	max_width = map->width * 2;
-	max_height = map->height * 2;
-	zoom_x = (WIN_WIDTH - 2 * MARGIN) / max_width;
-	zoom_y = (WIN_HEIGHT - 2 * MARGIN) / max_height;
-	if (zoom_x < zoom_y)
-		view->initial_zoom = zoom_x;
-	else
-		view->initial_zoom = zoom_y;
-	if (view->initial_zoom < 5)
-		view->initial_zoom = 5;
 }
 
 // This function initializes the fdf struct.
