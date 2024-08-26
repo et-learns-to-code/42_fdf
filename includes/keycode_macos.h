@@ -1,17 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keyboard_macros.h                                  :+:      :+:    :+:   */
+/*   keycode_macos.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/10 11:25:43 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 09:59:18 by etien            ###   ########.fr       */
+/*   Created: 2024/08/19 22:10:28 by etien             #+#    #+#             */
+/*   Updated: 2024/08/22 11:16:40 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEYBOARD_MACROS_H
-# define KEYBOARD_MACROS_H
+#ifndef KEYCODE_MACOS_H
+# define KEYCODE_MACOS_H
+
+// Key masks
+// macOS uses the Quartz event system for handling input events.
+// Event masks can be represented simply by integer values like 0.
+# define KEY_PRESS_MASK 0
 
 // Event hooks
 # define ON_KEYDOWN 2
@@ -29,18 +34,24 @@
 # define DOWN_KEY 125
 # define LEFT_KEY 123
 # define RIGHT_KEY 124
+# define W_KEY 13
+# define S_KEY 1
+# define A_KEY 0
+# define D_KEY 2
 
 // Rotation keys
 # define NUM_1_KEY 18
 # define NUM_2_KEY 19
 # define NUM_3_KEY 20
-# define NUM_4_KEY 21
-# define NUM_5_KEY 23
-# define NUM_6_KEY 22
+# define NUM_7_KEY 26
+# define NUM_8_KEY 28
+# define NUM_9_KEY 25
 
-// Change projection key
+// Change projection keys
 # define I_KEY 34
 # define P_KEY 35
-# define SPACE_KEY 49
+
+// Invert colors key
+# define SPACE_BAR 49
 
 #endif

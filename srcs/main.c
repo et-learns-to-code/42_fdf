@@ -34,7 +34,7 @@ int	main(int ac, char **av)
 	map = map_init();
 	parse_map(av, map);
 	view = view_init(map);
-	fdf = fdf_init(map, view);
+	fdf = fdf_init(map, view, av);
 	draw(map, fdf);
 	setup_hooks(fdf);
 	mlx_loop(fdf->mlx);

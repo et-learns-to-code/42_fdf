@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 15:04:59 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 17:25:59 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/26 17:42:51 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	malloc_arrays(char **av, t_map *map)
 {
 	set_map_height(av, map);
 	set_map_width(av, map);
+	if (map->height == 0 || map->width == 0)
+		free_map_and_exit(map, EMPTY_FILE_ERR);
 	map->z_arr = malloc((map->height * map->width) * sizeof(int));
 	if (!map->z_arr)
 		free_map_and_exit(map, MALLOC_ERR);
@@ -92,7 +94,7 @@ void	malloc_arrays(char **av, t_map *map)
 // data into their correct arrays.
 // If there are fewer coordinates in a line than the map width,
 // the second while loop will pad the arrays and set up default
-// values as placeholders with z = 0 and color = DEFAULT_COLOR.
+// values as placeholders with z = 0 and color = -1.
 // Allocated memory is always freed as soon as the data is
 // no longer needed (see freeing for line and coord data).
 void	parse_line(char *line, t_map *map, int *index)
@@ -117,15 +119,22 @@ void	parse_line(char *line, t_map *map, int *index)
 	while (i < map->width)
 	{
 		map->z_arr[*index] = 0;
-		map->color_arr[*index] = DEFAULT_COLOR;
+		map->color_arr[*index] = -1;
 		(*index)++;
 		i++;
 	}
 	free_double_arr(coord_data);
 }
 
-// This function will extract the z and hexadecimal color value
+// This function will extract the z and hexadecimal color values
 // from the coordinate's data to their correct arrays.
+// It achieves this by creating substrings of the z and color values
+// which are each passed to ft_atoi_base to get their integer
+// representations.
+// Once the integer values are known and stored into their respective arrays,
+// the substrings are freed to avoid memory leakages.
+// If a coordinate data does not have a color value, it will be assigned
+// -1 by default.
 void	extract_z_and_color(char *coord_data, int *z_arr, int *color_arr,
 			int index)
 {
@@ -152,22 +161,5 @@ void	extract_z_and_color(char *coord_data, int *z_arr, int *color_arr,
 		free(hex);
 	}
 	else
-		color_arr[index] = DEFAULT_COLOR;
-}
-
-void	update_elevation_colors(t_map *map, int index)
-{
-	int	i;
-	int	z;
-
-	if (index <= 0 || map->color_arr == NULL)
-		return ;
-	i = 0;
-	while (i < index)
-	{
-		z = map->z_arr[i];
-		if (map->color_arr[i] == DEFAULT_COLOR)
-			map->color_arr[i] = get_elevation_color(z, map);
-		i++;
-	}
+		color_arr[index] = -1;
 }

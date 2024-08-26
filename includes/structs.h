@@ -49,6 +49,7 @@ typedef struct s_view
 {
 	t_projection	projection;
 	t_parallel_view	parallel_view;
+	int				initial_zoom;
 	int				zoom;
 	int				x_offset;
 	int				y_offset;

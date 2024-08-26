@@ -6,21 +6,25 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:22:03 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 14:35:34 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/26 17:15:43 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-// There are three main error handling functions.
-// Their use cases will depends on when the error arises
+// There are four main error handling functions.
+// Their use cases will depend on when the error arises
 // within the program flow.
 // 1) err_and_exit will be called if no structs have been
 //    initialized yet.
 // 2) free_map_and_exit will be called if only the map struct
 //    has been initialized.
-// 3) free_fdf_and_exit will be called if the fdf struct has been
-//    initialized and the map struct has already been assigned to it.
+// 3) free_map_view_and_exit will be called if both the map and
+//    view structs have been initialized but the fdf struct fails
+//    to be initialized.
+// 4) free_fdf_and_exit will be called if the fdf struct has been
+//    initialized and the map and view structs have already been
+//    assigned to it.
 
 // This function will print the error message to STDERR
 // and exit the program.
@@ -45,6 +49,23 @@ void	free_map_and_exit(t_map *map, char *err_msg)
 			free(map->color_arr);
 		free(map);
 	}
+	err_and_exit(err_msg);
+}
+
+// This function will free both the map and view struct for the
+// specific case when the fdf struct fails to be initialized.
+void	free_map_view_and_exit(t_map *map, t_view *view, char *err_msg)
+{
+	if (map)
+	{
+		if (map->z_arr)
+			free(map->z_arr);
+		if (map->color_arr)
+			free(map->color_arr);
+		free(map);
+	}
+	if (view)
+		free(view);
 	err_and_exit(err_msg);
 }
 

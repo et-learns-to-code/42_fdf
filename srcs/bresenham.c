@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:20:38 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 16:38:13 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/26 18:26:43 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 // The function runs a while loop for plotting pixels until
 // x and y are incremented to their final point (b).
 // A pixel is placed first before checking the decision parameters:
-// 	1) (error[0] * 2) > dx
-// 	2) (error[0] * 2) < -dy
+// 	1) (error[0] * 2) < dx
+// 	2) (error[0] * 2) > -dy
 // Based on the different decision parameters, either x/y/both
 // (increment for both x and y is why two if conditions are necessary,
-// rather than using a simple else if statement)
+// rather than using a simple if else statement)
 // will be incremented and the error term will be adjusted accordingly.
 // error[0] is the error term and error[1] is (error[0] * 2) used
 // in the decision parameter.
@@ -92,6 +92,10 @@ void	set_step(t_point start, t_point end, t_point *step)
 
 // This function will store the color integer at the image pixel address
 // and achieve the effect of placing a pixel on the image.
+// The if condition checks that the x and y pixel coordinates are within
+// the frame of the window before the pixel is placed.
+// This will boost performance by not rendering pixels that are out
+// of frame and can't even be seen to begin with.
 // data_addr is the pointer to the first pixel in the image.
 // (y * fdf->size_line) will be the y-offset while
 // (x * (fdf->bits_per_pixel / 8) will be the x-offset (1 byte = 8 bits)
