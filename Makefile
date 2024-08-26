@@ -12,7 +12,7 @@ MLX_DIR = mlx_linux/
 LIBFT_DIR = libft/
 LIBFT = $(LIBFT_DIR)libft.a
 
-CC = cc -g
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -Iincludes -I$(MLX_DIR)
 
 # Operating system detection.
@@ -44,7 +44,7 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	@$(CC)  $(OBJS) $(LIBRARIES) -o $(NAME)
+	@$(CC) $(OBJS) $(LIBRARIES) -o $(NAME)
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:30:15 by etien             #+#    #+#             */
-/*   Updated: 2024/08/26 15:00:22 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/26 17:00:06 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_fdf	*fdf_init(t_map *map, t_view *view, char **av)
 
 	fdf = malloc(sizeof(t_fdf));
 	if (!fdf)
-		free_map_and_exit(map, FDF_INIT_ERR);
+		free_map_view_and_exit(map, view, FDF_INIT_ERR);
 	fdf->map = map;
 	fdf->view = view;
 	fdf->mlx = mlx_init();

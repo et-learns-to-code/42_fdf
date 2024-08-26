@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/26 14:48:29 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/26 16:58:58 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@
 # include "structs.h"
 # include "../libft/libft/libft.h"
 
-// The relevant keycode header file will be included based on
-// the operating system running.
+// The relevant keycode header file will be included and width and
+// height macros will be defined based on the operating system running.
 // __linux__ and __APPLE__ macros are predefined by the compiler.
-// Width and height macros
 # ifdef __linux__
 #  include "keycode_linux.h"
 #  define WIN_WIDTH 2400
@@ -40,8 +39,9 @@
 #  error "Unsupported OS"
 # endif
 
+// Color macros
 # define DEFAULT_COLOR 0xFFFFFF
-// Colours for the different elevation zones.
+// Colors for the different elevation zones.
 // 1 is the lowest and 5 is the highest.
 # define ZONE_1 0xFF0000
 # define ZONE_2 0xFFFF00
@@ -52,15 +52,15 @@
 // Error message macros
 # define ARG_ERR "Usage: './fdf file.fdf'."
 # define EMPTY_FILE_ERR "Error: File was empty."
-# define FDF_INIT_ERR "Error: An error occurred while initialising \
-	the fdf struct."
+# define FDF_INIT_ERR \
+	"Error: An error occurred while initialising the fdf struct."
 # define FILE_NAME_ERR "Error: File should end with '.fdf' extension."
 # define FILE_OPEN_ERR "Error: File could not be opened."
-# define MAP_INIT_ERR "Error: An error occurred while initialising \
-	the map struct."
-# define MALLOC_ERR "Error: Memory allocation failure"
-# define VIEW_INIT_ERR "Error: An error occurred while initialising \
-	the view struct."
+# define MAP_INIT_ERR \
+	"Error: An error occurred while initialising the map struct."
+# define MALLOC_ERR "Error: Memory allocation failure."
+# define VIEW_INIT_ERR \
+	"Error: An error occurred while initialising the view struct."
 
 // Structs initialisation functions
 t_map	*map_init(void);
@@ -70,6 +70,7 @@ t_fdf	*fdf_init(t_map *map, t_view *view, char **av);
 // Error handling functions
 void	err_and_exit(char *err_msg);
 void	free_map_and_exit(t_map *map, char *err_msg);
+void	free_map_view_and_exit(t_map *map, t_view *view, char *err_msg);
 void	free_fdf_and_exit(t_fdf *fdf, char *err_msg);
 void	free_double_arr(char **arr);
 
@@ -107,7 +108,6 @@ void	put_pixel_on_img(int x, int y, int color, t_fdf *fdf);
 
 // Drawing functions
 void	draw(t_map *map, t_fdf *fdf);
-void	draw_side_panel(t_fdf *fdf);
 void	clear_image(t_fdf *fdf);
 t_point	create_point(int x, int y, t_map *map);
 int		get_index(int x, int y, int width);
