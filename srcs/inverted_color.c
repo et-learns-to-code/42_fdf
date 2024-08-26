@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:45:38 by etien             #+#    #+#             */
-/*   Updated: 2024/08/22 13:12:00 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/26 15:36:24 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // are inverted from white to black on a black background.
 void	invert_colors(int key, t_fdf *fdf)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (key == SPACE_BAR)
@@ -27,7 +27,8 @@ void	invert_colors(int key, t_fdf *fdf)
 		while (i < fdf->map->width * fdf->map->height)
 		{
 			if (fdf->map->color_arr[i] != DEFAULT_COLOR)
-				fdf->map->color_arr[i] = get_inverted_color(fdf->map->color_arr[i]);
+				fdf->map->color_arr[i]
+					= get_inverted_color(fdf->map->color_arr[i]);
 			i++;
 		}
 	}
@@ -45,7 +46,7 @@ int	get_inverted_color(int color)
 	int	red;
 	int	green;
 	int	blue;
-	int inverted_color;
+	int	inverted_color;
 
 	red = (color >> 16) & 0xFF;
 	green = (color >> 8) & 0xFF;
