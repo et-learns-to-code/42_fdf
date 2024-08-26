@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 12:53:45 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 13:46:35 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/26 11:20:26 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_point	project_point(t_point p, t_fdf *fdf)
 	rotate_y(&p.x, &p.z, fdf->view->beta);
 	rotate_z(&p.x, &p.y, fdf->view->gamma);
 	p.x += (WIN_WIDTH - 2 * MARGIN) / 2 + fdf->view->x_offset;
-	p.y += (WIN_WIDTH - 2 * MARGIN) / 2 + fdf->view->y_offset;
+	p.y += (WIN_HEIGHT - 2 * MARGIN) / 2 + fdf->view->y_offset;
 	return (p);
 }
 
