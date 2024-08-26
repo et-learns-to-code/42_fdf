@@ -6,14 +6,14 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:30:59 by etien             #+#    #+#             */
-/*   Updated: 2024/08/22 10:19:45 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/26 18:53:44 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
 // This function handles for two scenarios:
-// 1) At least one color is specified
+// 1) At least one color was specified
 // - In this case, all unspecified colors will be set to the default color.
 // 2) No colors were specified
 // - All coordinates will be assigned their elevation color based
@@ -71,7 +71,7 @@ void	check_specified_colors(t_map *map, int index, bool *elevation_colors)
 // each with their own unique colors. This will make the
 // difference in elevation across the map immediately clear
 // through distinct colors.
-// Lowest elevation zone color will be returned in edge cases
+// The default color will be returned in edge cases
 // e.g. when range = 0.
 // Early return is necessary to avoid division by zero.
 // Multiplying 100 before division can preserve the numerical precision

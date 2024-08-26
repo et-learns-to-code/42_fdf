@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:00:00 by etien             #+#    #+#             */
-/*   Updated: 2024/08/22 14:20:34 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/26 18:15:27 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 // This is the main drawing function for the entire program.
 // It will iterate through the map struct and draw all the lines
 // that connect the points.
+// (x + 1) and (y + 1) means that adjacent coordinates (to the right
+// and below respectively) in the map should be connected together by lines.
+// create_point: creates and sets up the data for point structs
+// project_point: manipulates the data in the point structs
+//                based on the info in the view structs
+// draw_line: employs Bresenham's algorithm to draw lines between
+//            the points and shades the lines with gradients.
 void	draw(t_map *map, t_fdf *fdf)
 {
 	int	x;
@@ -54,6 +61,8 @@ void	clear_image(t_fdf *fdf)
 
 // This function will create the point structs that will be fed into
 // the drawing function by extracting this data from the map struct.
+// x and y are the map coordinates iterated through in the draw function.
+// z and color will be fetched from the map arrays.
 t_point	create_point(int x, int y, t_map *map)
 {
 	t_point	point;

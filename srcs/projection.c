@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 12:53:45 by etien             #+#    #+#             */
-/*   Updated: 2024/08/26 14:49:01 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/26 18:40:12 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	convert_to_isometric(int *x, int *y, int z)
 
 // These three functions will modify the coordinates for rotation
 // around the x, y and z axes.
-// double data type used for trigonometric functions
+// double data type used for trigonometric functions.
 // float is 32-bit but double can represent floating numbers with
 // 64-bit, meaning higher precision of values.
 void	rotate_x(int *y, int *z, double alpha)

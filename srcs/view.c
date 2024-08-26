@@ -6,13 +6,13 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:25:32 by etien             #+#    #+#             */
-/*   Updated: 2024/08/22 16:16:25 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/26 19:06:19 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-// This function will increase or decrease the zoom on the 3D object by
+// This function will increase or decrease the zoom on the object by
 // multiplying or dividing the previous zoom factor by a constant zoom factor.
 // This ensures smoother zooming that is proportional to high and low
 // levels of zoom.
@@ -21,7 +21,7 @@
 // Max zoom: (10 * initial_zoom)
 // Min zoom: 3 (due to division by 1.2 constant zoom and + 0.5 rounding,
 // the zoom will mathematically bottom out at 3.)
-// Zoom cannot be 0 or negative otherwise object won't render.
+// Zoom cannot be 0 or negative otherwise the object won't render.
 void	zoom(int key, t_fdf *fdf)
 {
 	double	zoom_factor;
@@ -43,7 +43,7 @@ void	zoom(int key, t_fdf *fdf)
 }
 
 // This function will modify the x and y offsets depending
-// on the arrow keys pressed to move the 3D object.
+// on the arrow keys pressed to move the object.
 // The up key decreases the y offset and the down key increases
 // it because the y-axis is flipped in minilibx.
 // x and y offsets are in pixel units.
@@ -68,7 +68,7 @@ void	move(int key, t_fdf *fdf)
 }
 
 // This function will modify the alpha, beta and gamma values to
-// achieve rotation of the 3D object around the x, y and z axes
+// achieve rotation of the object around the x, y and z axes
 // respectively.
 // alpha, beta and gamma are radian values, so 0.1 will be a
 // reasonable step for adjustment.

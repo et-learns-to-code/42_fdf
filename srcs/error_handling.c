@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:22:03 by etien             #+#    #+#             */
-/*   Updated: 2024/08/26 17:06:28 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/26 17:15:43 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	free_map_and_exit(t_map *map, char *err_msg)
 }
 
 // This function will free both the map and view struct for the
-// specific case when fdf has not been successfully initialized.
+// specific case when the fdf struct fails to be initialized.
 void	free_map_view_and_exit(t_map *map, t_view *view, char *err_msg)
 {
 	if (map)

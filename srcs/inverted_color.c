@@ -6,13 +6,13 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:45:38 by etien             #+#    #+#             */
-/*   Updated: 2024/08/26 15:36:24 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/26 19:14:02 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-// This function is another key callback function that will update all the
+// This function is another hook callback function that will update all the
 // integers in the color array to their inverse color representations as
 // long as they are not the default color.
 // The if check prevents lines from disappearing from the screen when they
@@ -35,8 +35,8 @@ void	invert_colors(int key, t_fdf *fdf)
 	draw(fdf->map, fdf);
 }
 
-// This function will return the inverted color of the color
-// given as a parameter.
+// This function will return the inverted color of the color given as
+// a parameter.
 // It will extract the RGB color components through bitwise shifts and
 // invert each color component by subtracting the component's value from 255.
 // After that, the color components are recombined into an integer that

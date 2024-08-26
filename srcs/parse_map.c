@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 15:04:59 by etien             #+#    #+#             */
-/*   Updated: 2024/08/21 16:31:33 by etien            ###   ########.fr       */
+/*   Updated: 2024/08/26 17:42:51 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	malloc_arrays(char **av, t_map *map)
 // data into their correct arrays.
 // If there are fewer coordinates in a line than the map width,
 // the second while loop will pad the arrays and set up default
-// values as placeholders with z = 0 and color = DEFAULT_COLOR.
+// values as placeholders with z = 0 and color = -1.
 // Allocated memory is always freed as soon as the data is
 // no longer needed (see freeing for line and coord data).
 void	parse_line(char *line, t_map *map, int *index)
@@ -126,8 +126,15 @@ void	parse_line(char *line, t_map *map, int *index)
 	free_double_arr(coord_data);
 }
 
-// This function will extract the z and hexadecimal color value
+// This function will extract the z and hexadecimal color values
 // from the coordinate's data to their correct arrays.
+// It achieves this by creating substrings of the z and color values
+// which are each passed to ft_atoi_base to get their integer
+// representations.
+// Once the integer values are known and stored into their respective arrays,
+// the substrings are freed to avoid memory leakages.
+// If a coordinate data does not have a color value, it will be assigned
+// -1 by default.
 void	extract_z_and_color(char *coord_data, int *z_arr, int *color_arr,
 			int index)
 {
