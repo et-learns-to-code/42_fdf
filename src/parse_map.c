@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 15:04:59 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 16:13:25 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 17:35:13 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,35 @@
 // Finally, the file descriptor is closed once the parsing is complete.
 void	parse_map(char **av, t_map *map)
 {
+	t_list	*lst;
+	t_list	*tmp;
 	int		fd;
 	char	*line;
 	int		index;
 
 	if (!check_file_extension(av[1]))
 		free_map_and_exit(map, FILE_NAME_ERR);
-	malloc_arrays(av, map);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
 		free_map_and_exit(map, FILE_OPEN_ERR);
-	index = 0;
+	lst = NULL;
 	line = get_next_line(fd);
 	while (line)
 	{
-		parse_line(line, map, &index);
+		ft_lstadd_back(&lst, ft_lstnew(line));
 		line = get_next_line(fd);
 	}
+	map->height = ft_lstsize(lst);
+	set_map_width(map, lst);
+	malloc_arrays(map);
+	tmp = lst;
+	index = 0;
+	while (tmp)
+	{
+		parse_line(tmp->content, map, &index);
+		tmp = tmp->next;
+	}
+	ft_lstclear(&lst, free);
 	set_z_range(map, index);
 	update_elevation_colors(map, index);
 	close(fd);
@@ -70,10 +82,8 @@ bool	check_file_extension(const char *filename)
 // after determining the width and height of the map.
 // It also handles for error in case memory fails to be allocated
 // for the arrays.
-void	malloc_arrays(char **av, t_map *map)
+void	malloc_arrays(t_map *map)
 {
-	set_map_height(av, map);
-	set_map_width(av, map);
 	if (map->height == 0 || map->width == 0)
 		free_map_and_exit(map, EMPTY_FILE_ERR);
 	map->z_arr = malloc((map->height * map->width) * sizeof(int));
@@ -107,7 +117,6 @@ void	parse_line(char *line, t_map *map, int *index)
 	if (line_length > 0 && line[line_length - 1] == '\n')
 		line[line_length - 1] = '\0';
 	coord_data = ft_split(line, ' ');
-	free(line);
 	i = 0;
 	while (coord_data[i] && i < map->width)
 	{

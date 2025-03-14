@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2024/08/26 16:58:58 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 17:29:37 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,13 @@ void	free_double_arr(char **arr);
 // Map parsing functions
 void	parse_map(char **av, t_map *map);
 bool	check_file_extension(const char *filename);
-void	malloc_arrays(char **av, t_map *map);
+void	malloc_arrays(t_map *map);
 void	parse_line(char *line, t_map *map, int *index);
 void	extract_z_and_color(char *coord_data,
 			int *z_arr, int *color_arr, int index);
 
 // Map parsing util functions
-void	set_map_height(char **av, t_map *map);
-void	set_map_width(char **av, t_map *map);
+void	set_map_width(t_map *map, t_list *lst);
 void	count_columns(char *line, int *column_count);
 int		ft_atoi_base(const char *str, int str_base);
 void	set_z_range(t_map *map, int index);

@@ -6,64 +6,30 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:10 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 16:13:25 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 17:20:42 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
-
-// This function will count the number of lines in the file
-// to set the height of the map.
-// Read permissions are sufficient because we are not
-// modifying the file, only reading it to count the lines.
-void	set_map_height(char **av, t_map *map)
-{
-	int		height;
-	int		fd;
-	char	*line;
-
-	height = 0;
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-		free_map_and_exit(map, FILE_OPEN_ERR);
-	line = get_next_line(fd);
-	while (line)
-	{
-		height++;
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	map->height = height;
-}
 
 // This function will run through all the lines in the map
 // and set the width based on the line with the most columns.
 // This info is necessary because some lines may have more columns
 // than others and we have to pad the shorter lines so that the
 // map can render without issues.
-void	set_map_width(char **av, t_map *map)
+void	set_map_width(t_map *map, t_list *lst)
 {
-	int		width;
-	int		fd;
-	char	*line;
 	int		column_count;
+	int		width;
 
-	width = 0;
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-		free_map_and_exit(map, FILE_OPEN_ERR);
-	line = get_next_line(fd);
-	while (line)
+	while (lst)
 	{
 		column_count = 0;
-		count_columns(line, &column_count);
+		count_columns(lst->content, &column_count);
 		if (column_count > width)
 			width = column_count;
-		free(line);
-		line = get_next_line(fd);
+		lst = lst->next;
 	}
-	close(fd);
 	map->width = width;
 }
 
