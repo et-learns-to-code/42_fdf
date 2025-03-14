@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 15:04:59 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 23:05:55 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 23:33:14 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ bool	check_file_extension(const char *filename)
 			extension, len_extension) == 0);
 }
 
-// This function allocates the memory for the z and color arrays
+// This function allocates the memory for the z and color array
 // after determining the width and height of the map.
 // It also handles for error in case memory fails to be allocated
 // for the arrays.
@@ -86,11 +86,8 @@ void	malloc_arrays(t_map *map, t_fdf *fdf)
 {
 	if (map->height == 0 || map->width == 0)
 		free_fdf_and_exit(fdf, EMPTY_FILE_ERR);
-	map->z_arr = malloc((map->height * map->width) * sizeof(int));
-	if (!map->z_arr)
-		free_fdf_and_exit(fdf, MALLOC_ERR);
-	map->color_arr = malloc((map->height * map->width) * sizeof(int));
-	if (!map->color_arr)
+	map->arr = malloc((map->height * map->width) * sizeof(t_arr));
+	if (!map->arr)
 		free_fdf_and_exit(fdf, MALLOC_ERR);
 }
 
@@ -120,15 +117,15 @@ void	parse_line(char *line, t_map *map, int *index)
 	i = 0;
 	while (coord_data[i] && i < map->width)
 	{
-		extract_z_and_color(coord_data[i], map->z_arr, map->color_arr,
+		extract_z_and_color(coord_data[i], map->arr,
 			*index);
 		(*index)++;
 		i++;
 	}
 	while (i < map->width)
 	{
-		map->z_arr[*index] = 0;
-		map->color_arr[*index] = -1;
+		map->arr[*index].z = 0;
+		map->arr[*index].color = -1;
 		(*index)++;
 		i++;
 	}
@@ -144,8 +141,7 @@ void	parse_line(char *line, t_map *map, int *index)
 // the substrings are freed to avoid memory leakages.
 // If a coordinate data does not have a color value, it will be assigned
 // -1 by default.
-void	extract_z_and_color(char *coord_data, int *z_arr, int *color_arr,
-			int index)
+void	extract_z_and_color(char *coord_data, t_arr *arr, int index)
 {
 	char	*nbr;
 	char	*hex;
@@ -160,15 +156,15 @@ void	extract_z_and_color(char *coord_data, int *z_arr, int *color_arr,
 		i++;
 	}
 	nbr = ft_substr(coord_data, 0, nbr_len);
-	z_arr[index] = ft_atoi_base(nbr, 10);
+	arr[index].z = ft_atoi_base(nbr, 10);
 	free(nbr);
 	if (coord_data[i] == ',')
 	{
 		hex = ft_substr(coord_data, i + 1,
 				ft_strlen(coord_data) - (i + 1));
-		color_arr[index] = ft_atoi_base(hex, 16);
+		arr[index].color = ft_atoi_base(hex, 16);
 		free(hex);
 	}
 	else
-		color_arr[index] = -1;
+		arr[index].color = -1;
 }

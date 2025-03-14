@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:30:59 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 16:13:25 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 23:34:06 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	update_elevation_colors(t_map *map, int index)
 	int		i;
 	int		z;
 
-	if (index <= 0 || map->color_arr == NULL)
+	if (index <= 0 || map->arr == NULL)
 		return ;
 	elevation_colors = true;
 	check_specified_colors(map, index, &elevation_colors);
@@ -33,20 +33,20 @@ void	update_elevation_colors(t_map *map, int index)
 	{
 		if (elevation_colors)
 		{
-			z = map->z_arr[i];
-			map->color_arr[i] = get_elevation_color(z, map);
+			z = map->arr[i].z;
+			map->arr[i].color = get_elevation_color(z, map);
 		}
 		else
 		{
-			if (map->color_arr[i] < 0)
-				map->color_arr[i] = DEFAULT_COLOR;
+			if (map->arr[i].color < 0)
+				map->arr[i].color = DEFAULT_COLOR;
 		}
 		i++;
 	}
 }
 
 // This function will check for specified colors by iterating through
-// the color_arr and checking for color values greater than 0.
+// the arr and checking for color values greater than 0.
 // It will set the elevation colors boolean to false if there are
 // specified colors.
 void	check_specified_colors(t_map *map, int index, bool *elevation_colors)
@@ -56,7 +56,7 @@ void	check_specified_colors(t_map *map, int index, bool *elevation_colors)
 	i = 0;
 	while (i < index)
 	{
-		if (map->color_arr[i] > 0)
+		if (map->arr[i].color > 0)
 		{
 			*elevation_colors = false;
 			break ;

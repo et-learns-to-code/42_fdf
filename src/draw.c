@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:00:00 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 16:34:37 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 23:26:50 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ t_point	create_point(int x, int y, t_map *map)
 	index = get_index(x, y, map->width);
 	point.x = x;
 	point.y = y;
-	point.z = map->z_arr[index];
-	point.color = map->color_arr[index];
+	point.z = map->arr[index].z;
+	point.color = map->arr[index].color;
 	return (point);
 }
 
-// This function will return the index to access the correct element
-// in the z_arr and color_arr.
+// This function will return the index to access the correct 
+// element in the arr.
 int	get_index(int x, int y, int width)
 {
 	return (y * width + x);

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:45:38 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 22:46:48 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 23:34:30 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	invert_colors(int key, t_fdf *fdf)
 	{
 		while (i < fdf->map.width * fdf->map.height)
 		{
-			if (fdf->map.color_arr[i] != DEFAULT_COLOR)
-				fdf->map.color_arr[i]
-					= get_inverted_color(fdf->map.color_arr[i]);
+			if (fdf->map.arr[i].color != DEFAULT_COLOR)
+				fdf->map.arr[i].color
+					= get_inverted_color(fdf->map.arr[i].color);
 			i++;
 		}
 	}

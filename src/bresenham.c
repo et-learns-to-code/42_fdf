@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:20:38 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 16:13:25 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 23:17:49 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ void	draw_line(t_point start, t_point end, t_fdf *fdf)
 	t_point	current;
 	int		error[2];
 
-	set_delta(start, end, &delta);
-	set_step(start, end, &step);
+	set_delta_and_step(start, end, &delta, &step);
 	error[0] = delta.x - delta.y;
 	current = start;
 	while (current.x != end.x || current.y != end.y)
@@ -65,9 +64,9 @@ void	draw_line(t_point start, t_point end, t_fdf *fdf)
 	}
 }
 
-// This function will set the deltas for x and y.
+// This function will set the deltas and step directions for x and y.
 // Deltas x and y will be cast as their absolute values.
-void	set_delta(t_point start, t_point end, t_point *delta)
+void	set_delta_and_step(t_point start, t_point end, t_point *delta,  t_point *step)
 {
 	delta->x = end.x - start.x;
 	delta->y = end.y - start.y;
@@ -75,11 +74,6 @@ void	set_delta(t_point start, t_point end, t_point *delta)
 		delta->x = -delta->x;
 	if (delta->y < 0)
 		delta->y = -delta->y;
-}
-
-// This function will set the step directions for x and y.
-void	set_step(t_point start, t_point end, t_point *step)
-{
 	if (end.x > start.x)
 		step->x = 1;
 	else

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:12:59 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 22:41:08 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 23:24:34 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,20 @@ typedef enum parallel_view
 	LEFT_SIDE_VIEW
 }	t_parallel_view;
 
+typedef struct s_arr
+{
+	int	z;
+	int	color;
+}	t_arr;
+
 typedef struct s_map
 {
-	int	width;
-	int	height;
-	int	*z_arr;
-	int	*color_arr;
-	int	z_min;
-	int	z_max;
-	int	z_range;
+	t_arr	*arr;
+	int		width;
+	int		height;
+	int		z_min;
+	int		z_max;
+	int		z_range;
 }	t_map;
 
 typedef struct s_view

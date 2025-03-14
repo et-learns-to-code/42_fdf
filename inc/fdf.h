@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 23:06:19 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 23:25:20 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ bool	check_file_extension(const char *filename);
 void	malloc_arrays(t_map *map, t_fdf *fdf);
 void	parse_line(char *line, t_map *map, int *index);
 void	extract_z_and_color(char *coord_data,
-			int *z_arr, int *color_arr, int index);
+			t_arr *arr, int index);
 
 // Map parsing util functions
 void	set_map_width(t_map *map, t_list *lst);
@@ -98,7 +98,7 @@ int		modify_color_component(int start, int end, double relative_position);
 
 // Bresenham line drawing algorithm functions
 void	draw_line(t_point start, t_point end, t_fdf *fdf);
-void	set_delta(t_point start, t_point end, t_point *delta);
+void	set_delta_and_step(t_point start, t_point end, t_point *delta, t_point *step);
 void	set_step(t_point start, t_point end, t_point *sign);
 void	put_pixel_on_img(int x, int y, int color, t_fdf *fdf);
 

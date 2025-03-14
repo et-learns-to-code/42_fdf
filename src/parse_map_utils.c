@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:10 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 17:20:42 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 23:30:21 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ int	ft_atoi_base(const char *str, int str_base)
 }
 
 // This function will set the z_range in the map struct.
-// z_min and z_max are initialized to the first value in the z_arr.
+// z_min and z_max are initialized to the first value of arr.z.
 // Their values will be updated from subsequent comparisons.
-// Since z_arr is an integer array, the safe way to iterate
+// Since arr is an integer array, the safe way to iterate
 // through the array is to use the array size to terminate
 // the while loop. The array size will be available from the
 // previously used index variable.
@@ -101,17 +101,17 @@ void	set_z_range(t_map *map, int index)
 	int	z_range;
 	int	i;
 
-	if (index <= 0 || map->z_arr == NULL)
+	if (index <= 0 || map->arr == NULL)
 		return ;
-	z_min = map->z_arr[0];
-	z_max = map->z_arr[0];
+	z_min = map->arr[0].z;
+	z_max = map->arr[0].z;
 	i = 1;
 	while (i < index)
 	{
-		if (map->z_arr[i] < z_min)
-			z_min = map->z_arr[i];
-		if (map->z_arr[i] > z_max)
-			z_max = map->z_arr[i];
+		if (map->arr[i].z < z_min)
+			z_min = map->arr[i].z;
+		if (map->arr[i].z > z_max)
+			z_max = map->arr[i].z;
 		i++;
 	}
 	z_range = z_max - z_min;

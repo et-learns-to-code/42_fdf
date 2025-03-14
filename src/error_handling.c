@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:22:03 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 23:03:57 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 23:28:04 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ void	free_fdf_and_exit(t_fdf *fdf, char *err_msg)
 		mlx_destroy_window(fdf->mlx, fdf->win);
 	if (fdf->mlx)
 		free(fdf->mlx);
-	if (fdf->map.z_arr)
-		free(fdf->map.z_arr);
-	if (fdf->map.color_arr)
-		free(fdf->map.color_arr);
+	if (fdf->map.arr)
+		free(fdf->map.arr);
 	if (err_msg)
 		err_and_exit(err_msg);
 	else
