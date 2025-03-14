@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:12:59 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 23:24:34 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/15 00:20:09 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_view
 	double			alpha;
 	double			beta;
 	double			gamma;
+	double			cos_iso;
+	double			sin_iso;
 }	t_view;
 
 // Bits per pixel, size_line and endian will be set up by the

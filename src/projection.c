@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 12:53:45 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 22:47:55 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/15 00:24:48 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_point	project_point(t_point p, t_fdf *fdf)
 	p.x -= (fdf->map.width * fdf->view.zoom / 2);
 	p.y -= (fdf->map.height * fdf->view.zoom / 2);
 	if (fdf->view.projection == ISOMETRIC)
-		convert_to_isometric(&p.x, &p.y, p.z);
+		convert_to_isometric(&p.x, &p.y, p.z, fdf->view);
 	rotate_x(&p.y, &p.z, fdf->view.alpha);
 	rotate_y(&p.x, &p.z, fdf->view.beta);
 	rotate_z(&p.x, &p.y, fdf->view.gamma);
@@ -41,15 +41,13 @@ t_point	project_point(t_point p, t_fdf *fdf)
 // The z coordinate is merely used as a part of the calculation.
 // z is subtracted from the y coordinate to add depth.
 // 30 degrees = 0.52359877559 radians
-void	convert_to_isometric(int *x, int *y, int z)
+void	convert_to_isometric(int *x, int *y, int z, t_view view)
 {
-	double	iso_radian;
 	int		original_x;
 
-	iso_radian = 0.52359877559;
 	original_x = *x;
-	*x = (*x - *y) * cos(iso_radian);
-	*y = (original_x + *y) * sin(iso_radian) - z;
+	*x = (*x - *y) * view.cos_iso;
+	*y = (original_x + *y) * view.sin_iso - z;
 }
 
 // These three functions will modify the coordinates for rotation

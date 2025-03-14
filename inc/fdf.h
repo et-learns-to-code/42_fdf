@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 23:25:20 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/15 00:24:54 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@
 # define ZONE_3 0x00FFFF
 # define ZONE_4 0x0000FF
 # define ZONE_5 0xFF00FF
+
+# define ISO_RADIAN  0.52359877559
 
 // Error message macros
 # define ARG_ERR "Usage: './fdf file.fdf'."
@@ -122,7 +124,7 @@ void	change_parallel_view(t_fdf *fdf);
 
 // Projection functions
 t_point	project_point(t_point p, t_fdf *fdf);
-void	convert_to_isometric(int *x, int *y, int z);
+void	convert_to_isometric(int *x, int *y, int z, t_view view);
 void	rotate_x(int *y, int *z, double alpha);
 void	rotate_y(int *x, int *z, double beta);
 void	rotate_z(int *x, int *y, double gamma);

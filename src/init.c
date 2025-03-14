@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:30:15 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 23:08:04 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/15 00:27:23 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 // will be locked due to the 1.2 zoom factor that will bottom out at 3.
 void	view_init(t_view *view, t_map *map)
 {
-	view->projection = ISOMETRIC;
+	view->projection = PARALLEL;
 	view->parallel_view = TOP_VIEW;
 	view->initial_zoom = WIN_WIDTH / map->width / 3;
 	if (view->initial_zoom < 5)
@@ -29,6 +29,8 @@ void	view_init(t_view *view, t_map *map)
 	view->alpha = 0;
 	view->beta = 0;
 	view->gamma = 0;
+	view->cos_iso = cos(ISO_RADIAN);
+	view->sin_iso = sin(ISO_RADIAN);
 }
 
 // This function initializes the fdf struct.
