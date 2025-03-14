@@ -1,11 +1,14 @@
 NAME = fdf
 
-SRCS = $(addprefix src/, \
+SRC = $(addprefix src/, \
 	bresenham.c controls.c draw.c elevation_color.c error_handling.c\
 	gradient_color.c init.c inverted_color.c main.c parse_map_utils.c \
 	parse_map.c projection.c view.c)
 
-OBJS = $(SRCS:.c=.o)
+OBJ_DIR = obj
+
+# src/bresenham.c -> obj/bresenham.o
+OBJ = $(patsubst src/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 MLX_DIR = mlx_linux/
 
@@ -38,20 +41,29 @@ else
 LIBRARIES = -L$(MLX_DIR) -L$(LIBFT_DIR) -lmlx -lX11 -lXext -lz -lm -lft
 endif
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
-
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT)
-	@$(CC) $(OBJS) $(LIBRARIES) -o $(NAME)
+# Create the obj directory if it doesn't exist
+# -p (parents) flag will create parent directories if
+# necessary and won't throw an error even if the directory
+# already exists
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
+$(NAME): $(OBJ) $(LIBFT)
+	@$(CC) $(OBJ) $(LIBRARIES) -o $(NAME)
+
+# | $(OBJ_DIR) part ensures that the directory is created before
+# the compilation happens.
+$(OBJ_DIR)/%.o: src/%.c | $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)
 
 clean:
 	@make clean -C $(LIBFT_DIR)
-	@rm -f $(OBJS)
+	@rm -f $(OBJ)
 
 fclean: clean
 	@make fclean -C $(LIBFT_DIR)
