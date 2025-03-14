@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 15:04:59 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 17:35:13 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 23:05:55 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 // The program will open the file and call parse_line in a while loop
 // to parse and fill the arrays.
 // Finally, the file descriptor is closed once the parsing is complete.
-void	parse_map(char **av, t_map *map)
+void	parse_map(char **av, t_map *map, t_fdf *fdf)
 {
 	t_list	*lst;
 	t_list	*tmp;
@@ -30,10 +30,10 @@ void	parse_map(char **av, t_map *map)
 	int		index;
 
 	if (!check_file_extension(av[1]))
-		free_map_and_exit(map, FILE_NAME_ERR);
+		free_fdf_and_exit(fdf, FILE_NAME_ERR);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
-		free_map_and_exit(map, FILE_OPEN_ERR);
+		free_fdf_and_exit(fdf, FILE_OPEN_ERR);
 	lst = NULL;
 	line = get_next_line(fd);
 	while (line)
@@ -43,7 +43,7 @@ void	parse_map(char **av, t_map *map)
 	}
 	map->height = ft_lstsize(lst);
 	set_map_width(map, lst);
-	malloc_arrays(map);
+	malloc_arrays(map, fdf);
 	tmp = lst;
 	index = 0;
 	while (tmp)
@@ -82,16 +82,16 @@ bool	check_file_extension(const char *filename)
 // after determining the width and height of the map.
 // It also handles for error in case memory fails to be allocated
 // for the arrays.
-void	malloc_arrays(t_map *map)
+void	malloc_arrays(t_map *map, t_fdf *fdf)
 {
 	if (map->height == 0 || map->width == 0)
-		free_map_and_exit(map, EMPTY_FILE_ERR);
+		free_fdf_and_exit(fdf, EMPTY_FILE_ERR);
 	map->z_arr = malloc((map->height * map->width) * sizeof(int));
 	if (!map->z_arr)
-		free_map_and_exit(map, MALLOC_ERR);
+		free_fdf_and_exit(fdf, MALLOC_ERR);
 	map->color_arr = malloc((map->height * map->width) * sizeof(int));
 	if (!map->color_arr)
-		free_map_and_exit(map, MALLOC_ERR);
+		free_fdf_and_exit(fdf, MALLOC_ERR);
 }
 
 // This function will parse the line returned from get_next_line.

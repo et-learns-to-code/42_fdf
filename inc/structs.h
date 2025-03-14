@@ -6,31 +6,15 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:12:59 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 15:22:16 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 22:41:08 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct s_point
-{
-	int	x;
-	int	y;
-	int	z;
-	int	color;
-}	t_point;
-
-typedef struct s_map
-{
-	int	width;
-	int	height;
-	int	*z_arr;
-	int	*color_arr;
-	int	z_min;
-	int	z_max;
-	int	z_range;
-}	t_map;
+typedef struct s_map t_map;
+typedef struct s_view t_view;
 
 typedef enum projection
 {
@@ -44,6 +28,17 @@ typedef enum parallel_view
 	FRONT_VIEW,
 	LEFT_SIDE_VIEW
 }	t_parallel_view;
+
+typedef struct s_map
+{
+	int	width;
+	int	height;
+	int	*z_arr;
+	int	*color_arr;
+	int	z_min;
+	int	z_max;
+	int	z_range;
+}	t_map;
 
 typedef struct s_view
 {
@@ -68,6 +63,8 @@ typedef struct s_view
 //			graphical framework share same endian.
 typedef struct fdf
 {
+	t_map	map;
+	t_view	view;
 	void	*mlx;
 	void	*win;
 	void	*img;
@@ -75,8 +72,14 @@ typedef struct fdf
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
-	t_map	*map;
-	t_view	*view;
 }	t_fdf;
+
+typedef struct s_point
+{
+	int	x;
+	int	y;
+	int	z;
+	int	color;
+}	t_point;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 12:53:45 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 16:13:25 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 22:47:55 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@
 // > center in center of window > apply move offset
 t_point	project_point(t_point p, t_fdf *fdf)
 {
-	p.x *= fdf->view->zoom;
-	p.y *= fdf->view->zoom;
-	p.z *= fdf->view->zoom;
-	p.x -= (fdf->map->width * fdf->view->zoom / 2);
-	p.y -= (fdf->map->height * fdf->view->zoom / 2);
-	if (fdf->view->projection == ISOMETRIC)
+	p.x *= fdf->view.zoom;
+	p.y *= fdf->view.zoom;
+	p.z *= fdf->view.zoom;
+	p.x -= (fdf->map.width * fdf->view.zoom / 2);
+	p.y -= (fdf->map.height * fdf->view.zoom / 2);
+	if (fdf->view.projection == ISOMETRIC)
 		convert_to_isometric(&p.x, &p.y, p.z);
-	rotate_x(&p.y, &p.z, fdf->view->alpha);
-	rotate_y(&p.x, &p.z, fdf->view->beta);
-	rotate_z(&p.x, &p.y, fdf->view->gamma);
-	p.x += WIN_WIDTH / 2 + fdf->view->x_offset;
-	p.y += WIN_HEIGHT / 2 + fdf->view->y_offset;
+	rotate_x(&p.y, &p.z, fdf->view.alpha);
+	rotate_y(&p.x, &p.z, fdf->view.beta);
+	rotate_z(&p.x, &p.y, fdf->view.gamma);
+	p.x += WIN_WIDTH / 2 + fdf->view.x_offset;
+	p.y += WIN_HEIGHT / 2 + fdf->view.y_offset;
 	return (p);
 }
 

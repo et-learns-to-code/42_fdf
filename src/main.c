@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:26:44 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 16:13:25 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 23:07:07 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,16 @@
 // windows is clicked).
 int	main(int ac, char **av)
 {
-	t_map	*map;
-	t_view	*view;
-	t_fdf	*fdf;
+	t_fdf	fdf;
 
 	if (ac != 2)
 		err_and_exit(ARG_ERR);
-	map = map_init();
-	parse_map(av, map);
-	view = view_init(map);
-	fdf = fdf_init(map, view, av);
-	draw(map, fdf);
-	setup_hooks(fdf);
-	mlx_loop(fdf->mlx);
+	ft_bzero(&fdf.map, sizeof(t_map));
+	parse_map(av, &fdf.map, &fdf);
+	view_init(&fdf.view, &fdf.map);
+	fdf_init(&fdf, av);
+	draw(&fdf.map, &fdf);
+	setup_hooks(&fdf);
+	mlx_loop(fdf.mlx);
 	return (0);
 }

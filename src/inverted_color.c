@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:45:38 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 16:13:25 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 22:46:48 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ void	invert_colors(int key, t_fdf *fdf)
 	i = 0;
 	if (key == SPACE_BAR)
 	{
-		while (i < fdf->map->width * fdf->map->height)
+		while (i < fdf->map.width * fdf->map.height)
 		{
-			if (fdf->map->color_arr[i] != DEFAULT_COLOR)
-				fdf->map->color_arr[i]
-					= get_inverted_color(fdf->map->color_arr[i]);
+			if (fdf->map.color_arr[i] != DEFAULT_COLOR)
+				fdf->map.color_arr[i]
+					= get_inverted_color(fdf->map.color_arr[i]);
 			i++;
 		}
 	}
-	draw(fdf->map, fdf);
+	draw(&fdf->map, fdf);
 }
 
 // This function will return the inverted color of the color given as

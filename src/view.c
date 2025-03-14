@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:25:32 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 16:13:25 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 22:51:57 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@ void	zoom(int key, t_fdf *fdf)
 	int		max_zoom;
 
 	zoom_factor = 1.2;
-	max_zoom = fdf->view->initial_zoom * 10;
+	max_zoom = fdf->view.initial_zoom * 10;
 	if (key == PLUS_KEY)
 	{
-		fdf->view->zoom = (int)(fdf->view->zoom * zoom_factor + 0.5);
-		if (fdf->view->zoom > max_zoom)
-			fdf->view->zoom = max_zoom;
+		fdf->view.zoom = (int)(fdf->view.zoom * zoom_factor + 0.5);
+		if (fdf->view.zoom > max_zoom)
+			fdf->view.zoom = max_zoom;
 	}
 	else if (key == MINUS_KEY)
 	{
-		fdf->view->zoom = (int)(fdf->view->zoom / zoom_factor + 0.5);
+		fdf->view.zoom = (int)(fdf->view.zoom / zoom_factor + 0.5);
 	}
-	draw(fdf->map, fdf);
+	draw(&fdf->map, fdf);
 }
 
 // This function will modify the x and y offsets depending
@@ -55,16 +55,16 @@ void	move(int key, t_fdf *fdf)
 {
 	int	move_step;
 
-	move_step = 15 * fdf->view->zoom / fdf->view->initial_zoom;
+	move_step = 15 * fdf->view.zoom / fdf->view.initial_zoom;
 	if (key == UP_KEY || key == W_KEY)
-		fdf->view->y_offset -= move_step;
+		fdf->view.y_offset -= move_step;
 	else if (key == DOWN_KEY || key == S_KEY)
-		fdf->view->y_offset += move_step;
+		fdf->view.y_offset += move_step;
 	else if (key == LEFT_KEY || key == A_KEY)
-		fdf->view->x_offset -= move_step;
+		fdf->view.x_offset -= move_step;
 	else if (key == RIGHT_KEY || key == D_KEY)
-		fdf->view->x_offset += move_step;
-	draw(fdf->map, fdf);
+		fdf->view.x_offset += move_step;
+	draw(&fdf->map, fdf);
 }
 
 // This function will modify the alpha, beta and gamma values to
@@ -78,35 +78,35 @@ void	move(int key, t_fdf *fdf)
 void	rotate(int key, t_fdf *fdf)
 {
 	if (key == NUM_3_KEY)
-		fdf->view->alpha += 0.1;
+		fdf->view.alpha += 0.1;
 	else if (key == NUM_7_KEY)
-		fdf->view->alpha -= 0.1;
+		fdf->view.alpha -= 0.1;
 	else if (key == NUM_2_KEY)
-		fdf->view->beta += 0.1;
+		fdf->view.beta += 0.1;
 	else if (key == NUM_8_KEY)
-		fdf->view->beta -= 0.1;
+		fdf->view.beta -= 0.1;
 	else if (key == NUM_1_KEY)
-		fdf->view->gamma += 0.1;
+		fdf->view.gamma += 0.1;
 	else if (key == NUM_9_KEY)
-		fdf->view->gamma -= 0.1;
-	draw(fdf->map, fdf);
+		fdf->view.gamma -= 0.1;
+	draw(&fdf->map, fdf);
 }
 
 // This function will reset all rotation to neutral angles then
 // set the projection type to isometric or parallel.
 void	change_projection(int key, t_fdf *fdf)
 {
-	fdf->view->alpha = 0;
-	fdf->view->beta = 0;
-	fdf->view->gamma = 0;
+	fdf->view.alpha = 0;
+	fdf->view.beta = 0;
+	fdf->view.gamma = 0;
 	if (key == I_KEY)
 	{
-		fdf->view->projection = ISOMETRIC;
-		draw(fdf->map, fdf);
+		fdf->view.projection = ISOMETRIC;
+		draw(&fdf->map, fdf);
 	}
 	else if (key == P_KEY)
 	{
-		fdf->view->projection = PARALLEL;
+		fdf->view.projection = PARALLEL;
 		change_parallel_view(fdf);
 	}
 }
@@ -121,25 +121,25 @@ void	change_parallel_view(t_fdf *fdf)
 	t_parallel_view	direction;
 
 	parallel_radian = 1.57079632679;
-	direction = fdf->view->parallel_view;
+	direction = fdf->view.parallel_view;
 	if (direction == TOP_VIEW)
 	{
-		fdf->view->alpha = 0;
-		fdf->view->beta = 0;
-		fdf->view->gamma = 0;
+		fdf->view.alpha = 0;
+		fdf->view.beta = 0;
+		fdf->view.gamma = 0;
 	}
 	else if (direction == FRONT_VIEW)
 	{
-		fdf->view->alpha = parallel_radian;
-		fdf->view->beta = 0;
-		fdf->view->gamma = 0;
+		fdf->view.alpha = parallel_radian;
+		fdf->view.beta = 0;
+		fdf->view.gamma = 0;
 	}
 	else if (direction == LEFT_SIDE_VIEW)
 	{
-		fdf->view->alpha = 0;
-		fdf->view->beta = -parallel_radian;
-		fdf->view->gamma = parallel_radian;
+		fdf->view.alpha = 0;
+		fdf->view.beta = -parallel_radian;
+		fdf->view.gamma = parallel_radian;
 	}
-	fdf->view->parallel_view = (direction + 1) % 3;
-	draw(fdf->map, fdf);
+	fdf->view.parallel_view = (direction + 1) % 3;
+	draw(&fdf->map, fdf);
 }

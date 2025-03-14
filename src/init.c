@@ -6,43 +6,18 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:30:15 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 16:13:25 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 23:08:04 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-// This function initializes the map struct.
-t_map	*map_init(void)
-{
-	t_map	*map;
-
-	map = malloc(sizeof(t_map));
-	if (!map)
-		err_and_exit(MAP_INIT_ERR);
-	map->width = 0;
-	map->height = 0;
-	map->z_arr = NULL;
-	map->color_arr = NULL;
-	map->z_min = 0;
-	map->z_max = 0;
-	map->z_range = 0;
-	return (map);
-}
-
 // This function initializes the view struct.
-// If the view struct fails to be malloc'd, the
-// previously allocated map struct has to be freed first.
 // Zoom has to be initialized to fit the entire top view within the map.
 // Initial zoom cannot go below 5, otherwise the zoom in and out functions
 // will be locked due to the 1.2 zoom factor that will bottom out at 3.
-t_view	*view_init(t_map *map)
+void	view_init(t_view *view, t_map *map)
 {
-	t_view	*view;
-
-	view = malloc(sizeof(t_view));
-	if (!view)
-		free_map_and_exit(map, VIEW_INIT_ERR);
 	view->projection = ISOMETRIC;
 	view->parallel_view = TOP_VIEW;
 	view->initial_zoom = WIN_WIDTH / map->width / 3;
@@ -54,7 +29,6 @@ t_view	*view_init(t_map *map)
 	view->alpha = 0;
 	view->beta = 0;
 	view->gamma = 0;
-	return (view);
 }
 
 // This function initializes the fdf struct.
@@ -70,15 +44,8 @@ t_view	*view_init(t_map *map)
 // free the fdf struct and exit the program.
 // mlx_get_data_addr() will automatically set the bits_per_pixel, size_line
 // and endian values for you.
-t_fdf	*fdf_init(t_map *map, t_view *view, char **av)
+void	fdf_init(t_fdf *fdf, char **av)
 {
-	t_fdf	*fdf;
-
-	fdf = malloc(sizeof(t_fdf));
-	if (!fdf)
-		free_map_view_and_exit(map, view, FDF_INIT_ERR);
-	fdf->map = map;
-	fdf->view = view;
 	fdf->mlx = mlx_init();
 	if (!fdf->mlx)
 		free_fdf_and_exit(fdf, FDF_INIT_ERR);
@@ -92,5 +59,4 @@ t_fdf	*fdf_init(t_map *map, t_view *view, char **av)
 			&(fdf->size_line), &(fdf->endian));
 	if (!fdf->data_addr)
 		free_fdf_and_exit(fdf, FDF_INIT_ERR);
-	return (fdf);
 }

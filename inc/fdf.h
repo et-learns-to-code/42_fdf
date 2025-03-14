@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 17:29:37 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 23:06:19 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 // __linux__ and __APPLE__ macros are predefined by the compiler.
 # ifdef __linux__
 #  include "keycode_linux.h"
-#  define WIN_WIDTH 2400
-#  define WIN_HEIGHT 1350
+#  define WIN_WIDTH 1920
+#  define WIN_HEIGHT 1080
 # elif __APPLE__
 #  include "keycode_macos.h"
 #  define WIN_WIDTH 1200
@@ -63,21 +63,18 @@
 	"Error: An error occurred while initialising the view struct."
 
 // Structs initialisation functions
-t_map	*map_init(void);
-t_view	*view_init(t_map *map);
-t_fdf	*fdf_init(t_map *map, t_view *view, char **av);
+void	view_init(t_view *view, t_map *map);
+void	fdf_init(t_fdf *fdf, char **av);
 
 // Error handling functions
 void	err_and_exit(char *err_msg);
-void	free_map_and_exit(t_map *map, char *err_msg);
-void	free_map_view_and_exit(t_map *map, t_view *view, char *err_msg);
 void	free_fdf_and_exit(t_fdf *fdf, char *err_msg);
 void	free_double_arr(char **arr);
 
 // Map parsing functions
-void	parse_map(char **av, t_map *map);
+void	parse_map(char **av, t_map *map, t_fdf *fdf);
 bool	check_file_extension(const char *filename);
-void	malloc_arrays(t_map *map);
+void	malloc_arrays(t_map *map, t_fdf *fdf);
 void	parse_line(char *line, t_map *map, int *index);
 void	extract_z_and_color(char *coord_data,
 			int *z_arr, int *color_arr, int index);
