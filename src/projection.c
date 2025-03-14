@@ -6,11 +6,11 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 12:53:45 by etien             #+#    #+#             */
-/*   Updated: 2024/08/26 18:40:12 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 16:13:25 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "../inc/fdf.h"
 
 // This function will take into account all the view parameters to
 // plot each point at its correct position.

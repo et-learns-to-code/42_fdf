@@ -6,11 +6,11 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:10 by etien             #+#    #+#             */
-/*   Updated: 2024/08/19 15:23:51 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 16:13:25 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "../inc/fdf.h"
 
 // This function will count the number of lines in the file
 // to set the height of the map.

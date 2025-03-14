@@ -6,11 +6,11 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:13:51 by etien             #+#    #+#             */
-/*   Updated: 2024/08/22 13:21:07 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 16:13:25 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "../inc/fdf.h"
 
 // This function uses hooks to register callback functions that will intercept
 // certain events, such as pressing of certain keys or closing of the window.

@@ -6,11 +6,11 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:30:59 by etien             #+#    #+#             */
-/*   Updated: 2024/08/26 18:53:44 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 16:13:25 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "../inc/fdf.h"
 
 // This function handles for two scenarios:
 // 1) At least one color was specified

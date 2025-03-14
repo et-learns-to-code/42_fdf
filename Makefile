@@ -1,6 +1,6 @@
 NAME = fdf
 
-SRCS = $(addprefix srcs/, \
+SRCS = $(addprefix src/, \
 	bresenham.c controls.c draw.c elevation_color.c error_handling.c\
 	gradient_color.c init.c inverted_color.c main.c parse_map_utils.c \
 	parse_map.c projection.c view.c)
@@ -13,7 +13,7 @@ LIBFT_DIR = libft/
 LIBFT = $(LIBFT_DIR)libft.a
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iincludes -I$(MLX_DIR)
+CFLAGS = -Wall -Wextra -Werror -Iinc -I$(MLX_DIR)
 
 # Operating system detection.
 # This calls an instance of the shell and assigns the result of the

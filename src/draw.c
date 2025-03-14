@@ -6,11 +6,11 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:00:00 by etien             #+#    #+#             */
-/*   Updated: 2024/08/26 18:15:27 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/14 16:34:37 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "../inc/fdf.h"
 
 // This is the main drawing function for the entire program.
 // It will iterate through the map struct and draw all the lines
@@ -55,8 +55,8 @@ void	draw(t_map *map, t_fdf *fdf)
 // For ft_bzero to work, you still have to multiply by the number of bytes.
 void	clear_image(t_fdf *fdf)
 {
-	ft_bzero(fdf->data_addr, (WIN_WIDTH * WIN_HEIGHT
-			* (fdf->bits_per_pixel / 8)));
+	ft_bzero(fdf->data_addr, WIN_WIDTH * WIN_HEIGHT
+		* (fdf->bits_per_pixel / 8));
 }
 
 // This function will create the point structs that will be fed into
