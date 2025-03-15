@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 15:04:59 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 23:33:14 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/15 09:18:04 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,46 +94,52 @@ void	malloc_arrays(t_map *map, t_fdf *fdf)
 // This function will parse the line returned from get_next_line.
 // First, it will replace the newline character at the end of the
 // line with a null terminator. This will ensure that the newline
-// character is not incorrectly saved to the array when the line
-// is split.
-// The line is split to separate the data for each coordinate
-// then the extract function parses and stores the z and color
-// data into their correct arrays.
+// character is not incorrectly saved to the array.
+// A null terminator is added to the end of each data then the
+// data is extracted into the arr by extract_z_and_color.
 // If there are fewer coordinates in a line than the map width,
 // the second while loop will pad the arrays and set up default
 // values as placeholders with z = 0 and color = -1.
-// Allocated memory is always freed as soon as the data is
-// no longer needed (see freeing for line and coord data).
 void	parse_line(char *line, t_map *map, int *index)
 {
-	int		line_length;
-	char	**coord_data;
-	int		i;
+	int		len;
+	char	*eol;
+	char	*data;
+	// int		i;
+	(void)map;
 
-	line_length = ft_strlen(line);
-	if (line_length > 0 && line[line_length - 1] == '\n')
-		line[line_length - 1] = '\0';
-	coord_data = ft_split(line, ' ');
-	i = 0;
-	while (coord_data[i] && i < map->width)
+	len = ft_strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+		line[len - 1] = '\0';
+	eol = line + len;
+	data = line;
+	while (*line)
 	{
-		extract_z_and_color(coord_data[i], map->arr,
-			*index);
+		skip_whitespace(&line, eol, true);
+		if (!*line)
+		break ;
+		data = line;
+		skip_whitespace(&line, eol, false);
+		if (*line)
+		{
+			*line = '\0';
+			line++;
+		}
+		extract_z_and_color(data, map->arr, *index);
 		(*index)++;
-		i++;
 	}
-	while (i < map->width)
-	{
-		map->arr[*index].z = 0;
-		map->arr[*index].color = -1;
-		(*index)++;
-		i++;
-	}
-	free_double_arr(coord_data);
+	// i = 0;
+	// while (i < map->width)
+	// {
+	// 	map->arr[*index].z = 0;
+	// 	map->arr[*index].color = -1;
+	// 	(*index)++;
+	// 	i++;
+	// }
 }
 
 // This function will extract the z and hexadecimal color values
-// from the coordinate's data to their correct arrays.
+// from the coordinate's data to the arr.
 // It achieves this by creating substrings of the z and color values
 // which are each passed to ft_atoi_base to get their integer
 // representations.
@@ -141,7 +147,7 @@ void	parse_line(char *line, t_map *map, int *index)
 // the substrings are freed to avoid memory leakages.
 // If a coordinate data does not have a color value, it will be assigned
 // -1 by default.
-void	extract_z_and_color(char *coord_data, t_arr *arr, int index)
+void	extract_z_and_color(char *data, t_arr *arr, int index)
 {
 	char	*nbr;
 	char	*hex;
@@ -150,18 +156,18 @@ void	extract_z_and_color(char *coord_data, t_arr *arr, int index)
 
 	i = 0;
 	nbr_len = 0;
-	while (coord_data[i] == '-' || ft_isdigit(coord_data[i]))
+	while (data[i] == '-' || ft_isdigit(data[i]))
 	{
 		nbr_len++;
 		i++;
 	}
-	nbr = ft_substr(coord_data, 0, nbr_len);
+	nbr = ft_substr(data, 0, nbr_len);
 	arr[index].z = ft_atoi_base(nbr, 10);
 	free(nbr);
-	if (coord_data[i] == ',')
+	if (data[i] == ',')
 	{
-		hex = ft_substr(coord_data, i + 1,
-				ft_strlen(coord_data) - (i + 1));
+		hex = ft_substr(data, i + 1,
+				ft_strlen(data) - (i + 1));
 		arr[index].color = ft_atoi_base(hex, 16);
 		free(hex);
 	}

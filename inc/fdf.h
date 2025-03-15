@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2025/03/15 00:24:54 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/15 08:06:20 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 
 # define ISO_RADIAN  0.52359877559
 
+# define WHITESPACE " \t\r\n\v"
+
 // Error message macros
 # define ARG_ERR "Usage: './fdf file.fdf'."
 # define EMPTY_FILE_ERR "Error: File was empty."
@@ -71,7 +73,6 @@ void	fdf_init(t_fdf *fdf, char **av);
 // Error handling functions
 void	err_and_exit(char *err_msg);
 void	free_fdf_and_exit(t_fdf *fdf, char *err_msg);
-void	free_double_arr(char **arr);
 
 // Map parsing functions
 void	parse_map(char **av, t_map *map, t_fdf *fdf);
@@ -84,6 +85,7 @@ void	extract_z_and_color(char *coord_data,
 // Map parsing util functions
 void	set_map_width(t_map *map, t_list *lst);
 void	count_columns(char *line, int *column_count);
+void	skip_whitespace(char **s, char *es, bool mode);
 int		ft_atoi_base(const char *str, int str_base);
 void	set_z_range(t_map *map, int index);
 

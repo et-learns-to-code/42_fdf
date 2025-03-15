@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:10 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 23:30:21 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/15 08:01:17 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,20 @@ void	count_columns(char *line, int *column_count)
 			(*column_count)++;
 		i++;
 	}
+}
+
+// This function will skip over whitespace characters in the string
+// based on the mode specified.
+// If mode is true, the function will skip over whitespace characters.
+// If mode is false, the function will skip over non-whitespace characters.
+void skip_whitespace(char **s, char *es, bool mode)
+{
+	if (mode)
+		while (*s < es && ft_strchr(WHITESPACE, **s))
+			(*s)++;
+	else
+		while (*s < es && !ft_strchr(WHITESPACE, **s))
+			(*s)++;
 }
 
 // This function will convert the given string to its decimal integer value
