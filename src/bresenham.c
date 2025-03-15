@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:20:38 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 23:17:49 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/15 09:54:26 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	draw_line(t_point start, t_point end, t_fdf *fdf)
 
 // This function will set the deltas and step directions for x and y.
 // Deltas x and y will be cast as their absolute values.
-void	set_delta_and_step(t_point start, t_point end, t_point *delta,  t_point *step)
+void	set_delta_and_step(t_point start, t_point end,
+			t_point *delta, t_point *step)
 {
 	delta->x = end.x - start.x;
 	delta->y = end.y - start.y;

@@ -6,11 +6,32 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:10 by etien             #+#    #+#             */
-/*   Updated: 2025/03/15 08:01:17 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/15 11:01:50 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
+
+// This function will check that the file inputted as the argument
+// ends with the required extension of ".fdf".
+// It will check the difference in length in the filename and extension,
+// and move the filename's pointer to the position where the extension
+// is expected to start.
+// If the filename is longer than the extension and the comparison evaluates
+// to 0 (i.e. no difference), the function will return true.
+// Otherwise, it will return false.
+bool	check_file_extension(const char *filename)
+{
+	const char	*extension = ".fdf";
+	size_t		len_filename;
+	size_t		len_extension;
+
+	len_filename = ft_strlen(filename);
+	len_extension = ft_strlen(extension);
+	return (len_filename > len_extension
+		&& ft_strncmp(filename + (len_filename - len_extension),
+			extension, len_extension) == 0);
+}
 
 // This function will run through all the lines in the map
 // and set the width based on the line with the most columns.
@@ -52,53 +73,6 @@ void	count_columns(char *line, int *column_count)
 			(*column_count)++;
 		i++;
 	}
-}
-
-// This function will skip over whitespace characters in the string
-// based on the mode specified.
-// If mode is true, the function will skip over whitespace characters.
-// If mode is false, the function will skip over non-whitespace characters.
-void skip_whitespace(char **s, char *es, bool mode)
-{
-	if (mode)
-		while (*s < es && ft_strchr(WHITESPACE, **s))
-			(*s)++;
-	else
-		while (*s < es && !ft_strchr(WHITESPACE, **s))
-			(*s)++;
-}
-
-// This function will convert the given string to its decimal integer value
-// based on the specified base.
-// The if condition for base 16 will move the string pointer two spaces
-// to move past its '0x' prefix.
-int	ft_atoi_base(const char *str, int str_base)
-{
-	int	sign;
-	int	result;
-	int	decimal_value;
-
-	sign = 1;
-	result = 0;
-	decimal_value = 0;
-	if (str_base == 16)
-		str += 2;
-	while (*str && str_base <= 16)
-	{
-		if (*str == '-')
-			sign *= -1;
-		else if (*str >= '0' && *str <= '9')
-			decimal_value = *str - '0';
-		else if (*str >= 'A' && *str <= 'F')
-			decimal_value = *str - 'A' + 10;
-		else if (*str >= 'a' && *str <= 'f')
-			decimal_value = *str - 'a' + 10;
-		else
-			break ;
-		result = result * str_base + decimal_value;
-		str++;
-	}
-	return (sign * result);
 }
 
 // This function will set the z_range in the map struct.
