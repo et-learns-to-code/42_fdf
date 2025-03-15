@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:30:59 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 23:34:06 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/15 11:21:34 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	update_elevation_colors(t_map *map, int index)
 	if (index <= 0 || map->arr == NULL)
 		return ;
 	elevation_colors = true;
-	check_specified_colors(map, index, &elevation_colors);
+	check_existing_colors(map, index, &elevation_colors);
 	i = 0;
 	while (i < index)
 	{
@@ -45,11 +45,11 @@ void	update_elevation_colors(t_map *map, int index)
 	}
 }
 
-// This function will check for specified colors by iterating through
+// This function will check for existing colors by iterating through
 // the arr and checking for color values greater than 0.
 // It will set the elevation colors boolean to false if there are
-// specified colors.
-void	check_specified_colors(t_map *map, int index, bool *elevation_colors)
+// existing colors.
+void	check_existing_colors(t_map *map, int index, bool *elevation_colors)
 {
 	int	i;
 

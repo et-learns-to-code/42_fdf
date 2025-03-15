@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 09:49:03 by etien             #+#    #+#             */
-/*   Updated: 2025/03/15 10:55:43 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/15 11:22:03 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ void	extract_z_and_color(char *data, t_arr *arr, int index)
 	arr[index].color = -1;
 }
 
-// This function will convert the given string to its decimal integer value
-// based on the specified base.
+// This function will convert the given string to its decimal integer 
+// value based on the specified base.
 // The if condition for base 16 will move the string pointer two spaces
 // to move past its '0x' prefix.
 int	ft_atoi_base(const char *str, int str_base)

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2025/03/15 11:08:49 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/15 11:21:14 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	pad_map(t_map *map, int *index, int i);
 
 // Elevation color functions
 void	update_elevation_colors(t_map *map, int index);
-void	check_specified_colors(t_map *map, int index, bool *elevation_colors);
+void	check_existing_colors(t_map *map, int index, bool *elevation_colors);
 int		get_elevation_color(int z, t_map *map);
 
 // Gradient color functions
