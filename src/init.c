@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:30:15 by etien             #+#    #+#             */
-/*   Updated: 2025/03/17 18:35:14 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/18 00:21:10 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,19 @@ void	view_init(t_view *view, t_map *map)
 	int	scale_x;
 	int	scale_y;
 
+	ft_bzero(view->keys, sizeof(view->keys));
+	ft_printf("keys[0]: %d, keys[TOTAL_KEYS-1]: %d\n", view->keys[0], view->keys[TOTAL_KEYS-1]);
+	view->projection = PARALLEL;
+	view->parallel_view = TOP_VIEW;
+	view->initial_zoom = WIN_WIDTH / map->width / 3;
+	if (view->initial_zoom < 5)
+		view->initial_zoom = 5;
 	scale_x = WIN_WIDTH / map->width;
 	scale_y = WIN_HEIGHT / map->height;
 	if (scale_x < scale_y)
 		view->zoom = scale_x;
 	else
 		view->zoom = scale_y;
-	view->projection = PARALLEL;
-	view->parallel_view = TOP_VIEW;
-	view->initial_zoom = WIN_WIDTH / map->width / 3;
-	if (view->initial_zoom < 5)
-		view->initial_zoom = 5;
 	view->x_offset = 0;
 	view->y_offset = 0;
 	view->alpha = 0;

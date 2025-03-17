@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:25:32 by etien             #+#    #+#             */
-/*   Updated: 2025/03/17 22:07:33 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/18 00:11:07 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,22 @@
 // Min zoom: 3 (due to division by 1.2 constant zoom and + 0.5 rounding,
 // the zoom will mathematically bottom out at 3.)
 // Zoom cannot be 0 or negative otherwise the object won't render.
-void	zoom(int key, t_fdf *fdf)
+void	zoom(int *keys, t_fdf *fdf, int *update_view)
 {
 	double	zoom_factor;
 	int		max_zoom;
 
+	*update_view = 1;
 	zoom_factor = 1.2;
 	max_zoom = fdf->view.initial_zoom * 10;
-	if (key == PLUS_KEY)
+	if (keys[PLUS_KEY])
 	{
 		fdf->view.zoom = (int)(fdf->view.zoom * zoom_factor + 0.5);
 		if (fdf->view.zoom > max_zoom)
 			fdf->view.zoom = max_zoom;
 	}
-	else if (key == MINUS_KEY)
-	{
+	if (keys[MINUS_KEY])
 		fdf->view.zoom = (int)(fdf->view.zoom / zoom_factor + 0.5);
-	}
-	draw(&fdf->map, fdf);
 }
 
 // This function will modify the x and y offsets depending
@@ -51,20 +49,20 @@ void	zoom(int key, t_fdf *fdf)
 // This ensures that the movement step is always proportional
 // to the zoom and solves the issue of slow movement of the object
 // across the screen when the zoom level is high.
-void	move(int key, t_fdf *fdf)
+void	move(int *keys, t_fdf *fdf, int *update_view)
 {
 	int	move_step;
 
+	*update_view = 1;
 	move_step = 15 * fdf->view.zoom / fdf->view.initial_zoom;
-	if (key == UP_KEY || key == W_KEY)
+	if (keys[UP_KEY] || keys[W_KEY])
 		fdf->view.y_offset -= move_step;
-	else if (key == DOWN_KEY || key == S_KEY)
+	if (keys[DOWN_KEY] || keys[S_KEY])
 		fdf->view.y_offset += move_step;
-	else if (key == LEFT_KEY || key == A_KEY)
+	if (keys[LEFT_KEY] || keys[A_KEY])
 		fdf->view.x_offset -= move_step;
-	else if (key == RIGHT_KEY || key == D_KEY)
+	if (keys[RIGHT_KEY] || keys[D_KEY])
 		fdf->view.x_offset += move_step;
-	draw(&fdf->map, fdf);
 }
 
 // This function will modify the alpha, beta and gamma values to
@@ -75,36 +73,34 @@ void	move(int key, t_fdf *fdf)
 // The keycodes are not random, but are mapped out for more
 // intuitive controls. Opposite rotations will be symmetrical
 // in finger placement on the keyboard.
-void	rotate(int key, t_fdf *fdf)
+void	rotate(int *keys, t_fdf *fdf, int *update_view)
 {
-	if (key == NUM_3_KEY)
+	*update_view = 1;
+	if (keys[NUM_3_KEY])
 		fdf->view.alpha += 0.1;
-	else if (key == NUM_7_KEY)
+	if (keys[NUM_7_KEY])
 		fdf->view.alpha -= 0.1;
-	else if (key == NUM_2_KEY)
+	if (keys[NUM_2_KEY])
 		fdf->view.beta += 0.1;
-	else if (key == NUM_8_KEY)
+	if (keys[NUM_8_KEY])
 		fdf->view.beta -= 0.1;
-	else if (key == NUM_1_KEY)
+	if (keys[NUM_1_KEY])
 		fdf->view.gamma += 0.1;
-	else if (key == NUM_9_KEY)
+	if (keys[NUM_9_KEY])
 		fdf->view.gamma -= 0.1;
-	draw(&fdf->map, fdf);
 }
 
 // This function will reset all rotation to neutral angles then
 // set the projection type to isometric or parallel.
-void	change_projection(int key, t_fdf *fdf)
+void	change_projection(int *keys, t_fdf *fdf, int *update_view)
 {
+	*update_view = 1;
 	fdf->view.alpha = 0;
 	fdf->view.beta = 0;
 	fdf->view.gamma = 0;
-	if (key == I_KEY)
-	{
+	if (keys[I_KEY])
 		fdf->view.projection = ISOMETRIC;
-		draw(&fdf->map, fdf);
-	}
-	else if (key == P_KEY)
+	else if (keys[P_KEY])
 	{
 		fdf->view.projection = PARALLEL;
 		change_parallel_view(fdf);
@@ -139,5 +135,4 @@ void	change_parallel_view(t_fdf *fdf)
 		fdf->view.gamma = PARALLEL_RADIAN;
 	}
 	fdf->view.parallel_view = (direction + 1) % 3;
-	draw(&fdf->map, fdf);
 }

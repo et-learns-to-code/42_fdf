@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 10:45:38 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 23:34:30 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/18 00:12:12 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
 // long as they are not the default color.
 // The if check prevents lines from disappearing from the screen when they
 // are inverted from white to black on a black background.
-void	invert_colors(int key, t_fdf *fdf)
+void	invert_colors(int* keys, t_fdf *fdf, int *update_view)
 {
 	int	i;
 
+	*update_view = 1;
 	i = 0;
-	if (key == SPACE_BAR)
+	if (keys[SPACE_BAR])
 	{
 		while (i < fdf->map.width * fdf->map.height)
 		{
@@ -32,7 +33,6 @@ void	invert_colors(int key, t_fdf *fdf)
 			i++;
 		}
 	}
-	draw(&fdf->map, fdf);
 }
 
 // This function will return the inverted color of the color given as

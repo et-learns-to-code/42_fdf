@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:13:51 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 16:13:25 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/18 00:16:00 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,14 @@
 // Mask parameter in mlx_hook function is for more granular control
 // over event handling than what is set within the event parameter.
 // However, for this project, we will set it to 0 and not bother with it.
+// mlx_loop_hook makes render_frame run continuously in the background 
+// (instead of only when an event occurs).
 void	setup_hooks(t_fdf *fdf)
 {
 	mlx_hook(fdf->win, ON_KEYDOWN, KEY_PRESS_MASK, key_press, fdf);
+	mlx_hook(fdf->win, ON_KEYUP, KEY_RELEASE_MASK, key_release, fdf);
 	mlx_hook(fdf->win, ON_DESTROY, KEY_PRESS_MASK, close_window, fdf);
+	mlx_loop_hook(fdf->mlx, render_frame, fdf);
 }
 
 // This function is connected to the mlx hook and will call the relevant
@@ -34,23 +38,45 @@ int	key_press(int key, t_fdf *fdf)
 {
 	if (key == ESC_KEY)
 		free_fdf_and_exit(fdf, NULL);
-	else if (key == PLUS_KEY || key == MINUS_KEY)
-		zoom(key, fdf);
-	else if (key == UP_KEY || key == DOWN_KEY
-		|| key == LEFT_KEY || key == RIGHT_KEY
-		|| key == W_KEY || key == S_KEY
-		|| key == A_KEY || key == D_KEY)
-		move(key, fdf);
-	else if (key == NUM_1_KEY || key == NUM_2_KEY
-		|| key == NUM_3_KEY || key == NUM_7_KEY
-		|| key == NUM_8_KEY || key == NUM_9_KEY)
-		rotate(key, fdf);
-	else if (key == I_KEY || key == P_KEY)
-		change_projection(key, fdf);
-	else if (key == SPACE_BAR)
-		invert_colors(key, fdf);
+	if (key < TOTAL_KEYS)
+		fdf->view.keys[key] = 1;
 	return (0);
 }
+
+int	key_release(int key, t_fdf *fdf)
+{
+	if (key < TOTAL_KEYS)
+		fdf->view.keys[key] = 0;
+	return (0);
+}
+
+int render_frame(t_fdf *fdf)
+{
+	int	*keys;
+	int	update_view;
+	
+	keys = fdf->view.keys;
+	update_view = 1;
+	if (keys[PLUS_KEY] || keys[MINUS_KEY])
+		zoom(keys, fdf, &update_view);
+	if (keys[UP_KEY] || keys[DOWN_KEY]
+		|| keys[LEFT_KEY] || keys[RIGHT_KEY]
+		|| keys[W_KEY] || keys[S_KEY]
+		|| keys[A_KEY] || keys[D_KEY])
+		move(keys, fdf, &update_view);
+	if (keys[NUM_1_KEY] || keys[NUM_2_KEY]
+		|| keys[NUM_3_KEY] || keys[NUM_7_KEY]
+		|| keys[NUM_8_KEY] || keys[NUM_9_KEY])
+		rotate(keys, fdf, &update_view);
+	if (keys[I_KEY] || keys[P_KEY])
+		change_projection(keys, fdf, &update_view);
+	if (keys[SPACE_BAR])
+		invert_colors(keys, fdf, &update_view);
+	if (update_view)
+		draw(&fdf->map, fdf);
+	return (0);	
+}
+
 
 // This function is also connected to the mlx hook and will clean up resources
 // and exit with status 0 (because of NULL parameter) when the window is closed.
