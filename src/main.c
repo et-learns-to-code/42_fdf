@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:26:44 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 23:07:07 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/17 21:34:50 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		err_and_exit(ARG_ERR);
-	ft_bzero(&fdf.map, sizeof(t_map));
+	ft_bzero(&fdf, sizeof(t_fdf));
 	parse_map(av, &fdf.map, &fdf);
 	view_init(&fdf.view, &fdf.map);
 	fdf_init(&fdf, av);
