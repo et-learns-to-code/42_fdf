@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:25:32 by etien             #+#    #+#             */
-/*   Updated: 2025/03/14 22:51:57 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/17 22:07:33 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,8 @@ void	change_projection(int key, t_fdf *fdf)
 // 90 degrees = 1.57079632679 radians
 void	change_parallel_view(t_fdf *fdf)
 {
-	double			parallel_radian;
 	t_parallel_view	direction;
 
-	parallel_radian = 1.57079632679;
 	direction = fdf->view.parallel_view;
 	if (direction == TOP_VIEW)
 	{
@@ -130,15 +128,15 @@ void	change_parallel_view(t_fdf *fdf)
 	}
 	else if (direction == FRONT_VIEW)
 	{
-		fdf->view.alpha = parallel_radian;
+		fdf->view.alpha = PARALLEL_RADIAN;
 		fdf->view.beta = 0;
 		fdf->view.gamma = 0;
 	}
 	else if (direction == LEFT_SIDE_VIEW)
 	{
 		fdf->view.alpha = 0;
-		fdf->view.beta = -parallel_radian;
-		fdf->view.gamma = parallel_radian;
+		fdf->view.beta = -PARALLEL_RADIAN;
+		fdf->view.gamma = PARALLEL_RADIAN;
 	}
 	fdf->view.parallel_view = (direction + 1) % 3;
 	draw(&fdf->map, fdf);

@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2025/03/17 18:52:50 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/17 22:07:49 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define ZONE_5 0xFF00FF
 
 # define ISO_RADIAN  0.52359877559
+# define PARALLEL_RADIAN 1.57079632679
 
 # define WHITESPACE " \t\r\n\v"
 
