@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2025/03/15 11:21:14 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/17 18:52:50 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,10 @@
 // Error message macros
 # define ARG_ERR "Usage: './fdf file.fdf'."
 # define EMPTY_FILE_ERR "Error: File was empty."
-# define FDF_INIT_ERR \
-	"Error: An error occurred while initialising the fdf struct."
+# define FDF_INIT_ERR "Error: fdf struct could not be initialized."
 # define FILE_NAME_ERR "Error: File should end with '.fdf' extension."
 # define FILE_OPEN_ERR "Error: File could not be opened."
-# define MAP_INIT_ERR \
-	"Error: An error occurred while initialising the map struct."
 # define MALLOC_ERR "Error: Memory allocation failure."
-# define VIEW_INIT_ERR \
-	"Error: An error occurred while initialising the view struct."
 
 // Structs initialisation functions
 void	view_init(t_view *view, t_map *map);
@@ -106,7 +101,8 @@ int		modify_color_component(int start, int end, double relative_position);
 
 // Bresenham line drawing algorithm functions
 void	draw_line(t_point start, t_point end, t_fdf *fdf);
-void	set_delta_and_step(t_point start, t_point end, t_point *delta, t_point *step);
+void	set_delta_and_step(t_point start, t_point end,
+			t_point *delta, t_point *step);
 void	set_step(t_point start, t_point end, t_point *sign);
 void	put_pixel_on_img(int x, int y, int color, t_fdf *fdf);
 

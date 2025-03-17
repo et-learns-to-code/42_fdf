@@ -6,15 +6,15 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:12:59 by etien             #+#    #+#             */
-/*   Updated: 2025/03/15 00:20:09 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/17 18:53:19 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct s_map t_map;
-typedef struct s_view t_view;
+typedef struct s_map	t_map;
+typedef struct s_view	t_view;
 
 typedef enum projection
 {

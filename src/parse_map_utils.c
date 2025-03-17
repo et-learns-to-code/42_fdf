@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:13:10 by etien             #+#    #+#             */
-/*   Updated: 2025/03/15 11:01:50 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/17 18:45:09 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	set_map_width(t_map *map, t_list *lst)
 	int		column_count;
 	int		width;
 
+	width = 0;
 	while (lst)
 	{
 		column_count = 0;

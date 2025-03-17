@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:30:15 by etien             #+#    #+#             */
-/*   Updated: 2025/03/15 00:27:23 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/17 18:35:14 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,20 @@
 // will be locked due to the 1.2 zoom factor that will bottom out at 3.
 void	view_init(t_view *view, t_map *map)
 {
+	int	scale_x;
+	int	scale_y;
+
+	scale_x = WIN_WIDTH / map->width;
+	scale_y = WIN_HEIGHT / map->height;
+	if (scale_x < scale_y)
+		view->zoom = scale_x;
+	else
+		view->zoom = scale_y;
 	view->projection = PARALLEL;
 	view->parallel_view = TOP_VIEW;
 	view->initial_zoom = WIN_WIDTH / map->width / 3;
 	if (view->initial_zoom < 5)
 		view->initial_zoom = 5;
-	view->zoom = view->initial_zoom;
 	view->x_offset = 0;
 	view->y_offset = 0;
 	view->alpha = 0;
