@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 11:25:43 by etien             #+#    #+#             */
-/*   Updated: 2024/08/22 12:50:15 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/18 11:08:39 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,18 @@
 // We put 1 otherwise norminette will complain that the
 // preprocessor statement can only contain a constant.
 # define KEY_PRESS_MASK 1
+# define KEY_RELEASE_MASK 2
 
 // Event hooks
 # define ON_KEYDOWN 2
+# define ON_KEYUP 3
 # define ON_DESTROY 17
 
 // Exit key
 # define ESC_KEY 65307
+
+// Backspace key
+# define BACKSPACE_KEY 65288
 
 // Zoom keys
 # define PLUS_KEY 61

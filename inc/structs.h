@@ -6,12 +6,14 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 15:12:59 by etien             #+#    #+#             */
-/*   Updated: 2025/03/17 18:53:19 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/18 11:44:57 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+# define TOTAL_KEYS 256
 
 typedef struct s_map	t_map;
 typedef struct s_view	t_view;
@@ -47,9 +49,9 @@ typedef struct s_map
 
 typedef struct s_view
 {
+	int				keys[TOTAL_KEYS];
 	t_projection	projection;
 	t_parallel_view	parallel_view;
-	int				initial_zoom;
 	int				zoom;
 	int				x_offset;
 	int				y_offset;
