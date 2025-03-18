@@ -1,29 +1,32 @@
-FDF Controls Guide 
+# FDF Controls Guide 
 
-🔄 Rotation Controls (Tilt, Spin & Roll)
-– Rotate the object around different axes!
-🔢 Keypad 1-2-3 / 7-8-9 
-(1) - Tilt forward - alpha++
-(2) - Spin clockwise - beta++
-(3) - Roll clockwise - gamma++
-(7) - Roll counterclockwise - gamma--
-(8) - Spin counterclockwise - beta--
-(9) - Tilt backwards - alpha--
+## 🔄 Rotation
+- `1` - Tilt forward (𝛼++)  
+- `2` - Spin clockwise (𝛽++)  
+- `3` - Roll clockwise (𝛾++)  
+- `7` - Roll counterclockwise (𝛾--)  
+- `8` - Spin counterclockwise (𝛽--)  
+- `9` - Tilt backwards (𝛼--)  
 
-🔍 Zoom Controls
-(+) – Zoom in 
-(-) – Zoom out 
+## 🔍 Zoom
+- `+` – Zoom in  
+- `-` – Zoom out  
 
-🕹️ Toggle View
-(W Key) - Move up
-(S Key) - Move down
-(A Key) - Move left
-(D Key) - Move right
+## 🕹️ Translation 
+- `W` - Move up  
+- `S` - Move down  
+- `A` - Move left  
+- `D` - Move right  
 
-📐 View Reset & Projections
-(Backspace) – Reset to default view
-(I Key) – Switch to isometric projection 
-(P Key) – Cycle through top, front, and left-side views 
+## 📐 Projection
+- `I` – Switch to isometric projection  
+- `P` – Cycle through top, front, and left-side views
 
-🌗 Bonus - Color Inversion
-(Spacebar) – Invert colors
+## 🌗 Bonus - Color Inversion
+- `Spacebar` – Invert colors  
+
+## 🆑 Reset View
+- `Backspace` – Reset to default view
+
+## ❌ Exit
+- `Esc` – Exit the program
