@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 15:35:06 by etien             #+#    #+#             */
-/*   Updated: 2025/03/18 00:11:52 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/18 10:36:50 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@
 
 # define ISO_RADIAN  0.52359877559
 # define PARALLEL_RADIAN 1.57079632679
+# define TWO_PI 6.28318530718
 
 # define WHITESPACE " \t\r\n\v"
 
@@ -124,7 +125,7 @@ int		close_window(t_fdf *fdf);
 void	zoom(int *keys, t_fdf *fdf, int *update_view);
 void	move(int *keys, t_fdf *fdf, int *update_view);
 void	rotate(int *keys, t_fdf *fdf, int *update_view);
-void	change_projection(int *keys, t_fdf *fdf, int *update_view);
+void	change_projection(int key, t_fdf *fdf);
 void	change_parallel_view(t_fdf *fdf);
 
 // Projection functions
@@ -135,7 +136,7 @@ void	rotate_y(int *x, int *z, double beta);
 void	rotate_z(int *x, int *y, double gamma);
 
 // Color inversion function for bonus
-void	invert_colors(int* keys, t_fdf *fdf, int *update_view);
+void	invert_colors(int *keys, t_fdf *fdf, int *update_view);
 int		get_inverted_color(int color);
 
 #endif

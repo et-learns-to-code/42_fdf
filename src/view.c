@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:25:32 by etien             #+#    #+#             */
-/*   Updated: 2025/03/18 09:32:46 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/18 10:36:26 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	move(int *keys, t_fdf *fdf, int *update_view)
 // The keycodes are not random, but are mapped out for more
 // intuitive controls. Opposite rotations will be symmetrical
 // in finger placement on the keyboard.
+// alpha, beta and gamma are brought back to the range of 0 to 2PI.
 void	rotate(int *keys, t_fdf *fdf, int *update_view)
 {
 	*update_view = 1;
@@ -88,23 +89,35 @@ void	rotate(int *keys, t_fdf *fdf, int *update_view)
 		fdf->view.gamma += 0.1;
 	if (keys[NUM_9_KEY])
 		fdf->view.gamma -= 0.1;
+	if (fdf->view.alpha >= TWO_PI)
+		fdf->view.alpha -= TWO_PI;
+	else if (fdf->view.alpha < 0)
+		fdf->view.alpha += TWO_PI;
+	if (fdf->view.beta >= TWO_PI)
+		fdf->view.beta -= TWO_PI;
+	else if (fdf->view.beta < 0)
+		fdf->view.beta += TWO_PI;
+	if (fdf->view.gamma >= TWO_PI)
+		fdf->view.gamma -= TWO_PI;
+	else if (fdf->view.gamma < 0)
+		fdf->view.gamma += TWO_PI;
 }
 
 // This function will reset all rotation to neutral angles then
 // set the projection type to isometric or parallel.
-void	change_projection(int *keys, t_fdf *fdf, int *update_view)
+void	change_projection(int key, t_fdf *fdf)
 {
-	*update_view = 1;
 	fdf->view.alpha = 0;
 	fdf->view.beta = 0;
 	fdf->view.gamma = 0;
-	if (keys[I_KEY])
+	if (key == I_KEY)
 		fdf->view.projection = ISOMETRIC;
-	else if (keys[P_KEY])
+	else if (key == P_KEY)
 	{
 		fdf->view.projection = PARALLEL;
 		change_parallel_view(fdf);
 	}
+	draw(&fdf->map, fdf);
 }
 
 // This function is a helper function of the change projection function.

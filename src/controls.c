@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:13:51 by etien             #+#    #+#             */
-/*   Updated: 2025/03/18 09:38:49 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/18 10:34:31 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 // all necessary variables in one parameter.
 // Mask parameter in mlx_hook function is for more granular control
 // over event handling than what is set within the event parameter.
-// However, for this project, we will set it to 0 and not bother with it.
 // mlx_loop_hook makes render_frame run continuously in the background 
 // (instead of only when an event occurs).
 void	setup_hooks(t_fdf *fdf)
@@ -37,6 +36,8 @@ int	key_press(int key, t_fdf *fdf)
 {
 	if (key == ESC_KEY)
 		free_fdf_and_exit(fdf, NULL);
+	else if (key == I_KEY || key == P_KEY)
+		change_projection(key, fdf);
 	if (key < TOTAL_KEYS)
 		fdf->view.keys[key] = 1;
 	return (0);
@@ -50,14 +51,16 @@ int	key_release(int key, t_fdf *fdf)
 	return (0);
 }
 
-// Function that will be called by mlx_loop_hook.
+// This function will check if any keys are pressed and will update the view.
+// The function runs in mlx_loop_hook, which means it will run continuously,
+// so update_view is used to prevent unnecessary rendering of the same frame.
 int	render_frame(t_fdf *fdf)
 {
 	int	*keys;
 	int	update_view;
 
 	keys = fdf->view.keys;
-	update_view = 1;
+	update_view = 0;
 	if (keys[PLUS_KEY] || keys[MINUS_KEY])
 		zoom(keys, fdf, &update_view);
 	if (keys[W_KEY] || keys[S_KEY]
@@ -67,8 +70,6 @@ int	render_frame(t_fdf *fdf)
 		|| keys[NUM_3_KEY] || keys[NUM_7_KEY]
 		|| keys[NUM_8_KEY] || keys[NUM_9_KEY])
 		rotate(keys, fdf, &update_view);
-	if (keys[I_KEY] || keys[P_KEY])
-		change_projection(keys, fdf, &update_view);
 	if (keys[SPACE_BAR])
 		invert_colors(keys, fdf, &update_view);
 	if (update_view)
