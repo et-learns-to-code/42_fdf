@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:25:32 by etien             #+#    #+#             */
-/*   Updated: 2025/03/18 12:05:43 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/18 12:15:20 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ void	move(int *keys, t_fdf *fdf, int *update_view)
 	*update_view = 1;
 	move_step = 10 + (fdf->view.zoom / 5);
 	if (keys[W_KEY])
-		fdf->view.y_offset -= move_step;
-	if (keys[S_KEY])
 		fdf->view.y_offset += move_step;
+	if (keys[S_KEY])
+		fdf->view.y_offset -= move_step;
 	if (keys[A_KEY])
-		fdf->view.x_offset -= move_step;
-	if (keys[D_KEY])
 		fdf->view.x_offset += move_step;
+	if (keys[D_KEY])
+		fdf->view.x_offset -= move_step;
 }
 
 // This function will modify the alpha, beta and gamma values to
