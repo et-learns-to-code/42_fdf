@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:25:32 by etien             #+#    #+#             */
-/*   Updated: 2025/03/18 12:15:20 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/18 12:21:49 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	zoom(int *keys, t_fdf *fdf, int *update_view)
 		if (fdf->view.zoom < max_zoom)
 			fdf->view.zoom = (int)(fdf->view.zoom * zoom_factor + 0.5);
 	if (keys[MINUS_KEY])
-		if (fdf->view.zoom > min_zoom )
+		if (fdf->view.zoom > min_zoom)
 			fdf->view.zoom = (int)(fdf->view.zoom / zoom_factor + 0.5);
 }
 
