@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:30:15 by etien             #+#    #+#             */
-/*   Updated: 2025/03/18 09:36:40 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/18 11:45:01 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 // This function initializes the view struct.
 // Zoom has to be initialized to fit the entire top view within the map.
-// Initial zoom cannot go below 5, otherwise the zoom in and out functions
-// will be locked due to the 1.2 zoom factor that will bottom out at 3.
 void	view_init(t_view *view, t_map *map)
 {
 	int	scale_x;
@@ -24,9 +22,6 @@ void	view_init(t_view *view, t_map *map)
 	ft_bzero(view->keys, sizeof(view->keys));
 	view->projection = PARALLEL;
 	view->parallel_view = TOP_VIEW;
-	view->initial_zoom = WIN_WIDTH / map->width / 3;
-	if (view->initial_zoom < 5)
-		view->initial_zoom = 5;
 	scale_x = WIN_WIDTH / map->width;
 	scale_y = WIN_HEIGHT / map->height;
 	if (scale_x < scale_y)

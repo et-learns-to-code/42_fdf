@@ -6,38 +6,44 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:25:32 by etien             #+#    #+#             */
-/*   Updated: 2025/03/18 10:36:26 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/18 12:05:43 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
 // This function will increase or decrease the zoom on the object by
-// multiplying or dividing the previous zoom factor by a constant zoom factor.
-// This ensures smoother zooming that is proportional to high and low
-// levels of zoom.
+// multiplying or dividing the zoom by a constant zoom factor.
+// This ensures smoother zooming.
 // + 0.5 before casting ensures proper rounding to the nearest integer
 // (round upwards if decimal is above 0.5).
-// Max zoom: (10 * initial_zoom)
-// Min zoom: 3 (due to division by 1.2 constant zoom and + 0.5 rounding,
-// the zoom will mathematically bottom out at 3.)
-// Zoom cannot be 0 or negative otherwise the object won't render.
+// - max_zoom = 200 keeps zoom behavior uniform across different map sizes.
+// - min_zoom (small maps) = 3 uses a gentler zoom factor for fine control.
+// - min_zoom (large maps) = 1 uses a stronger zoom factor to navigate quickly.
 void	zoom(int *keys, t_fdf *fdf, int *update_view)
 {
 	double	zoom_factor;
-	int		max_zoom;
+	double	max_zoom;
+	double	min_zoom;
 
 	*update_view = 1;
-	zoom_factor = 1.2;
-	max_zoom = fdf->view.initial_zoom * 10;
-	if (keys[PLUS_KEY])
+	max_zoom = 200;
+	if (fdf->map.width <= 250 || fdf->map.height <= 250)
 	{
-		fdf->view.zoom = (int)(fdf->view.zoom * zoom_factor + 0.5);
-		if (fdf->view.zoom > max_zoom)
-			fdf->view.zoom = max_zoom;
+		zoom_factor = 1.1;
+		min_zoom = 3;
 	}
+	else
+	{
+		zoom_factor = 1.5;
+		min_zoom = 1;
+	}
+	if (keys[PLUS_KEY])
+		if (fdf->view.zoom < max_zoom)
+			fdf->view.zoom = (int)(fdf->view.zoom * zoom_factor + 0.5);
 	if (keys[MINUS_KEY])
-		fdf->view.zoom = (int)(fdf->view.zoom / zoom_factor + 0.5);
+		if (fdf->view.zoom > min_zoom )
+			fdf->view.zoom = (int)(fdf->view.zoom / zoom_factor + 0.5);
 }
 
 // This function will modify the x and y offsets depending
@@ -49,12 +55,14 @@ void	zoom(int *keys, t_fdf *fdf, int *update_view)
 // This ensures that the movement step is always proportional
 // to the zoom and solves the issue of slow movement of the object
 // across the screen when the zoom level is high.
+// The 10 ensures a minimum movement step, so even at the smallest zoom level, 
+// the object doesn't move too slowly.
 void	move(int *keys, t_fdf *fdf, int *update_view)
 {
 	int	move_step;
 
 	*update_view = 1;
-	move_step = 15 * fdf->view.zoom / fdf->view.initial_zoom;
+	move_step = 10 + (fdf->view.zoom / 5);
 	if (keys[W_KEY])
 		fdf->view.y_offset -= move_step;
 	if (keys[S_KEY])
