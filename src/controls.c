@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:13:51 by etien             #+#    #+#             */
-/*   Updated: 2025/03/18 10:34:31 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/18 11:17:58 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,18 @@ void	setup_hooks(t_fdf *fdf)
 }
 
 // Pressing the key will toggle its value to 1 in the keys array.
+// Pressing the backspace key will reset to the default view.
 int	key_press(int key, t_fdf *fdf)
 {
 	if (key == ESC_KEY)
 		free_fdf_and_exit(fdf, NULL);
 	else if (key == I_KEY || key == P_KEY)
 		change_projection(key, fdf);
+	else if (key == BACKSPACE_KEY)
+	{
+		view_init(&fdf->view, &fdf->map);
+		draw(&fdf->map, fdf);
+	}
 	if (key < TOTAL_KEYS)
 		fdf->view.keys[key] = 1;
 	return (0);

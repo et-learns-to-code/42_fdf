@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 22:10:28 by etien             #+#    #+#             */
-/*   Updated: 2024/08/22 11:16:40 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/18 11:08:33 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 
 // Exit key
 # define ESC_KEY 53
+
+// Backspace key
+# define BACKSPACE_KEY 51
 
 // Zoom keys
 # define PLUS_KEY 24
