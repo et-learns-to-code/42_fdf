@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 18:13:51 by etien             #+#    #+#             */
-/*   Updated: 2025/03/18 00:16:00 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/18 09:38:49 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ void	setup_hooks(t_fdf *fdf)
 	mlx_loop_hook(fdf->mlx, render_frame, fdf);
 }
 
-// This function is connected to the mlx hook and will call the relevant
-// view function when its associated key is pressed.
+// Pressing the key will toggle its value to 1 in the keys array.
 int	key_press(int key, t_fdf *fdf)
 {
 	if (key == ESC_KEY)
@@ -43,6 +42,7 @@ int	key_press(int key, t_fdf *fdf)
 	return (0);
 }
 
+//	Releasing the key will toggle its value to 0 in the keys array.
 int	key_release(int key, t_fdf *fdf)
 {
 	if (key < TOTAL_KEYS)
@@ -50,18 +50,17 @@ int	key_release(int key, t_fdf *fdf)
 	return (0);
 }
 
-int render_frame(t_fdf *fdf)
+// Function that will be called by mlx_loop_hook.
+int	render_frame(t_fdf *fdf)
 {
 	int	*keys;
 	int	update_view;
-	
+
 	keys = fdf->view.keys;
 	update_view = 1;
 	if (keys[PLUS_KEY] || keys[MINUS_KEY])
 		zoom(keys, fdf, &update_view);
-	if (keys[UP_KEY] || keys[DOWN_KEY]
-		|| keys[LEFT_KEY] || keys[RIGHT_KEY]
-		|| keys[W_KEY] || keys[S_KEY]
+	if (keys[W_KEY] || keys[S_KEY]
 		|| keys[A_KEY] || keys[D_KEY])
 		move(keys, fdf, &update_view);
 	if (keys[NUM_1_KEY] || keys[NUM_2_KEY]
@@ -74,9 +73,8 @@ int render_frame(t_fdf *fdf)
 		invert_colors(keys, fdf, &update_view);
 	if (update_view)
 		draw(&fdf->map, fdf);
-	return (0);	
+	return (0);
 }
-
 
 // This function is also connected to the mlx hook and will clean up resources
 // and exit with status 0 (because of NULL parameter) when the window is closed.

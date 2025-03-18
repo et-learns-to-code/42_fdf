@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:30:15 by etien             #+#    #+#             */
-/*   Updated: 2025/03/18 00:21:10 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/18 09:36:40 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	view_init(t_view *view, t_map *map)
 	int	scale_y;
 
 	ft_bzero(view->keys, sizeof(view->keys));
-	ft_printf("keys[0]: %d, keys[TOTAL_KEYS-1]: %d\n", view->keys[0], view->keys[TOTAL_KEYS-1]);
 	view->projection = PARALLEL;
 	view->parallel_view = TOP_VIEW;
 	view->initial_zoom = WIN_WIDTH / map->width / 3;

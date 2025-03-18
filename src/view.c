@@ -6,7 +6,7 @@
 /*   By: etien <etien@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:25:32 by etien             #+#    #+#             */
-/*   Updated: 2025/03/18 00:11:07 by etien            ###   ########.fr       */
+/*   Updated: 2025/03/18 09:32:46 by etien            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ void	move(int *keys, t_fdf *fdf, int *update_view)
 
 	*update_view = 1;
 	move_step = 15 * fdf->view.zoom / fdf->view.initial_zoom;
-	if (keys[UP_KEY] || keys[W_KEY])
+	if (keys[W_KEY])
 		fdf->view.y_offset -= move_step;
-	if (keys[DOWN_KEY] || keys[S_KEY])
+	if (keys[S_KEY])
 		fdf->view.y_offset += move_step;
-	if (keys[LEFT_KEY] || keys[A_KEY])
+	if (keys[A_KEY])
 		fdf->view.x_offset -= move_step;
-	if (keys[RIGHT_KEY] || keys[D_KEY])
+	if (keys[D_KEY])
 		fdf->view.x_offset += move_step;
 }
 
