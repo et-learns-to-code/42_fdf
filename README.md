@@ -1,3 +1,32 @@
+# 🗺️ FDF – fil de fer (French for "wireframe")
+
+A 3D wireframe renderer built using **MiniLibX**, part of the 42 curriculum.  
+Rotate, zoom, and explore 3D maps projected in isometric and parallel views.
+
+---
+
+## 🧭 Instructions
+
+1. **Clone the repository**
+    ```bash
+    git clone <your-repo-url>
+    cd <your-repo-folder>
+    ```
+2. **Compile the project**
+    ```bash
+    make
+    ```
+3. **If compilation fails, install the missing dependencies:**
+    ```bash
+    sudo apt update
+    sudo apt install libx11-dev libxext-dev zlib1g-dev
+    ```
+4. **Run the program**
+    ```bash
+    ./fdf maps/<map_name>.fdf
+    ```
+    Try one of the sample maps included in the maps/ folder.
+
 # FDF Controls Guide 
 
 ## 🔄 Rotation
